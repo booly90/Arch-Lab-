@@ -33,7 +33,7 @@ BEGIN
 		row_left(i) <= row_left(i-1)(n-2 downto 0) & '0'; --shift previous row_left 1 bit to the left and insert '0'
 		Shifter_cout_vector_left(i-1) <= row_left(i-1)(n-1); --cout recieves the last bit that has been pushed out
 	END generate
-	
+	nn  
 	SLR: for i IN 1 to n-1 generate
 		row_right(i) <= '0' & row_right(i-1)(n-1 downto 1); --shift previous row_right 1 bit to the right and insert '0'
 		Shifter_cout_vector_right(i-1) <= row_left(i-1)(0); --cout recieves the last bit that has been pushed out
