@@ -32,15 +32,16 @@ ARCHITECTURE dataflow OF Shifter IS
 BEGIN
     row_left(0) <= y_Shifter_in;
     row_right(0) <= y_Shifter_in;
-
+	Shifter_cout_vector_left(0) <= '0';
+	Shifter_cout_vector_right(0) <='0';
     SHL: for i IN 1 to n-1 generate
         row_left(i) <= row_left(i-1)(n-2 downto 0) & '0'; -- Shift left
-        Shifter_cout_vector_left(i-1) <= row_left(i-1)(n-1); -- Collect shifted out bit
+        Shifter_cout_vector_left(i) <= row_left(i-1)(n-1); -- Collect shifted out bit
     END generate;
 
     SHR: for i IN 1 to n-1 generate
         row_right(i) <= '0' & row_right(i-1)(n-1 downto 1); -- Shift right
-        Shifter_cout_vector_right(i-1) <= row_right(i-1)(0); -- Collect shifted out bit
+        Shifter_cout_vector_right(i) <= row_right(i-1)(0); -- Collect shifted out bit
     END generate;
 
     Shifter_out <= row_left(TO_INTEGER(unsigned(x_Shifter_in))) when ALUFN = "000" else
