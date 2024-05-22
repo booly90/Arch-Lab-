@@ -122,7 +122,7 @@ BEGIN
 	
 	Shifter_inst: Shifter GENERIC map(n => n , k => k)
 		PORT map(
-				x_Shifter_in => x_adderSub_in,
+				x_Shifter_in => x_adderSub_in(k-1 DOWNTO 0),
 				y_Shifter_in => y_adderSub_in,
 				ALUFN 	     => ALUFN_i(2 DOWNTO 0),
 				Shifter_cout => Shifter_cout,
