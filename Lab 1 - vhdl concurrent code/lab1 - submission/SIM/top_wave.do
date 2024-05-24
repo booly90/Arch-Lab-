@@ -1,13 +1,17 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_logic/y_logic
-add wave -noupdate /tb_logic/x_logic
-add wave -noupdate /tb_logic/Logic_out
-add wave -noupdate /tb_logic/ALUFN
+add wave -noupdate /tb/Y
+add wave -noupdate /tb/X
+add wave -noupdate /tb/ALUFN
+add wave -noupdate /tb/ALUout
+add wave -noupdate /tb/Nflag
+add wave -noupdate /tb/Cflag
+add wave -noupdate /tb/Zflag
+add wave -noupdate /tb/Vflag
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0}
-quietly wave cursor active 0
-configure wave -namecolwidth 206
+WaveRestoreCursors {{Cursor 1} {2599181 ps} 0}
+quietly wave cursor active 1
+configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -21,4 +25,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {933 ps}
+WaveRestoreZoom {0 ps} {1 ns}
