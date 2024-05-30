@@ -14,77 +14,80 @@ entity top is
         x : in std_logic_vector(n-1 downto 0);
         DetectionCode : in integer range 0 to 3;
         detector : out std_logic;
-        out1 : out std_logic; -- x[j-1]
-        out2 : out std_logic; -- x[j-2]
+        out1 : out std_logic_vector(n-1 downto 0); -- x[j-1]
+        out2 : out std_logic_vector(n-1 downto 0); -- x[j-2]
         valid : out std_logic
     );
 end top;
 
 architecture arc_sys of top is
-    subtype vector IS std_logic_vector(n-1 downto 0);
     signal internal_SR : std_logic_vector(m-1 downto 0);
-    signal out1_int, out2_int : std_logic;
+    signal out1_int, out2_int : std_logic_vector(n-1 downto 0);
     signal valid_int : std_logic;
-    signal index : integer := 2;
+    signal prev_x : std_logic_vector(n-1 downto 0);
 begin
 
     process1 : process(clk, rst)
     begin
+	
         if rst = '1' then
-            index <= 2; -- j-2 is used, we will use for the reason 2 as initioal index.
-            out1_int <= '0';
-            out2_int <= '0';
+            out1_int <= (others => '0');
+            out2_int <= (others => '0');
+            prev_x <= (others => '0');
+		
         elsif rising_edge(clk) then
             if ena = '1' then
-                if index < n-1 then
-                    out1_int <= x(index - 1); -- x[j-1]
-                    out2_int <= x(index - 2); -- x[j-2]
-                    index <= index + 1;
+                -- Update previous values
+                prev_x <= x;
+
+                -- Update outputs
+				out2_int <= out1_int; -- x[j-2]
+				out1_int <= prev_x; -- x[j-1]
+                    
                 else
-                    index <= 2;
+                    out1_int <= (others => '0');
+                    out2_int <= (others => '0');
                 end if;
+                
             end if;
         end if;
     end process;
 
-    -- Assign internal signals to output ports of process 2
+    -- Assign internal signals to output ports
     out1 <= out1_int;
     out2 <= out2_int;
 
-    -- Process2
+    -- Process2: Detection Logic
     process2 : process(out1_int, out2_int, DetectionCode)
     begin
-        if rst = '1' then
-            valid_int <= '0';
-        else
-            case DetectionCode is
-                when 0 =>
-                    if (to_integer(unsigned(out1_int)) - to_integer(unsigned(out2_int))) = 1 then
-                        valid_int <= '1';
-                    else
-                        valid_int <= '0';
-                    end if;
-                when 1 =>
-                    if (to_integer(unsigned(out1_int)) - to_integer(unsigned(out2_int))) = 2 then
-                        valid_int <= '1';
-                    else
-                        valid_int <= '0';
-                    end if;
-                when 2 =>
-                    if (to_integer(unsigned(out1_int)) - to_integer(unsigned(out2_int))) = 3 then
-                        valid_int <= '1';
-                    else
-                        valid_int <= '0';
-                    end if;
-                when 3 =>
-                    if (to_integer(unsigned(out1_int)) - to_integer(unsigned(out2_int))) = 4 then
-                        valid_int <= '1';
-                    else
-                        valid_int <= '0';
-                    end if;
-                when others =>
-                    valid_int <= '0';
-            end case;
+		case DetectionCode is
+			when 0 =>
+				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 1 then
+					valid_int <= '1';
+				else
+					valid_int <= '0';
+				end if;
+			when 1 =>
+				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 2 then
+					valid_int <= '1';
+				else
+					valid_int <= '0';
+				end if;
+			when 2 =>
+				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 3 then
+					valid_int <= '1';
+				else
+					valid_int <= '0';
+				end if;
+			when 3 =>
+				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 4 then
+					valid_int <= '1';
+				else
+					valid_int <= '0';
+				end if;
+			when others =>
+				valid_int <= '0';
+		end case;
         end if;
     end process;
 
