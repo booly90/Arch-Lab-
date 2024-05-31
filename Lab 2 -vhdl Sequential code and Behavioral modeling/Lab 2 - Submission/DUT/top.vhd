@@ -24,24 +24,29 @@ architecture arc_sys of top is
     signal internal_SR : std_logic_vector(m-1 downto 0);
     signal out1_int, out2_int : std_logic_vector(n-1 downto 0);
     signal valid_int : std_logic;
-    signal prev_x : std_logic_vector(n-1 downto 0);
+	signal adder_in : std_logic_vector(n-1 downto 0);
+	signal sum_2_DetCode : std_logic_vector(n-1 downto 0); --sum of adder_in and out_2
+	signal carry : std_logic;
 begin
 
     process1 : process(clk, rst)
+	variable prev_x, prev_prev_x : std_logic_vector(n-1 downto 0);
     begin
 	
         if rst = '1' then
             out1_int <= (others => '0');
             out2_int <= (others => '0');
-            prev_x <= (others => '0');
-		
+            prev_x := (others => '0');
+			prev_prev_x:= (others => '0');
+			
         elsif rising_edge(clk) then
             if ena = '1' then
                 -- Update previous values
-                prev_x <= x;
+                prev_prev_x:= prev_x;
+				prev_x := x;
 
                 -- Update outputs
-				out2_int <= out1_int; -- x[j-2]
+				out2_int <= prev_prev_x; -- x[j-2]
 				out1_int <= prev_x; -- x[j-1]
                     
                 else
@@ -58,37 +63,36 @@ begin
     out2 <= out2_int;
 
     -- Process2: Detection Logic
+	
+
+		
     process2 : process(out1_int, out2_int, DetectionCode)
     begin
 		case DetectionCode is
-			when 0 =>
-				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 1 then
-					valid_int <= '1';
-				else
-					valid_int <= '0';
-				end if;
-			when 1 =>
-				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 2 then
-					valid_int <= '1';
-				else
-					valid_int <= '0';
-				end if;
-			when 2 =>
-				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 3 then
-					valid_int <= '1';
-				else
-					valid_int <= '0';
-				end if;
-			when 3 =>
-				if (to_integer(signed(out1_int)) - to_integer(signed(out2_int))) = 4 then
-					valid_int <= '1';
-				else
-					valid_int <= '0';
-				end if;
-			when others =>
-				valid_int <= '0';
-		end case;
+            when 0 =>
+                adder_in <= (n-1 downto 1 => '0') & '1';
+            when 1 =>
+                adder_in <= (n-1 downto 2 => '0') & '1' & '0';
+            when 2 =>
+                adder_in <= (n-1 downto 2 => '0') & '1' & '0';
+            when 3 =>
+                adder_in <= (n-1 downto 2 => '0') & '1' & '1';
+            when others =>
+                adder_in <= (others => '0');
+        end case;
+
+		
+		sum: Adder GENERIC MAP(n) 
+			PORT MAP(out2, adder_in, '0', sum_2_DetCode, carry);
+			
+
+
+        if sum_2_DetCode = Q1 then
+            valid <= '1';  -- x(j-1) - x(j-2) = DetectionCode 
+        else
+            valid <= '0';  --x(j-1) - x(j-2) != DetectionCode 
         end if;
+		
     end process;
 
     -- Assign internal valid signal to output port
