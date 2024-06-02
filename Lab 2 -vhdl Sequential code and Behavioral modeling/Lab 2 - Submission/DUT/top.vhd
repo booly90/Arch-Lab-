@@ -14,21 +14,21 @@ entity top is
         rst, ena, clk : in std_logic;
         x : in std_logic_vector(n-1 downto 0);
         DetectionCode : in integer range 0 to 3;
-        detector : out std_logic;
-        out1 : out std_logic_vector(n-1 downto 0);
-        out2 : out std_logic_vector(n-1 downto 0);
-        valid_out : in std_logic
+        detector : out std_logic
+        --out1 : out std_logic_vector(n-1 downto 0);
+        --out2 : out std_logic_vector(n-1 downto 0);
+        --valid_out : in std_logic
     );
 end top;
 
 architecture arc_sys of top is
-    signal internal_SR : std_logic_vector(m-1 downto 0);
     signal out1_int, out2_int : std_logic_vector(n-1 downto 0);
     signal valid_int : std_logic;
     signal adder_in : std_logic_vector(n-1 downto 0);
     signal sum_2_DetCode : std_logic_vector(n-1 downto 0);
     signal carry : std_logic;
 begin
+-- process 1 -----------------------------------------------------------------
 
     process(clk, rst)
         variable prev_x, prev_prev_x : std_logic_vector(n-1 downto 0);
@@ -52,12 +52,14 @@ begin
         end if;
     end process;
 
-    out1 <= out1_int;
-    out2 <= out2_int;
+--    out1 <= out1_int;
+--    out2 <= out2_int;
+	
+-- process 2 -----------------------------------------------------------------
 
-    process(DetectionCode)
+    process(DetectionCode) 			--add 1 to DetectionCode and convert to std_logic_vector
     begin
-        case DetectionCode is
+        case DetectionCode is 
             when 0 =>
                 adder_in <= (n-1 downto 1 => '0') & '1';
             when 1 =>
@@ -71,11 +73,11 @@ begin
         end case;
 	end process;
 	
-	sum: Adder GENERIC MAP(n) 
+	sum: Adder GENERIC MAP(n)    	--compute x[j-2]+detectioncode+1 for comparing to x[j-1]
 		PORT MAP(out2_int, adder_in, '0', sum_2_DetCode, carry);
 	
 	
-	process(out1_int, out2_int)
+	process(out1_int, adder_in)		--compare adder output to x[j-1]
 	begin
 
 
@@ -89,7 +91,7 @@ begin
 
 
 
--- process 3
+-- process 3 -----------------------------------------------------------------
 
     process (clk, rst, ena, valid_int)
         variable counter : integer := 0;
