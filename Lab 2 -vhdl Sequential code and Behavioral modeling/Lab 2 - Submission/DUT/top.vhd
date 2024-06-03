@@ -15,9 +15,7 @@ entity top is
         x : in std_logic_vector(n-1 downto 0);
         DetectionCode : in integer range 0 to 3;
         detector : out std_logic
-        --out1 : out std_logic_vector(n-1 downto 0);
-        --out2 : out std_logic_vector(n-1 downto 0);
-        --valid_out : in std_logic
+
     );
 end top;
 
@@ -52,8 +50,7 @@ begin
         end if;
     end process;
 
---    out1 <= out1_int;
---    out2 <= out2_int;
+
 	
 -- process 2 -----------------------------------------------------------------
 
@@ -93,24 +90,30 @@ begin
 
 -- process 3 -----------------------------------------------------------------
 
-    process (clk, rst, ena, valid_int)
+    process (clk, rst)
         variable counter : integer := 0;
     begin
         if rst = '1' then
             detector <= '0';
             counter := 0;
-        elsif rising_edge(clk) and ena = '1' then
-            if valid_int = '1' then
-                counter := counter + 1;
-            else
-                counter := 0;
-            end if;
+		end if;
+		if ena = '1' then
+			if rising_edge(clk) then
+				if valid_int = '1' then
+					counter := counter + 1;
+				else
+					counter := 0;
+				end if;
 
-            if counter >= m then
-                detector <= '1';
-            else
-                detector <= '0';
-            end if;
+				if counter >= m then
+					detector <= '1';
+				else
+					detector <= '0';
+				end if;
+			end if;
+		else
+			detector <= '0';
+            counter := 0;
         end if;
     end process;
 end arc_sys;
