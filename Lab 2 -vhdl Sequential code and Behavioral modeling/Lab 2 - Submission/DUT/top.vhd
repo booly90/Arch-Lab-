@@ -1,5 +1,4 @@
 LIBRARY ieee;
-library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use work.aux_package.all;
@@ -15,11 +14,11 @@ entity top is
         x : in std_logic_vector(n-1 downto 0);
         DetectionCode : in integer range 0 to 3;
         detector : out std_logic
-
     );
 end top;
 
 architecture arc_sys of top is
+	signal x_int : std_logic_vector(n-1 downto 0);
     signal out1_int, out2_int : std_logic_vector(n-1 downto 0);
     signal valid_int : std_logic;
     signal adder_in : std_logic_vector(n-1 downto 0);
@@ -27,8 +26,8 @@ architecture arc_sys of top is
     signal carry : std_logic;
 begin
 -- process 1 -----------------------------------------------------------------
-
-    process(clk, rst)
+	x_int <= x;
+    process(clk, rst, ena, x_int)
         variable prev_x, prev_prev_x : std_logic_vector(n-1 downto 0);
     begin
         if rst = '1' then
@@ -39,7 +38,7 @@ begin
         elsif rising_edge(clk) then
             if ena = '1' then
                 prev_prev_x := prev_x;
-                prev_x := x;
+                prev_x := x_int;
 
                 out2_int <= prev_prev_x;
                 out1_int <= prev_x;
@@ -60,11 +59,11 @@ begin
             when 0 =>
                 adder_in <= (n-1 downto 1 => '0') & '1';
             when 1 =>
-                adder_in <= (n-1 downto 2 => '0') & '1' & '0';
+                adder_in <= (n-1 downto 2 => '0') & "10";
             when 2 =>
-                adder_in <= (n-1 downto 2 => '0') & '1' & '1';
+                adder_in <= (n-1 downto 2 => '0') & "11";
             when 3 =>
-                adder_in <= (n-1 downto 3 => '0') & '1' & '0' & '0';
+                adder_in <= (n-1 downto 3 => '0') & "100";
             when others =>
                 adder_in <= (others => '0');
         end case;
@@ -74,7 +73,7 @@ begin
 		PORT MAP(out2_int, adder_in, '0', sum_2_DetCode, carry);
 	
 	
-	process(out1_int, adder_in)		--compare adder output to x[j-1]
+	process(out1_int, adder_in,sum_2_DetCode)		--compare adder output to x[j-1]
 	begin
 
 
