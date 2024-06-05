@@ -28,13 +28,13 @@ begin
 	gen_x : process
 			variable j : integer := 0;
         begin
-		  x <= (others => '1');
-		if (j<2) then 
-			DetectionCode <= j;
-		end if
+		x <= (others => '0');
+	
+		DetectionCode <= j;
+	
 		for i in 0 to 11 loop
 			wait for 100 ns;
-			x <= x-j-1;
+			x <= x+j+1;
 		end loop;
 		j := j+1;
 		  
