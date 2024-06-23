@@ -18,7 +18,7 @@ END PCLogic;
 ------------------------------------------------
 ARCHITECTURE dfl OF PC_wrap IS
 	SIGNAL PC_current, PC_next 	:std_logic_vector(Awidth-1 DOWNTO 0) := (others =>'0');
-	constant rstAddr			:std_logic_vector(Awidth-1 downto 0) := (others => '0');
+	constant rst_Addr			:std_logic_vector(Awidth-1 downto 0) := (others => '0');
 	--SIGNAL offsetAddr  		:std_logic_vector(OffsetWidth-1 DOWNTO 0);
 	
 BEGIN
@@ -32,9 +32,9 @@ BEGIN
 	end process
 
 	with PCsel select
-	PC_next <= 	PC_current + 1							when "01", -- PC++
-				PC_current + 1 + SXT(IRoffset,Awidth)	when "10"  -- PC += offset + 1
-				rstAddr									when "11"  -- PC = 0
+	PC_next <= 	PC_current + 1							when "00", -- PC++
+				PC_current + 1 + SXT(IRoffset,Awidth)	when "01"  -- PC += Imm1 + 1
+				rst_Addr									when "10"  -- PC = 0
 				unaffected when others;
 
 	PCout <= PC_current;
