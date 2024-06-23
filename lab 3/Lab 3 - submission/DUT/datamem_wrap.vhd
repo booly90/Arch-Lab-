@@ -13,10 +13,7 @@ generic(
     port(
 --DUT signals		
 		clk in std_logic;	
-		WmemData_muxed:	in std_logic_vector(Dwidth-1 downto 0);
-		WmemAddr_muxed,RmemAddr_muxed:	
-		in std_logic_vector(Awidth-1 downto 0);
-		RmemData: 	out std_logic_vector(Dwidth-1 downto 0)
+
 		dataBUS: in std_logic_vector(Dwidth-1 downto 0);
 --control signals
 		mem_wr, mem_in, mem_out: in std_logic;
