@@ -19,7 +19,6 @@ architecture controlTB of controlTB is
 	signal 	PCsel, RFaddr 										:  	std_logic_vector(1 downto 0);
 	signal	done_TB												:	STD_LOGIC;
 	
----------------------------------------------------------
 begin
 Control_instance: control_fsm port map (
 			clk, ena, rst,
@@ -53,7 +52,7 @@ Control_instance: control_fsm port map (
 		
 		ena <= '1';
 
-		--------------- status signal checks ---------------------
+		--------------- control signal operation check ---------------------
 		
 		process
         begin
