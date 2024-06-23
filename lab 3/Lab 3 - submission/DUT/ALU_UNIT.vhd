@@ -29,7 +29,7 @@ ARCHITECTURE intel_i9 OF ALU_UNIT IS
     signal internal_carry : STD_LOGIC;
 BEGIN
 
-    Adder port map(A_temp, B_temp, carryin, s, internal_carry);
+    adder_inst: Adder port map(A_temp, B_temp, carryin, s, internal_carry);
 
     process(A, B, OPC, Ain, cout)
     begin
@@ -88,6 +88,6 @@ BEGIN
     C <= REG_C when cout = '1';
 
     -- flags
-    Zflag <= '1' when REG_C = (others => '0') else '0';
+    Zflag <= '1' when REG_C = (BusSize - 1 downto 0 => '0') else '0';
     Nflag <= REG_C(BusSize-1);
 END intel_i9;

@@ -14,7 +14,7 @@ ENTITY PC_wrap IS
 			PCin     		:IN std_logic;
 			PCsel			:IN std_logic_vector(1 DOWNTO 0)
 			);
-END PCLogic;
+END PC_wrap;
 ------------------------------------------------
 ARCHITECTURE dfl OF PC_wrap IS
 	SIGNAL PC_current, PC_next 	:std_logic_vector(Awidth-1 DOWNTO 0) := (others =>'0');
@@ -27,14 +27,14 @@ BEGIN
 		if (clk'event and clk ='1') then
 			if(PCin = '1') then
 				PC_current <= pc_next;
-			end if
-		end if
-	end process
+			end if;
+		end if;
+	end process;
 
 	with PCsel select
-	PC_next <= 	PC_current + 1							when "00", -- PC++
-				PC_current + 1 + SXT(IRoffset,Awidth)	when "01"  -- PC += Imm1 + 1
-				rst_Addr									when "10"  -- PC = 0
+	PC_next <= 	PC_current + 1							when "00",  -- PC++
+				PC_current + 1 + SXT(IRoffset,Awidth)	when "01",  -- PC += Imm1 + 1
+				rst_Addr								when "10",  -- PC = 0
 				unaffected when others;
 
 	PCout <= PC_current;

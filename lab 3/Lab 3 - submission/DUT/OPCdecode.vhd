@@ -32,4 +32,4 @@ begin
 	ld			<= '1' when IRopBits ="1101" ;
 	st			<= '1' when IRopBits ="1110" ;
 	done_DTCM	<= '1' when IRopBits ="1111" ;
-end OPCdecode
+end OPCdecode;
