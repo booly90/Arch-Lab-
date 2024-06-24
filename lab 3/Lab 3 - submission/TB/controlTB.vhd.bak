@@ -16,9 +16,9 @@ architecture controlTB of controlTB is
 	signal	mem_wr, mem_out, mem_in, C_out, C_in, RFin, PCin		: STD_LOGIC;
 	signal	Imm1_in, Imm2_in, Ain, RFout, IRin					: STD_LOGIC;
 	signal	OPC 												: std_logic_vector(3 downto 0);  -- Ensure 4-bit length
-	signal 	PCsel 												: std_logic_vector(1 downto 0);  -- Changed to 2-bit vector
-	signal 	RFaddr 											: std_logic_vector(1 downto 0);  -- Changed to 2-bit vector
-	signal	done_TB												: std_logic;  -- Changed to std_logic
+	signal 	PCsel 												: STD_LOGIC;  -- Changed to std_logic
+	signal 	RFaddr 											: std_logic_vector(3 downto 0);  -- Changed to 4-bit vector
+	signal	done_TB												: std_logic_vector(0 downto 0);  -- Changed to std_logic_vector
 
 begin
 	Control_instance: control_fsm port map (
