@@ -1,8 +1,8 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+library IEEE;
+use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
-USE ieee.std_logic_unsigned.all;
-use work.aux_package.all;
+use ieee.std_logic_unsigned.all;
+USE work.aux_package.all;
 ----------------------------------------
 entity control_fsm is
 	generic(Awidth 	  : integer := 16;
@@ -179,7 +179,7 @@ begin
 				PCin   		<= '0';
 				Imm1_in		<= '0';
 				Imm2_in		<= '0';
-				done_TB  		<= '0';
+				done_TB  	<= '0';
 				PCsel  		<= "00";		-- PC<=PC+1
 				RFaddr 		<= "00";		-- r_c
 				Ain			<= '0';
@@ -216,7 +216,7 @@ begin
 				PCin   		<= '1';
 				Imm1_in		<= '0';
 				Imm2_in		<= '0';
-				done_TB  		<= '0';
+				done_TB  	<= '0';
 				PCsel  		<= "00";		-- PC<=PC+1
 				RFaddr 		<= "10";		-- r_a
 				Ain			<= '0';
@@ -233,7 +233,7 @@ begin
 				PCin   		<= '0';
 				Imm1_in		<= '0';
 				Imm2_in		<= '1';
-				done_TB  		<= '0';
+				done_TB  	<= '0';
 				PCsel  		<= "00";		-- PC<=PC+1
 				RFaddr 		<= "10";		-- r_a
 				OPC			<= "0000";    	--add
