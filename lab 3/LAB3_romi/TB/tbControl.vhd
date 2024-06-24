@@ -42,7 +42,7 @@ begin
 --	
 -----------------------------------------------------------
 --begin
---	Control_Unit : control_fsm port map(mov, done, and_op, or_op, xor_op, jnc, jc, jmp, sub, add, ld, st,
+--	Control_Unit : Control port map(mov, done, and_op, or_op, xor_op, jnc, jc, jmp, sub, add, ld, st,
 --									Nflag, Zflag, Cflag,
 --									rst, ena, clk,
 --									Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in,

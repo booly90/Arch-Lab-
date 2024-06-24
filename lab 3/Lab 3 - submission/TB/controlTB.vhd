@@ -2,18 +2,19 @@ library IEEE;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
-use work.aux_package.all;
+USE work.aux_package.all;
 ---------------------------------------------------------
 -- A test bench which checks the Control unit's proper function. 
 ---------------------------------------------------------
 entity controlTB is
+
 end controlTB;
 
 ---------------------------------------------------------
-architecture controlTB of controlTB is
+architecture dfl of controlTB is
 	signal 	clk, rst, ena, mov, done_DTCM, and_op, or_op, xor_op	: STD_LOGIC;
 	signal	jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st		: STD_LOGIC;
-	signal	mem_wr, mem_out, mem_in, Cout, C_in, RFin, PCin		: STD_LOGIC;
+	signal	mem_wr, mem_out, mem_in, Cout, C_in, RFin, PCin			: STD_LOGIC;
 	signal	Imm1_in, Imm2_in, Ain, RFout, IRin						: STD_LOGIC;
 	signal	OPC 													: std_logic_vector(3 downto 0);  -- Ensure 4-bit length
 	signal 	PCsel 													: std_logic_vector(1 downto 0);  -- Changed to 2-bit vector
@@ -36,13 +37,13 @@ begin
 
 	--------- start of stimulus section ------------------	
 	
-	process	-- reset process
+	rst_gen: process	-- reset process
 	begin
 		rst <= '1', '0' after 100 ns;	-- start by resetting everything
 		wait;
 	end process; 
 		
-	process	-- Clk generating process - period of 100 ns
+	clk_gen: process	-- Clk generating process - period of 100 ns
 	begin
 		clk <= '1';
 		wait for 50 ns;
@@ -85,7 +86,7 @@ begin
 	end process;
 	
 	cflag_process: process begin
-		Cflag 	<= '0', '1' after 2100 ns, '0' after 2500 ns;
+		Cflag 	<= '1', '0' after 2100 ns, '1'  after 2500 ns;
 		wait;
 	end process;
 	
@@ -94,15 +95,16 @@ begin
 		wait;
 	end process;
 	
-	jmp_process: process begin
-		jmp 	<= '0', '1' after 2500 ns, '0' after 2700 ns;  --jmp
+	mov_process: process begin
+		mov 	<= '0', '1' after 2500 ns, '0' after 2700 ns;  --jmp
 		wait;
 	end process;
 	
-	mov_process: process begin
-		mov 	<= '0', '1' after 2700 ns, '0' after 2900 ns;  -- mov
+	jmp_process: process begin
+		jmp 	<= '0', '1' after 2700 ns, '0' after 2900 ns;  -- mov
 		wait;
 	end process;
+
 	
 	ld_process: process begin
 		ld 		<= '0', '1' after 2900 ns, '0' after 3400 ns;  -- ld
@@ -118,6 +120,6 @@ begin
 		done_DTCM <= '0', '1' after 3900 ns, '0' after 4100 ns;  -- done
 		wait;
 	end process;
-		
-end architecture controlTB;
+	-- TB length 4100 ns
+end architecture dfl;
 

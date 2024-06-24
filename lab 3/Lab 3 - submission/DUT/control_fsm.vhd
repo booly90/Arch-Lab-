@@ -30,7 +30,7 @@ architecture dft of control_fsm is
 type state is (reset, fetch, decode, Rstate0, Rstate1, Istate0, Istate1, Istate2);
 
 signal current_state, next_state 	: 	state ;
-
+signal input_status_valid			:	std_logic;
 begin
 
 	process (clk, rst,ena) begin
@@ -46,7 +46,8 @@ begin
 	end process;
 	
 --next_state update comb. logic	
-	process begin
+	process (current_state,mov,done_DTCM,and_op,or_op,xor_op, jnc,jc,jmp,sub,add,Nflag,Zflag,Cflag,ld,st)
+	begin
 		case current_state is
 			when reset		=> 
 				if (done_DTCM = '0') then
@@ -88,7 +89,7 @@ begin
 	end process;
 
 --control signals update logic
-	process (mov,done_DTCM,and_op,or_op,xor_op, jnc,jc,jmp,sub,add,Nflag,Zflag,Cflag,ld,st)
+	process (current_state,mov,done_DTCM,and_op,or_op,xor_op, jnc,jc,jmp,sub,add,Nflag,Zflag,Cflag,ld,st)
 	begin
 		case current_state is
 --reset state
@@ -288,6 +289,8 @@ begin
 					mem_wr  <='1';
 				end if;
 		end case;
+		
 	end process;
+
 
 end dft;
