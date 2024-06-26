@@ -36,38 +36,16 @@ architecture proccesor of top is
 begin
 	datapath_unit : datapath generic map (bus_size, Awidth,OffsetSize,ImmidSize, dept,Prog_Data_size, Prog_Addr_size);
 					port map (clk, rst,Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in
-							,OPC, RFaddr, PCsel, ProgMem_wren , ProgMem_DataIn, ProgMem_writeAddr,
+							,OPC, RFaddr, PCsel, ProgMem_wren , ProgMem_DataIn, ProgMem_writeAddr,Data_wren, TBactive,
+							DataMem_Data_in,Data_writeAddr, Data_readAddr,mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub,
+							add, ld, st,Nflag, Zflag, Cflag,DataMem_Data_out);
 							
+	control : control_fsm generic map (bus_size,Awidth);
+				port map(clk, ena, rst,mov,done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st
+						Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in,
+						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done);
+
+
+						
 	
-	
-	
-generic( Dwidth: integer:=16;	-- Bus Size
-		 RFAddrWidth: integer:=4; 	-- Register Size
-		 OffsetSize 	: integer := 8;
-		 ImmidSize	: integer := 8;		 
-		 dept:    integer:=64;
-		 prog_data_size : integer := 16;
-		 prog_addr_size : integer := 6
-		 
-		); 
-	port(clk, rst: in std_logic;
-		-- inputs from control unit
-		Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in : in std_logic;
-		OPC : in std_logic_vector(3 downto 0);
-		RFaddr, PCsel : in std_logic_vector(1 downto 0);
-		 -- inputs from tb
-		 -- PROGRAM
-		Prog_wren : in std_logic; -- enable bit
-		ProgMem_Data_in : in std_logic_vector(prog_data_size-1 downto 0);
-		ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0);
-		-- DATA
-		TB_Data_wren, TBactive: in std_logic := '0';
-		TB_DataMem_Data_in: in std_logic_vector(Dwidth-1 downto 0);
-		TB_Data_writeAddr, TB_Data_readAddr : in std_logic_vector(prog_addr_size-1 downto 0);
-		
-		 -- outputs to control unit
-		mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st : out std_logic; -- out from OPCdecoder
-		Nflag, Zflag, Cflag : out std_logic := '0'; -- out from ALU
-		-- outputs to tb, DATA
-		DataMem_Data_out : out std_logic_vector(Dwidth-1 downto 0)
-);
+end proccesor;
