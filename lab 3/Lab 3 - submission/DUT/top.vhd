@@ -27,7 +27,7 @@ entity top is
 		  ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0));
 end top;
 
-architecture proccesor of top is
+architecture top_behav of top is
 	signal OPC : std_logic_vector(3 downto 0);
 	signal Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in : std_logic;
 	signal RFaddr, PCsel : std_logic_vector(1 downto 0);
@@ -46,4 +46,4 @@ begin
 						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done);
 	
 	
-end proccesor;
+end top_behav;

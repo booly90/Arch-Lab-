@@ -8,25 +8,26 @@ package aux_package is
 component top is
 	generic(bus_size : integer := 16;
 		Awidth: integer := 4;
-		prog_data_size : integer := 16;
-		data_data_size : integer := 16;
-		prog_addr_size : integer := 6;
+		Prog_Data_size : integer := 16;
+		Prog_Addr_size : integer := 6;
+		data_size : integer := 16;
 		data_addr_size : integer := 6;
+		OffsetSize : integer := 8;
+		ImmidSize	: integer := 8;
 		dept:   integer:=64);
 
-	port(rst, clk, ena : in std_logic; -- for both control & datapath
-	-- Input (DATAPATH)
-	 -- PROGRAM
-		Prog_wren : in std_logic; -- enable bit
-		ProgMem_Data_in : in std_logic_vector(prog_data_size-1 downto 0);
-		ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0);
-		-- DATA
-		Data_wren, TBactive: in std_logic;
-		DataMem_Data_in: in std_logic_vector(data_data_size-1 downto 0);
-		Data_writeAddr, Data_readAddr : in std_logic_vector(data_addr_size-1 downto 0);
-	-- Output
-		tb_done : out std_logic; -- CONTROL UNIT
-		DataMem_Data_out : out std_logic_vector(data_data_size-1 downto 0)); -- DATAPATH UNIT
+	port (rst, clk, ena : in std_logic;
+		--Output Signals
+		  DataMem_Data_out :  out std_logic_vector(data_size-1 downto 0);
+		  tb_done : out std_logic;
+		--Data Memory ports
+		  Data_wren, TBactive : in std_logic; --TBactive is for the mux of testbench
+		  DataMem_Data_in: in std_logic_vector(data_size-1 downto 0);
+		  Data_writeAddr, Data_readAddr : in std_logic_vector(data_addr_size-1 downto 0);
+		--Program Memory ports
+		  ProgMem_wren : in std_logic;
+		  ProgMem_DataIn: in std_logic_vector (Prog_Data_size-1 downto 0);
+		  ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0));
 end component;
 -----------------------------------------------------------------
 component Control is

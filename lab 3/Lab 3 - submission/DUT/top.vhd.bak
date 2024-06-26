@@ -15,7 +15,7 @@ entity top is
 
 	port (rst, clk, ena : in std_logic;
 		--Output Signals
-		  DataMem_Data_out :  out std_logic_vector(data_size-1 downto 0);
+		  DataMem_Data_out :  out std_logic_vector(6-1 downto 0);
 		  tb_done : out std_logic;
 		--Data Memory ports
 		  Data_wren, TBactive : in std_logic; --TBactive is for the mux of testbench
@@ -43,20 +43,7 @@ begin
 	control : control_fsm generic map (bus_size,Awidth)
 				port map(clk, ena, rst,mov,done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st,
 						Mem_wr, Mem_out, Mem_in, Cout, Cin, RFin, PCin, Imm1_in, Imm2_in,
-						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done)
-
-	port   (clk, ena, rst 
-			mov, done_DTCM, and_op, or_op, xor_op,
-			jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st, 
-			mem_wr, mem_out, mem_in, C_out, C_in, RFin, PCin,
-			Imm1_in, Imm2_in, Ain, RFout, IRin,
-			PCsel, RFaddr,
-			OPC ,done_TB	
+						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done);
 	
-										
-			
-			
-			);
-						
 	
 end proccesor;

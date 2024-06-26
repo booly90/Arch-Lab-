@@ -13,6 +13,7 @@ entity tb_TOP is
     constant Awidth : integer := 4;
     constant dept: integer := 64;
     constant addr_size : integer := 6;
+	constant OffsetSize: integer := 8;
 end tb_TOP;
 ---------------------------------------------------------
 architecture rtc of tb_TOP is
@@ -29,17 +30,17 @@ architecture rtc of tb_TOP is
     signal TB_ITCM_W_Addr: std_logic_vector(addr_size-1 downto 0);
     signal TB_DTCM_W_Addr: std_logic_vector(addr_size-1 downto 0);
     signal TB_DTCM_R_Addr: std_logic_vector(addr_size-1 downto 0);
-    signal TB_ITCM_in: std_logic_vector(15 downto 0);
-    signal TB_DTCM_in: std_logic_vector(15 downto 0);
-    signal TB_DTCM_out: std_logic_vector(15 downto 0);
+    signal TB_ITCM_in: std_logic_vector(Dwidth-1 downto 0);
+    signal TB_DTCM_in: std_logic_vector(Dwidth-1 downto 0);
+    signal TB_DTCM_out: std_logic_vector(Dwidth-1 downto 0);
 
-    constant read_file_loc : string(1 to 72) :=  "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\ITCMinit.txt";
+   constant read_file_loc : string(1 to 72) :=  "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\ITCMinit.txt";
     constant read_file_loc2 : string(1 to 72) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\DTCMinit.txt";
     constant write_file_loc : string(1 to 75) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\TopResault.text";
     
 begin
-    L1: entity work.top 
-        generic map (Dwidth, Awidth, Dwidth, Dwidth, addr_size, addr_size, dept) 
+    top_tb : entity work.top 
+        generic map (Dwidth, Awidth, Dwidth, addr_size, Dwidth, addr_size,OffsetSize,OffsetSize, dept) 
         port map (
             rst => rst,
             clk => clk,
