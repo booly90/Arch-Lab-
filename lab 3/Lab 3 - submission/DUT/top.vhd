@@ -15,7 +15,7 @@ entity top is
 
 	port (rst, clk, ena : in std_logic;
 		--Output Signals
-		  DataMem_Data_out :  in std_logic_vector(data_size-1 downto 0);
+		  DataMem_Data_out :  out std_logic_vector(data_size-1 downto 0);
 		  tb_done : out std_logic;
 		--Data Memory ports
 		  Data_wren, TBactive : in std_logic; --TBactive is for the mux of testbench
@@ -34,18 +34,16 @@ architecture proccesor of top is
 	signal mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st, Nflag, Zflag, Cflag : std_logic;
 
 begin
-	datapath_unit : datapath generic map (bus_size, Awidth,OffsetSize,ImmidSize, dept,Prog_Data_size, Prog_Addr_size);
+	datapath_unit : datapath generic map (bus_size, Awidth,OffsetSize,ImmidSize, dept,Prog_Data_size, Prog_Addr_size)
 					port map (clk, rst,Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in
 							,OPC, RFaddr, PCsel, ProgMem_wren , ProgMem_DataIn, ProgMem_writeAddr,Data_wren, TBactive,
 							DataMem_Data_in,Data_writeAddr, Data_readAddr,mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub,
 							add, ld, st,Nflag, Zflag, Cflag,DataMem_Data_out);
 							
-	control : control_fsm generic map (bus_size,Awidth);
-				port map(clk, ena, rst,mov,done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st
-						Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in,
+	control : control_fsm generic map (bus_size,Awidth)
+				port map(clk, ena, rst,mov,done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st,
+						Mem_wr, Mem_out, Mem_in, Cout, Cin, RFin, PCin, Imm1_in, Imm2_in,
 						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done);
-
-
-						
+	
 	
 end proccesor;

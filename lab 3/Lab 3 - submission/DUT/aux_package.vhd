@@ -152,23 +152,28 @@ generic( Dwidth: integer:=16;	-- Bus Size
 END component;
 ----------------------------------------------------------------		
 component top is
-generic( 
-		Dwidth: integer:=16;
-		Awidth: integer:=6;
+	generic(bus_size : integer := 16;
+		Awidth: integer := 4;
+		Prog_Data_size : integer := 16;
+		Prog_Addr_size : integer := 6;
+		data_size : integer := 16;
+		data_addr_size : integer := 6;
+		OffsetSize : integer := 8;
+		ImmidSize	: integer := 8;
 		dept:   integer:=64);
-    port(
---DUT signals		
-		clk, rst :in std_logic;	
 
-		dataBUS: in std_logic_vector(Dwidth-1 downto 0);
---control signals
-		mem_wr, mem_in, mem_out: in std_logic;
---TB signals	
-		TBactive, TB_wren: in std_logic;
-		TB_wAddr, TB_rAddr	: in std_logic_vector(Awidth-1 downto 0);
-		TB_wData 			: in std_logic_vector(Dwidth-1 downto 0);
-		TB_rData  			: out std_logic_vector(Dwidth-1 downto 0)
-);
+	port (rst, clk, ena : in std_logic;
+		--Output Signals
+		  DataMem_Data_out :  out std_logic_vector(data_size-1 downto 0);
+		  tb_done : out std_logic;
+		--Data Memory ports
+		  Data_wren, TBactive : in std_logic; --TBactive is for the mux of testbench
+		  DataMem_Data_in: in std_logic_vector(data_size-1 downto 0);
+		  Data_writeAddr, Data_readAddr : in std_logic_vector(data_addr_size-1 downto 0);
+		--Program Memory ports
+		  ProgMem_wren : in std_logic;
+		  ProgMem_DataIn: in std_logic_vector (Prog_Data_size-1 downto 0);
+		  ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0));
 end component;
 -----------------------------------------------------------------
 component datamem_wrap is
