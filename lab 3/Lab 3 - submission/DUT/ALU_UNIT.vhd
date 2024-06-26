@@ -32,7 +32,7 @@ ARCHITECTURE intel_i9 OF ALU_UNIT IS
 	signal c_slave : bus_wire;
 BEGIN
 
-    adder_inst: Adder port map(A_temp, B_temp, carryin, s, internal_carry);
+    adder_inst: Adder generic map (BusSize) port map(A_temp, B_temp, carryin, s, internal_carry);
 	process(clk)
 	BEGIN
 		if clk'event and clk = '1' then

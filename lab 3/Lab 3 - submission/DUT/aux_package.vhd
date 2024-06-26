@@ -5,7 +5,8 @@ package aux_package is
 -----------------------------------------------------------------
 component control_fsm is
 	generic(Awidth 	  : integer := 16;
-			OPsize    : integer := 4);
+			OPsize    : integer := 4
+			);
 	port   (clk, ena, rst 	: IN std_logic;
 	--input status signals from datapath
 			mov,done_DTCM,and_op,or_op,xor_op : IN std_logic;
@@ -35,7 +36,8 @@ port(	clk,memEn: in std_logic;
 		WmemData:	in std_logic_vector(Dwidth-1 downto 0);
 		WmemAddr,RmemAddr:	
 					in std_logic_vector(Awidth-1 downto 0);
-		RmemData: 	out std_logic_vector(Dwidth-1 downto 0));
+		RmemData: 	out std_logic_vector(Dwidth-1 downto 0)
+);
 end component;
 -----------------------------------------------------------------
 component BidirPin is
@@ -60,13 +62,15 @@ END component;
 -----------------------------------------------------------------
 component IR IS
   generic (
-    bus_size : integer := 16
+    bus_size 	: integer := 16;
+	RFAddrWidth	: integer := 4
   );
   port (
+	clk, rst: in std_logic;
     bus_in : in std_logic_vector(bus_size-1 downto 0);
     IRin : in std_logic;
     RFaddr : in std_logic_vector(1 downto 0);
-    reg_address : out std_logic_vector(3 downto 0);
+    reg_address : out std_logic_vector(RFAddrWidth-1 downto 0);
     Op : out std_logic_vector(3 downto 0);
     Imm1 : out std_logic_vector(bus_size-1 downto 0);
     Imm2 : out std_logic_vector(bus_size-1 downto 0);
@@ -74,15 +78,16 @@ component IR IS
   );
 END component;
 ----------------------------------------------------------------
-component RF IS
+component RF is
 generic( Dwidth: integer:=16;
-		 Awidth: integer:=4);
+		 RFAddrWidth: integer:=4);
 port(	clk,rst,WregEn: in std_logic;	
 		WregData:	in std_logic_vector(Dwidth-1 downto 0);
 		WregAddr,RregAddr:	
-					in std_logic_vector(Awidth-1 downto 0);
-		RregData: 	out std_logic_vector(Dwidth-1 downto 0));
-END component;
+					in std_logic_vector(RFAddrWidth-1 downto 0);
+		RregData: 	out std_logic_vector(Dwidth-1 downto 0)
+);
+end component;
 ----------------------------------------------------------------
 component OPCdecode IS
 	generic(RFAddrWidth: integer:=4); 	-- Register Size
@@ -116,13 +121,13 @@ END component;
 component datapath is
 generic( Dwidth: integer:=16;	-- Bus Size
 		 RFAddrWidth: integer:=4; 	-- Register Size
-		 m: 	  integer:=16;  -- Program Memory In Data Size
 		 Awidth:  integer:=6;  	-- Address Size
 		 OffsetSize 	: integer := 8;
 		 ImmidSize	: integer := 8;		 
 		 dept:    integer:=64;
 		 prog_data_size : integer := 16;
 		 prog_addr_size : integer := 6
+		 
 		); 
 	port(clk, rst: in std_logic;
 		-- inputs from control unit
@@ -136,14 +141,15 @@ generic( Dwidth: integer:=16;	-- Bus Size
 		ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0);
 		-- DATA
 		TB_Data_wren, TBactive: in std_logic := '0';
-		TB_DataMem_Data_in: in std_logic_vector(m-1 downto 0);
+		TB_DataMem_Data_in: in std_logic_vector(Dwidth-1 downto 0);
 		TB_Data_writeAddr, TB_Data_readAddr : in std_logic_vector(prog_addr_size-1 downto 0);
 		
 		 -- outputs to control unit
 		mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st : out std_logic; -- out from OPCdecoder
 		Nflag, Zflag, Cflag : out std_logic := '0'; -- out from ALU
 		-- outputs to tb, DATA
-		DataMem_Data_out : out std_logic_vector(m-1 downto 0));
+		DataMem_Data_out : out std_logic_vector(RFAddrWidth-1 downto 0)
+		);
 END component;
 ----------------------------------------------------------------		
 component datamem_wrap is

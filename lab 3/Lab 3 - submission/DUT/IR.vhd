@@ -3,36 +3,40 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;  -- For std_logic_vector arithmetic
 use work.aux_package.all;
 
-entity IRunit is
+entity IR is
   generic (
-    bus_size : integer := 16
+    bus_size 	: integer := 16;
+	RFAddrWidth	: integer := 4
   );
   port (
+	clk, rst: in std_logic;
     bus_in : in std_logic_vector(bus_size-1 downto 0);
     IRin : in std_logic;
     RFaddr : in std_logic_vector(1 downto 0);
-    reg_address : out std_logic_vector(3 downto 0);
+    reg_address : out std_logic_vector(RFAddrWidth-1 downto 0);
     Op : out std_logic_vector(3 downto 0);
     Imm1 : out std_logic_vector(bus_size-1 downto 0);
     Imm2 : out std_logic_vector(bus_size-1 downto 0);
     offset_addr : out std_logic_vector(7 downto 0)
   );
-end IRunit;
+end IR;
 
-architecture behavioral of IRunit is
-  signal full_bus_in : std_logic_vector(bus_size-1 downto 0);
+architecture behavioral of IR is
+  signal IR_reg : std_logic_vector(bus_size-1 downto 0);
   
-  alias opcode is full_bus_in(bus_size-1 downto bus_size-4);
-  alias ra is full_bus_in(bus_size-5 downto bus_size-8);
-  alias rb is full_bus_in(bus_size-9 downto bus_size-12);
-  alias rc is full_bus_in(bus_size-13 downto 0);
-  alias IR_8 is full_bus_in(7 downto 0);
+  alias opcode is IR_reg(bus_size-1 downto bus_size-4);
+  alias ra is IR_reg(bus_size-5 downto bus_size-8);
+  alias rb is IR_reg(bus_size-9 downto bus_size-12);
+  alias rc is IR_reg(bus_size-13 downto 0);
+  alias IR_8 is IR_reg(7 downto 0);
   
 begin
-  process (IRin, bus_in)
+  process (clk,rst)
   begin
-    if IRin = '1' then
-      full_bus_in <= bus_in;
+	if rst = '1' then
+		IR_reg <= (others =>'0');
+    elsif IRin = '1' and (clk'event and clk='1') then
+      IR_reg <= bus_in;
     end if;
   end process;
 

@@ -5,18 +5,18 @@ use ieee.std_logic_unsigned.all;
 --------------------------------------------------------------
 entity RF is
 generic( Dwidth: integer:=16;
-		 Awidth: integer:=4);
+		 RFAddrWidth: integer:=4);
 port(	clk,rst,WregEn: in std_logic;	
 		WregData:	in std_logic_vector(Dwidth-1 downto 0);
 		WregAddr,RregAddr:	
-					in std_logic_vector(Awidth-1 downto 0);
+					in std_logic_vector(RFAddrWidth-1 downto 0);
 		RregData: 	out std_logic_vector(Dwidth-1 downto 0)
 );
 end RF;
 --------------------------------------------------------------
 architecture behav of RF is
 
-type RegFile is array (0 to 2**Awidth-1) of 
+type RegFile is array (0 to 2**RFAddrWidth-1) of 
 	std_logic_vector(Dwidth-1 downto 0);
 signal sysRF: RegFile;
 
@@ -24,7 +24,10 @@ begin
   process(clk,rst)
   begin
 	if (rst='1') then
-		sysRF(0) <= (others=>'0');   -- R[0] is constant Zero value 
+		for i in 0 to 2**RFAddrWidth-1 loop -- loop over all RF and reset to 0
+			sysRF(i) <= (others => '0'); 	-- R[0] is constant Zero value 
+		end loop;
+		   
 	elsif (clk'event and clk='1') then
 	    if (WregEn='1') then
 		    -- index is type of integer so we need to use 

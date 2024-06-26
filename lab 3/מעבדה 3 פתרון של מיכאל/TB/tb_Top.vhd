@@ -12,15 +12,16 @@ entity top_tb is
 	constant Awidth : integer:=6;	 
 	constant RegSize: integer:=4;
 	constant dept   : integer:=64;
-
-	constant dataMemResult:	 	string(1 to 58) :=
-	"C:\Users\mgren\Documents\LAB3\Memory files\DTCMcontent.txt";
+	constant lab3path:		string (1 to 47) :=
+	"C:\Users\barmu\Documents\GitHub\Arch-Lab-\lab 3"
+	constant dataMemResult:	 	string(1 to 93) :=
+	lab3path & "Lab 3 - submission\memory files\DTCMcontent.txt";
 	
-	constant dataMemLocation: 	string(1 to 55) :=
-	"C:\Users\mgren\Documents\LAB3\Memory files\DTCMinit.txt";
+	constant dataMemLocation: 	string(1 to 91) :=
+	lab3path & "Lab 3 - submission\memory files\DTCMinit.txt";
 	
-	constant progMemLocation: 	string(1 to 55) :=
-	"C:\Users\mgren\Documents\LAB3\Memory files\ITCMinit.txt";
+	constant progMemLocation: 	string(1 to 91) :=
+	lab3path & "Lab 3 - submission\memory files\ITCMinit.txt";
 end top_tb;
 ---------------------------------------------------------
 architecture rtb of top_tb is

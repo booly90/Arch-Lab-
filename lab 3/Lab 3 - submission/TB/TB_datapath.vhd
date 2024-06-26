@@ -44,15 +44,25 @@ signal tb_done : std_logic;
 
 -- reading from files flags
 signal donePmemIn, doneDmemIn: BOOLEAN;
+constant lab3path:		string (1 to 48) :=
+"C:\Users\barmu\Documents\GitHub\Arch-Lab-\lab 3\";
+constant dataMemResult:	 	string(1 to 95) :=
+lab3path & "Lab 3 - submission\memory files\DTCMcontent.txt";
 
-constant dataMemResult: string(1 to 101) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMcontent.txt"; -- our url
-constant dataMemLocation: string(1 to 98) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMinit.txt";-- our url
-constant progMemLocation: string(1 to 98) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\ITCMinit.txt";-- our url
+constant dataMemLocation: 	string(1 to 92) :=
+lab3path & "Lab 3 - submission\memory files\DTCMinit.txt";
+
+constant progMemLocation: 	string(1 to 92) :=
+lab3path & "Lab 3 - submission\memory files\ITCMinit.txt";
+
+--constant dataMemResult: string(1 to 101) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMcontent.txt"; -- our url
+--constant dataMemLocation: string(1 to 98) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMinit.txt";-- our url
+--constant progMemLocation: string(1 to 98) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\ITCMinit.txt";-- our url
 
 begin 
 
 DataPathUnit: datapath
-    generic map(bus_size, bus_size, RFAddrWidth, Awidth, OffsetSize, ImmidSize, dept, prog_data_size, prog_addr_size)
+    generic map(bus_size, RFAddrWidth, Awidth, OffsetSize, ImmidSize, dept, prog_data_size, prog_addr_size)
     port map(clk, rst, Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in, OPC, RFaddr, PCsel, Prog_wren, ProgMem_Data_in, ProgMem_writeAddr, TB_Data_wren, TBactive, TB_DataMem_Data_in, TB_Data_writeAddr, TB_Data_readAddr, mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st, Nflag, Zflag, Cflag, DataMem_Data_out);
 
 -- Clock generation
