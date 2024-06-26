@@ -151,7 +151,7 @@ generic( Dwidth: integer:=16;	-- Bus Size
 );
 END component;
 ----------------------------------------------------------------		
-component top is
+component datamem_wrap is
 generic( 
 		Dwidth: integer:=16;
 		Awidth: integer:=6;
