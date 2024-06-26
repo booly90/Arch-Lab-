@@ -69,7 +69,7 @@ lab3path & "Lab 3 - submission\memory files\ITCMinitDatapath.txt";
 begin 
 
 DataPathUnit: datapath
-    generic map(bus_size, RFAddrWidth, Awidth, OffsetSize, ImmidSize, dept, prog_data_size, prog_addr_size)
+    generic map(bus_size, RFAddrWidth, OffsetSize, ImmidSize, dept, prog_data_size, prog_addr_size)
     port map(clk, rst, Mem_wr, Mem_out, Mem_in, Cout, Cin, Ain, RFin, RFout, IRin, PCin, Imm1_in, Imm2_in, OPC, RFaddr, PCsel, Prog_wren, ProgMem_Data_in, ProgMem_writeAddr, TB_Data_wren, TBactive, TB_DataMem_Data_in, TB_Data_writeAddr, TB_Data_readAddr, mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st, Nflag, Zflag, Cflag, DataMem_Data_out);
 
 -- Clock generation
@@ -96,7 +96,7 @@ begin
     TBactive <= '1';
     wait until donePmemIn and doneDmemIn;
     TBactive <= '0';
-    wait until done = '1';
+    wait until done_TB = '1';
     TBactive <= '1';
 end process;
 
@@ -1150,4 +1150,4 @@ StartTb : process
 	
 
 
-end tb_behav;
+end dfl;

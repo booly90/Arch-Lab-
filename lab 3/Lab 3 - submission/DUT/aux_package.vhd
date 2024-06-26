@@ -121,7 +121,6 @@ END component;
 component datapath is
 generic( Dwidth: integer:=16;	-- Bus Size
 		 RFAddrWidth: integer:=4; 	-- Register Size
-		 Awidth:  integer:=6;  	-- Address Size
 		 OffsetSize 	: integer := 8;
 		 ImmidSize	: integer := 8;		 
 		 dept:    integer:=64;
@@ -148,8 +147,8 @@ generic( Dwidth: integer:=16;	-- Bus Size
 		mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st : out std_logic; -- out from OPCdecoder
 		Nflag, Zflag, Cflag : out std_logic := '0'; -- out from ALU
 		-- outputs to tb, DATA
-		DataMem_Data_out : out std_logic_vector(RFAddrWidth-1 downto 0)
-		);
+		DataMem_Data_out : out std_logic_vector(Dwidth-1 downto 0)
+);
 END component;
 ----------------------------------------------------------------		
 component datamem_wrap is
