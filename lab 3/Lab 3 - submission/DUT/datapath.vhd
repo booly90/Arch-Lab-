@@ -107,7 +107,7 @@ begin
     
     
     --bidirpins
-    Bus_Cout:       BidirPin        generic map(Dwidth) port map(C, Cout, B, main_BUS);
+    Bus_Cout:       BidirPin        generic map(Dwidth) port map(C, Cout, A, main_BUS);
     Bus_RF_out:     BidirPin        generic map(Dwidth) port map(RF2Bus, RFout, Bus2RF, main_BUS);
     Bus_Mem_out:    BidirPin        generic map(Dwidth) port map(DataMem2Bus, Mem_out, Bus2RF, main_BUS);
     Bus_Imm1_in:    BidirPin        generic map(Dwidth) port map(Imm_1, Imm1_in, Bus2RF, main_BUS);

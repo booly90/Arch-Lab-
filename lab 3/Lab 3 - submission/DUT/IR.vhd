@@ -43,9 +43,9 @@ begin
   process (RFaddr, ra, rb, rc)
   begin
     case RFaddr is
-      when "01" => reg_address <= ra;
-      when "10" => reg_address <= rb;
-      when "11" => reg_address <= rc;
+      when "00" => reg_address <= ra;
+      when "01" => reg_address <= rb;
+      when "10" => reg_address <= rc;
       when others => reg_address <= (others => '0');
     end case;
   end process;

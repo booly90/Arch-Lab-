@@ -46,10 +46,10 @@ BEGIN
 
 		end if;
 		
-		if clk'event and clk = '0' then
-			c_slave <= MASTER_C;
+--		if clk'event and clk = '0' then
+--			c_slave <= MASTER_C;
 		
-		end if;
+--		end if;
 	end process;
 	
     process(A, B, OPC, Ain)
@@ -90,7 +90,8 @@ BEGIN
 	
     -- 
 	
-    C <= c_slave when Cout = '1' else (others => 'Z');
+--    C <= c_slave when Cout = '1' else (others => 'Z');
+	C <= MASTER_C when Cout = '1' else (others => 'Z');
 
     -- flags
     Zflag <= '1' when c_slave = (BusSize - 1 downto 0 => '0') else '0';

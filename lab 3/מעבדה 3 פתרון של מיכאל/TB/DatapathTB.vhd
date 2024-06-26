@@ -131,6 +131,35 @@ begin
 end process;
 
 
+--------- Writing from Data memory to external text file, after the program ends (done_FSM = 1).
+	
+	WriteToDataMem:process 
+		file outDmemfile : text open write_mode is dataMemResult;
+		variable    linetomem			: STD_LOGIC_VECTOR(BusSize-1 downto 0);
+		variable	good				: BOOLEAN;
+		variable 	L 					: LINE;
+		variable	TempAddresses		: STD_LOGIC_VECTOR(Awidth-1 downto 0) ; 
+		variable 	counter				: INTEGER;
+	begin 
+
+		wait until done_FSM = '1';  
+		TempAddresses := (others => '0');
+		counter := 1;
+		while counter < 16 loop	--15 lines in file
+			TBRdAddrDataMem <= TempAddresses;
+			wait until rising_edge(clk);   -- 
+			wait until rising_edge(clk); -- 
+			linetomem := TBdataOutDataMem;   --
+			hwrite(L,linetomem);
+			writeline(outDmemfile,L);
+			TempAddresses := TempAddresses +1;
+			counter := counter +1;
+		end loop ;
+		file_close(outDmemfile);
+		wait;10
+	end process;
+
+
 --------- Start Test Bench ---------------------
 StartTb : process
 	begin
@@ -143,7 +172,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; -- ALU unaffected
+		OPC	 	 <= "0110"; -- ALU unaffected
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -164,7 +193,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -183,7 +212,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -222,7 +251,7 @@ StartTb : process
 		
 		Cout	 <= '1'; 
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -241,7 +270,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -263,7 +292,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -283,7 +312,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -323,7 +352,7 @@ StartTb : process
 		
 		Cout	 <= '1'; 
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -342,7 +371,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -363,7 +392,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -382,7 +411,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -420,7 +449,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 		
 		Cout	 <= '1'; 
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -439,7 +468,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -460,7 +489,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -479,7 +508,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -517,7 +546,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 		
 		Cout	 <= '1'; 
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -536,7 +565,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -557,7 +586,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -576,7 +605,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0'; 
 		RFin	 <= '1';
 		RFout	 <= '0';  
@@ -596,7 +625,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -615,7 +644,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -653,7 +682,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '1';  
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '1';
 		RFout	 <= '0';
@@ -673,7 +702,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -692,7 +721,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -730,7 +759,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '1';  
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '1';
 		RFout	 <= '0';
@@ -750,7 +779,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -769,7 +798,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -807,7 +836,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '1';  
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '1';
 		RFout	 <= '0';
@@ -827,7 +856,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -846,7 +875,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -884,7 +913,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '1';  
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '1';
 		RFout	 <= '0';
@@ -905,7 +934,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -924,7 +953,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '1'; 
 		RFin	 <= '0';
 		RFout	 <= '1';  
@@ -962,7 +991,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 		
 		Cout	 <= '1'; 
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -981,7 +1010,7 @@ StartTb : process
 		wait until clk'EVENT and clk='1'; 
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; 
+		OPC	 	 <= "0110"; 
 		Ain	 	 <= '0';				
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
@@ -1004,7 +1033,7 @@ StartTb : process
 		Mem_wr	 <= '0';
 		Cout	 <= '0';
 		Cin	 	 <= '0';
-		OPC	 	 <= "1111"; -- ALU unaffected
+		OPC	 	 <= "0110"; -- ALU unaffected
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
@@ -1022,33 +1051,6 @@ StartTb : process
 	end process;	
 	
 	
-	--------- Writing from Data memory to external text file, after the program ends (done_FSM = 1).
 	
-	WriteToDataMem:process 
-		file outDmemfile : text open write_mode is dataMemResult;
-		variable    linetomem			: STD_LOGIC_VECTOR(BusSize-1 downto 0);
-		variable	good				: BOOLEAN;
-		variable 	L 					: LINE;
-		variable	TempAddresses		: STD_LOGIC_VECTOR(Awidth-1 downto 0) ; 
-		variable 	counter				: INTEGER;
-	begin 
-
-		wait until done_FSM = '1';  
-		TempAddresses := (others => '0');
-		counter := 1;
-		while counter < 16 loop	--15 lines in file
-			TBRdAddrDataMem <= TempAddresses;
-			wait until rising_edge(clk);   -- 
-			wait until rising_edge(clk); -- 
-			linetomem := TBdataOutDataMem;   --
-			hwrite(L,linetomem);
-			writeline(outDmemfile,L);
-			TempAddresses := TempAddresses +1;
-			counter := counter +1;
-		end loop ;
-		file_close(outDmemfile);
-		wait;
-	end process;
-
 
 end tb_behav;

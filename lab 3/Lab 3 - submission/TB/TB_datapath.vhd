@@ -198,7 +198,7 @@ StartTb : process
 		RFaddr	 <= "00";   -- RF unaffected
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "11";  -- PC = zeros 
+		PCsel	 <= "10";  -- PC = zeros 
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -216,10 +216,10 @@ StartTb : process
 		Ain	 	 <= '0';
 		RFin	 <= '0';
 		RFout	 <= '0';
-		RFaddr	 <= "11";   
+		RFaddr	 <= "00";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -236,7 +236,7 @@ StartTb : process
 		RFin	 <= '0';
 		RFout	 <= '1';  
 		RFaddr	 <= "01"; 
-		PCsel	 <= "01";		
+		PCsel	 <= "00";		
 		IRin 	 <= '0';
 		PCin	 <= '0';	
 		Imm1_in	 <= '0';
@@ -258,12 +258,12 @@ StartTb : process
 		RFaddr	 <= "10";  		 
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '1';
 		Mem_out	 <= '0';			
 		done_TB  <= '0';
-		Mem_in	 <= '1';
+		Mem_in	 <= '0';
 ------------- Load  ------------------------
 -- Istate1
 		wait until clk'EVENT and clk='1'; 
@@ -275,7 +275,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';				
 		done_TB  <= '0';
@@ -294,7 +294,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';	
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_in	 <= '0';
@@ -318,7 +318,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -336,7 +336,7 @@ StartTb : process
 		RFin	 <= '0';
 		RFout	 <= '1';  
 		RFaddr	 <= "01"; 
-		PCsel	 <= "01";		
+		PCsel	 <= "00";		
 		IRin 	 <= '0';
 		PCin	 <= '0';	
 		Imm1_in	 <= '0';
@@ -359,7 +359,7 @@ StartTb : process
 		RFaddr	 <= "10";  		 
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '1';
 		Mem_out	 <= '0';			
@@ -376,7 +376,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';				
 		done_TB  <= '0';
@@ -395,7 +395,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';	
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_in	 <= '0';
@@ -418,7 +418,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -435,7 +435,7 @@ StartTb : process
 		RFin	 <= '0';
 		RFout	 <= '1';  
 		RFaddr	 <= "01"; 
-		PCsel	 <= "01";		
+		PCsel	 <= "00";		
 		IRin 	 <= '0';
 		PCin	 <= '0';	
 		Imm1_in	 <= '0';
@@ -457,7 +457,7 @@ StartTb : process
 		RFaddr	 <= "10";  		 
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '1';
 		Mem_out	 <= '0';			
@@ -473,7 +473,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';				
 		done_TB  <= '0';
@@ -492,7 +492,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';	
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_in	 <= '0';
@@ -515,7 +515,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -532,7 +532,7 @@ StartTb : process
 		RFin	 <= '0';
 		RFout	 <= '1';  
 		RFaddr	 <= "01"; 
-		PCsel	 <= "01";		
+		PCsel	 <= "00";		
 		IRin 	 <= '0';
 		PCin	 <= '0';	
 		Imm1_in	 <= '0';
@@ -554,7 +554,7 @@ StartTb : process
 		RFaddr	 <= "10";  		 
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '1';
 		Mem_out	 <= '0';			
@@ -570,7 +570,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';				
 		done_TB  <= '0';
@@ -589,7 +589,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';	
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_in	 <= '0';
@@ -612,7 +612,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -631,7 +631,7 @@ StartTb : process
 		RFaddr	 <= "10";  
 		IRin 	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '1';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -651,7 +651,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -670,7 +670,7 @@ StartTb : process
 		RFaddr	 <= "01";  
 		IRin 	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -688,7 +688,7 @@ StartTb : process
         RFaddr	 <= "00";
         IRin	 <= '0';
         PCin	 <= '0';
-        PCsel	 <= "01";
+        PCsel	 <= "00";
         Imm1_in	 <= '0';
         Imm2_in	 <= '0';
         Mem_out	 <= '0';
@@ -708,7 +708,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -728,7 +728,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -747,7 +747,7 @@ StartTb : process
 		RFaddr	 <= "01";  
 		IRin 	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -765,7 +765,7 @@ StartTb : process
         RFaddr	 <= "00";
         IRin	 <= '0';
         PCin	 <= '0';
-        PCsel	 <= "01";
+        PCsel	 <= "00";
         Imm1_in	 <= '0';
         Imm2_in	 <= '0';
         Mem_out	 <= '0';
@@ -785,7 +785,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -805,7 +805,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -824,7 +824,7 @@ StartTb : process
 		RFaddr	 <= "01";  
 		IRin 	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -842,7 +842,7 @@ StartTb : process
         RFaddr	 <= "00";
         IRin	 <= '0';
         PCin	 <= '0';
-        PCsel	 <= "01";
+        PCsel	 <= "00";
         Imm1_in	 <= '0';
         Imm2_in	 <= '0';
         Mem_out	 <= '0';
@@ -862,7 +862,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -882,7 +882,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -901,7 +901,7 @@ StartTb : process
 		RFaddr	 <= "01";  
 		IRin 	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -919,7 +919,7 @@ StartTb : process
         RFaddr	 <= "00";
         IRin	 <= '0';
         PCin	 <= '0';
-        PCsel	 <= "01";
+        PCsel	 <= "00";
         Imm1_in	 <= '0';
         Imm2_in	 <= '0';
         Mem_out	 <= '0';
@@ -939,7 +939,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -960,7 +960,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -979,7 +979,7 @@ StartTb : process
 		RFaddr	 <= "01";  
 		IRin 	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";				
+		PCsel	 <= "00";				
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -997,7 +997,7 @@ StartTb : process
         RFaddr	 <= "00";
         IRin	 <= '0';
         PCin	 <= '0';
-        PCsel	 <= "01";
+        PCsel	 <= "00";
         Imm1_in	 <= '0';
         Imm2_in	 <= '0';
         Mem_out	 <= '0';
@@ -1017,7 +1017,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -1037,7 +1037,7 @@ StartTb : process
 		RFaddr	 <= "11";   
 		IRin	 <= '1';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
@@ -1054,7 +1054,7 @@ StartTb : process
 		RFin	 <= '0';
 		RFout	 <= '1';  
 		RFaddr	 <= "01"; 
-		PCsel	 <= "01";		
+		PCsel	 <= "00";		
 		IRin 	 <= '0';
 		PCin	 <= '0';	
 		Imm1_in	 <= '0';
@@ -1076,7 +1076,7 @@ StartTb : process
 		RFaddr	 <= "10";  		 
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '1';
 		Mem_out	 <= '0';			
@@ -1092,7 +1092,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '0';
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';				
 		done_TB  <= '0';
@@ -1111,7 +1111,7 @@ StartTb : process
 		RFaddr	 <= "10";   
 		IRin	 <= '0';
 		PCin	 <= '1';	
-		PCsel	 <= "01";	
+		PCsel	 <= "00";	
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_in	 <= '0';
@@ -1136,7 +1136,7 @@ StartTb : process
 		RFaddr	 <= "00";   -- RF unaffected
 		IRin	 <= '0';
 		PCin	 <= '1';
-		PCsel	 <= "11";  -- PC = zeros 
+		PCsel	 <= "10";  -- PC = zeros 
 		Imm1_in	 <= '0';
 		Imm2_in	 <= '0';
 		Mem_out	 <= '0';
