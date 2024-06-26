@@ -24,7 +24,7 @@ entity top is
 		--Program Memory ports
 		  ProgMem_wren : in std_logic;
 		  ProgMem_DataIn: in std_logic_vector (Prog_Data_size-1 downto 0);
-		  ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0));
+		  ProgMem_writeAddr : in std_logic_vector(prog_addr_size-1 downto 0);
 end top;
 
 architecture proccesor of top is
