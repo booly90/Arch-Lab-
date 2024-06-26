@@ -4,7 +4,7 @@ int res;
 void main(){
 	
 	R[1] = arr[4] & 31;
-	R[2] = arr[5] & 31;
+	R[2] = arr[8] & 31;
 	
 	if(R[2] >= R[1])
 		res=0;

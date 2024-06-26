@@ -4,18 +4,17 @@ res ds16 1
 
 code segment:
 ld  r1,4(r0)
-ld  r2,5(r0)
+ld  r2,8(r0)
 mov r3,31
 mov r4,1
-mov r5,14
 and r1,r1,r3
 and r2,r2,r3
 sub r6,r2,r1
 jc  2
-add r6,r4,r0
+add r6,r1,r0
 jmp 1
 add r6,r0,r0
-st  r6,0(r5)
+st  r6,14(r0)
 done
 nop
 jmp -2

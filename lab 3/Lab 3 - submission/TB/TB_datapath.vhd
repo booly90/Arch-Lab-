@@ -40,20 +40,27 @@ signal TB_Data_writeAddr, TB_Data_readAddr : std_logic_vector(data_addr_size-1 d
 signal mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st, Nflag, Zflag, Cflag: std_logic;
 -- output to tb
 signal DataMem_Data_out : std_logic_vector(data_data_size-1 downto 0);
-signal tb_done : std_logic;
+signal done_TB : std_logic;
 
 -- reading from files flags
 signal donePmemIn, doneDmemIn: BOOLEAN;
-constant lab3path:		string (1 to 48) :=
+
+-- for yarden's PC
+constant lab3path:		string (1 to 48) :=              
 "C:\Users\barmu\Documents\GitHub\Arch-Lab-\lab 3\";
+
+---- for Hadar's PC
+--constant lab3path:		string (1 to 48) :=              
+--"C:\Users\barmu\Documents\GitHub\Arch-Lab-\lab 3\";
+
 constant dataMemResult:	 	string(1 to 95) :=
 lab3path & "Lab 3 - submission\memory files\DTCMcontent.txt";
 
 constant dataMemLocation: 	string(1 to 92) :=
 lab3path & "Lab 3 - submission\memory files\DTCMinit.txt";
 
-constant progMemLocation: 	string(1 to 92) :=
-lab3path & "Lab 3 - submission\memory files\ITCMinit.txt";
+constant progMemLocation: 	string(1 to 100) :=
+lab3path & "Lab 3 - submission\memory files\ITCMinitDatapath.txt";
 
 --constant dataMemResult: string(1 to 101) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMcontent.txt"; -- our url
 --constant dataMemLocation: string(1 to 98) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\Lab 3 - submission\TB_RESAULT\DATAPATH\DTCMinit.txt";-- our url
@@ -145,7 +152,7 @@ begin
     wait;
 end process;
 
--- Writing from Data memory to external text file, after the program ends (tb_done = 1)
+-- Writing from Data memory to external text file, after the program ends (done_TB = 1)
 WriteToDataMem: process
     file outDmemfile : text open write_mode is dataMemResult;
     variable linetomem: std_logic_vector(bus_size-1 downto 0);
@@ -154,10 +161,10 @@ WriteToDataMem: process
     variable TempAddresses: std_logic_vector(Awidth-1 downto 0); 
     variable counter: integer;
 begin 
-    wait for 6500 ns;
+    wait until done_TB = '1';
     TempAddresses := (others => '0');
-    counter := 1;
-    while counter < 16 loop -- 15 lines in file
+    counter := 0;
+    while counter < 11 loop -- 11 lines in file
         TB_Data_readAddr <= TempAddresses;
         wait until rising_edge(clk);   
         wait until rising_edge(clk); 
@@ -171,72 +178,976 @@ begin
     wait;
 end process;
 
--- Start Test Bench
-StartTb: process
-begin
-    wait until donePmemIn and doneDmemIn;  
 
-    -- Reset
-    wait until rising_edge(clk);
-    Mem_wr <= '0';
-    Mem_out <= '0';
-    Mem_in <= '0';
-    cout <= '0';
-    cin <= '0';
-    OPC <= "0101"; -- opcode not in use
-    Ain <= '0';
-    RFin <= '0';
-    RFout <= '0';
-    RFaddr <= "00";
-    IRin <= '0';
-    PCin <= '1'; -- resets PC
-    PCsel <= "11";
-    Imm1_in <= '0';
-    Imm2_in <= '0';
-    tb_done <= '1';
+--------- Start Test Bench ---------------------
+StartTb : process
+	begin
+	
+		wait until donePmemIn and doneDmemIn;  
 
-    -- Sample instructions, update based on your specific instruction set
-    -- Example: Load Instruction D104
-    -- Fetch
-    wait until rising_edge(clk); 
-    Mem_wr <= '0';
-    Mem_out <= '0';
-    Mem_in <= '0';
-    cout <= '0';
-    cin <= '0';
-    OPC <= "0101"; -- opcode not in use
-    Ain <= '0';
-    RFin <= '0';
-    RFout <= '0';
-    RFaddr <= "00";
-    IRin <= '1';
-    PCin <= '0';
-    PCsel <= "00";
-    Imm1_in <= '0';
-    Imm2_in <= '0';
-    tb_done <= '0';
+------------- Reset ------------------------		
+	 --reset
+		wait until clk'EVENT and clk='1';
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; -- ALU unaffected
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "00";   -- RF unaffected
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "11";  -- PC = zeros 
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+---------------------- Instruction For Load - D202-----------------------------		
+------------- Fetch ------------------------
+		
+		wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01"; 
+		PCsel	 <= "01";		
+		IRin 	 <= '0';
+		PCin	 <= '0';	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Load  ------------------------
+-- Istate0
+		wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0'; 
+		Cin	 	 <= '1';
+		OPC	 	 <= "0000"; 	
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "10";  		 
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '1';
+		Mem_out	 <= '0';			
+		done_TB  <= '0';
+		Mem_in	 <= '1';
+------------- Load  ------------------------
+-- Istate1
+		wait until clk'EVENT and clk='1'; 
+		
+		Cout	 <= '1'; 
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';				
+		done_TB  <= '0';
+		Mem_out	 <= '0';  
+		RFin	 <= '0'; 
+		RFout	 <= '0'; 
+		Mem_wr	 <= '0';
+		Mem_in	 <= '0';
+------------- Load  ------------------------
+-- Istate2
+		wait until clk'EVENT and clk='1'; 
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';	
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+		Mem_wr	 <= '0'; 
+		Mem_out	 <= '1';  
+		RFin	 <= '1';
+		RFout 	 <= '0';
+-----------------------------------------------------------------------------
+---------------------- Instruction For Load - D303-----------------------------	
+------------- Fetch ------------------------		
+		wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
 
-    -- Decode
-    wait until rising_edge(clk); 
-    Mem_wr <= '0';
-    Mem_out <= '0';
-    Mem_in <= '0';
-    cout <= '0';
-    cin <= '0';
-    OPC <= "0101"; -- opcode not in use
-    Ain <= '1';
-    RFin <= '0';
-    RFout <= '1'; -- REG-A <- R[rb]
-    RFaddr <= "10";
-    IRin <= '0';
-    PCin <= '0';
-    PCsel <= "00";
-    Imm1_in <= '0';
-    Imm2_in <= '0';
-    tb_done <= '0';
-    
-    -- Add more instructions following the same pattern as needed for your test
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01"; 
+		PCsel	 <= "01";		
+		IRin 	 <= '0';
+		PCin	 <= '0';	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
 
-end process;
+------------- Load  ------------------------
+-- Istate0
+		wait until clk'EVENT and clk='1'; 
+		
+		Mem_wr	 <= '0';
+		Cout	 <= '0'; 
+		Cin	 	 <= '1';
+		OPC	 	 <= "0000"; 	
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "10";  		 
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '1';
+		Mem_out	 <= '0';			
+		done_TB  <= '0';
+		Mem_in	 <= '1';
+------------- Load  ------------------------
+-- Istate1
+		wait until clk'EVENT and clk='1'; 
+		
+		Cout	 <= '1'; 
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';				
+		done_TB  <= '0';
+		Mem_out	 <= '0';  
+		RFin	 <= '0'; 
+		RFout	 <= '0'; 
+		Mem_wr	 <= '0';
+		Mem_in	 <= '0';
+------------- Load  ------------------------
+-- Istate2
+		wait until clk'EVENT and clk='1'; 
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';	
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+		Mem_wr	 <= '0'; 
+		Mem_out	 <= '1';  
+		RFin	 <= '1';
+		RFout 	 <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For Load - D404-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
 
-end dfl;
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01"; 
+		PCsel	 <= "01";		
+		IRin 	 <= '0';
+		PCin	 <= '0';	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+
+------------- Load  ------------------------
+-- Istate0
+		wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0'; 
+		Cin	 	 <= '1';
+		OPC	 	 <= "0000"; 	
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "10";  		 
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '1';
+		Mem_out	 <= '0';			
+		done_TB  <= '0';
+		Mem_in	 <= '1';
+------------- Load  ------------------------
+-- Istate1
+		wait until clk'EVENT and clk='1'; 		
+		Cout	 <= '1'; 
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';				
+		done_TB  <= '0';
+		Mem_out	 <= '0';  
+		RFin	 <= '0'; 
+		RFout	 <= '0'; 
+		Mem_wr	 <= '0';
+		Mem_in	 <= '0';
+------------- Load  ------------------------
+-- Istate2
+		wait until clk'EVENT and clk='1'; 
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';	
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+		Mem_wr	 <= '0'; 
+		Mem_out	 <= '1';  
+		RFin	 <= '1';
+		RFout 	 <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For Load - D505-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01"; 
+		PCsel	 <= "01";		
+		IRin 	 <= '0';
+		PCin	 <= '0';	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+
+------------- Load  ------------------------
+-- Istate0
+		wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0'; 
+		Cin	 	 <= '1';
+		OPC	 	 <= "0000"; 	
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "10";  		 
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '1';
+		Mem_out	 <= '0';			
+		done_TB  <= '0';
+		Mem_in	 <= '1';
+------------- Load  ------------------------
+-- Istate1
+		wait until clk'EVENT and clk='1'; 		
+		Cout	 <= '1'; 
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';				
+		done_TB  <= '0';
+		Mem_out	 <= '0';  
+		RFin	 <= '0'; 
+		RFout	 <= '0'; 
+		Mem_wr	 <= '0';
+		Mem_in	 <= '0';
+------------- Load  ------------------------
+-- Istate2
+		wait until clk'EVENT and clk='1'; 
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';	
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+		Mem_wr	 <= '0'; 
+		Mem_out	 <= '1';  
+		RFin	 <= '1';
+		RFout 	 <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For Mov - C101 -----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode - Mov ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0'; 
+		RFin	 <= '1';
+		RFout	 <= '0';  
+		RFaddr	 <= "10";  
+		IRin 	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '1';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+-------------------------------------------------------------------------------
+---------------------- Instruction For Add - 0223-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01";  
+		IRin 	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Add -----------------------------	
+--Rstate0
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+        Cout	 <= '0';
+        Cin	 	 <= '1'; 
+        Ain	 	 <= '0';
+        RFin	 <= '0';
+        RFout	 <= '1'; 
+        RFaddr	 <= "00";
+        IRin	 <= '0';
+        PCin	 <= '0';
+        PCsel	 <= "01";
+        Imm1_in	 <= '0';
+        Imm2_in	 <= '0';
+        Mem_out	 <= '0';
+        Mem_in	 <= '0';
+        done_TB  <= '0';
+		OPC <= "0000";
+------------- Add -----------------------------	
+--Rstate1
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+		Cout	 <= '1';  
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '1';
+		RFout	 <= '0';
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For sub - 1342-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01";  
+		IRin 	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Add -----------------------------	
+--Rstate0
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+        Cout	 <= '0';
+        Cin	 	 <= '1'; 
+        Ain	 	 <= '0';
+        RFin	 <= '0';
+        RFout	 <= '1'; 
+        RFaddr	 <= "00";
+        IRin	 <= '0';
+        PCin	 <= '0';
+        PCsel	 <= "01";
+        Imm1_in	 <= '0';
+        Imm2_in	 <= '0';
+        Mem_out	 <= '0';
+        Mem_in	 <= '0';
+        done_TB  <= '0';
+		OPC <= "0000";
+------------- Add -----------------------------	
+--Rstate1
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+		Cout	 <= '1';  
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '1';
+		RFout	 <= '0';
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For and - 2645-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01";  
+		IRin 	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Sub -----------------------------	
+--Rstate0
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+        Cout	 <= '0';
+        Cin	 	 <= '1'; 
+        Ain	 	 <= '0';
+        RFin	 <= '0';
+        RFout	 <= '1'; 
+        RFaddr	 <= "00";
+        IRin	 <= '0';
+        PCin	 <= '0';
+        PCsel	 <= "01";
+        Imm1_in	 <= '0';
+        Imm2_in	 <= '0';
+        Mem_out	 <= '0';
+        Mem_in	 <= '0';
+        done_TB  <= '0';
+		OPC 	 <= "0001";
+------------- Sub -----------------------------	
+--Rstate1
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+		Cout	 <= '1';  
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '1';
+		RFout	 <= '0';
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For Or - 3745 -----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01";  
+		IRin 	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Add -----------------------------	
+--Rstate0
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+        Cout	 <= '0';
+        Cin	 	 <= '1'; 
+        Ain	 	 <= '0';
+        RFin	 <= '0';
+        RFout	 <= '1'; 
+        RFaddr	 <= "00";
+        IRin	 <= '0';
+        PCin	 <= '0';
+        PCsel	 <= "01";
+        Imm1_in	 <= '0';
+        Imm2_in	 <= '0';
+        Mem_out	 <= '0';
+        Mem_in	 <= '0';
+        done_TB  <= '0';
+		OPC 	 <= "0000";
+------------- Add -----------------------------	
+--Rstate1
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+		Cout	 <= '1';  
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '1';
+		RFout	 <= '0';
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+-------------------------------------------------------------------------------
+---------------------- Instruction For Xor - 4845 -----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01";  
+		IRin 	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";				
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+------------- Add -----------------------------	
+--Rstate0
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+        Cout	 <= '0';
+        Cin	 	 <= '1'; 
+        Ain	 	 <= '0';
+        RFin	 <= '0';
+        RFout	 <= '1'; 
+        RFaddr	 <= "00";
+        IRin	 <= '0';
+        PCin	 <= '0';
+        PCsel	 <= "01";
+        Imm1_in	 <= '0';
+        Imm2_in	 <= '0';
+        Mem_out	 <= '0';
+        Mem_in	 <= '0';
+        done_TB  <= '0';
+		OPC 	 <= "0000";
+------------- Add -----------------------------	
+--Rstate1
+    	wait until clk'EVENT and clk='1'; 
+		Mem_wr	 <= '0';
+		Cout	 <= '1';  
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '1';
+		RFout	 <= '0';
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+-------------------------------------------------------------------------------
+---------------------- Instruction For Store - E70E-----------------------------
+------------- Fetch ------------------------	
+		wait until clk'EVENT and clk='1';		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "11";   
+		IRin	 <= '1';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+
+------------- Decode ------------------------	
+    	wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '1'; 
+		RFin	 <= '0';
+		RFout	 <= '1';  
+		RFaddr	 <= "01"; 
+		PCsel	 <= "01";		
+		IRin 	 <= '0';
+		PCin	 <= '0';	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';				
+
+------------- Store  ------------------------
+-- Istate0
+		wait until clk'EVENT and clk='1'; 		
+		Mem_wr	 <= '0';
+		Cout	 <= '0'; 
+		Cin	 	 <= '1';
+		OPC	 	 <= "0000"; 	
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "10";  		 
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '1';
+		Mem_out	 <= '0';			
+		done_TB  <= '0';
+		Mem_in	 <= '0';
+------------- Store  ------------------------
+-- Istate1
+		wait until clk'EVENT and clk='1'; 		
+		Cout	 <= '1'; 
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '0';
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';				
+		done_TB  <= '0';
+		RFout	 <= '0'; 
+		Mem_wr	 <= '0'; 
+		RFin	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '1';  
+------------- Store  ------------------------
+-- Istate2
+		wait until clk'EVENT and clk='1'; 
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; 
+		Ain	 	 <= '0';				
+		RFaddr	 <= "10";   
+		IRin	 <= '0';
+		PCin	 <= '1';	
+		PCsel	 <= "01";	
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '0';
+		Mem_out	 <= '0';	
+		RFout	 <= '1'; 
+		Mem_wr	 <= '1'; 
+		RFin	 <= '0';
+
+--******************************************************************
+
+------------- End: emulates done TB ---------------------------------	
+------------- Reset ------------------------		
+		wait until clk'EVENT and clk='1';
+		Mem_wr	 <= '0';
+		Cout	 <= '0';
+		Cin	 	 <= '0';
+		OPC	 	 <= "0110"; -- ALU unaffected
+		Ain	 	 <= '0';
+		RFin	 <= '0';
+		RFout	 <= '0';
+		RFaddr	 <= "00";   -- RF unaffected
+		IRin	 <= '0';
+		PCin	 <= '1';
+		PCsel	 <= "11";  -- PC = zeros 
+		Imm1_in	 <= '0';
+		Imm2_in	 <= '0';
+		Mem_out	 <= '0';
+		Mem_in	 <= '0';
+		done_TB  <= '1';
+		wait;
+		
+	end process;	
+	
+	
+	
+
+
+end tb_behav;
