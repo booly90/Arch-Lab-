@@ -50,13 +50,16 @@ add wave -noupdate /tb/DataPathUnit/ALU_Module/Ain
 add wave -noupdate /tb/DataPathUnit/ALU_Module/REG_A
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/B
 add wave -noupdate /tb/DataPathUnit/ALU_Module/MASTER_C
-add wave -noupdate /tb/DataPathUnit/ALU_Module/c_slave
+add wave -noupdate -radix hexadecimal /tb/DataPathUnit/C
+add wave -noupdate /tb/DataPathUnit/ALU_Module/A_temp
+add wave -noupdate /tb/DataPathUnit/ALU_Module/B_temp
+add wave -noupdate /tb/DataPathUnit/ALU_Module/wire_c
+add wave -noupdate /tb/DataPathUnit/ALU_Module/OPC
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/Immid_1
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/Immid_2
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/IR2RF
-add wave -noupdate -radix hexadecimal /tb/DataPathUnit/IR_OPC
+add wave -noupdate -radix binary /tb/DataPathUnit/IR_OPC
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/A
-add wave -noupdate -radix hexadecimal /tb/DataPathUnit/C
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/DataMem2Bus
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/Data_wren
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/DataMem_Data_in
@@ -104,7 +107,7 @@ add wave -noupdate /tb/DataPathUnit/PC_unit/PC_current
 add wave -noupdate /tb/DataPathUnit/OPCdecoder_unit/IRopBits
 add wave -noupdate -radix hexadecimal /tb/DataPathUnit/IR_unit/IR_reg
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1827439 ps} 0}
+WaveRestoreCursors {{Cursor 1} {2687032 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 287
 configure wave -valuecolwidth 100
@@ -120,4 +123,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {1479765 ps} {2413397 ps}
+WaveRestoreZoom {1517981 ps} {2904969 ps}

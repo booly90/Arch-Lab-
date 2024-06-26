@@ -52,7 +52,7 @@ BEGIN
 --		end if;
 	end process;
 	
-    process(A, B, OPC, Ain)
+    process(REG_A, B, OPC, Ain,s)
     begin
         if OPC = "0000" then
             A_temp <= REG_A;
@@ -94,6 +94,10 @@ BEGIN
 	C <= MASTER_C when Cout = '1' else (others => 'Z');
 
     -- flags
-    Zflag <= '1' when c_slave = (BusSize - 1 downto 0 => '0') else '0';
-    Nflag <= c_slave(BusSize-1);
+    Zflag <= '1' when MASTER_C = (BusSize - 1 downto 0 => '0') else '0';
+--	Zflag <= '1' when c_slave = (BusSize - 1 downto 0 => '0') else '0';
+
+	Nflag <= MASTER_C(BusSize-1);
+
+--    Nflag <= c_slave(BusSize-1);
 END intel_i9;
