@@ -43,7 +43,20 @@ begin
 	control : control_fsm generic map (bus_size,Awidth)
 				port map(clk, ena, rst,mov,done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st,
 						Mem_wr, Mem_out, Mem_in, Cout, Cin, RFin, PCin, Imm1_in, Imm2_in,
-						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done);
+						Ain, RFout,IRin, PCsel,RFaddr,OPC,tb_done)
+
+	port   (clk, ena, rst 
+			mov, done_DTCM, and_op, or_op, xor_op,
+			jnc, jc, jmp, sub, add, Nflag, Zflag, Cflag, ld, st, 
+			mem_wr, mem_out, mem_in, C_out, C_in, RFin, PCin,
+			Imm1_in, Imm2_in, Ain, RFout, IRin,
+			PCsel, RFaddr,
+			OPC ,done_TB	
 	
+										
+			
+			
+			);
+						
 	
 end proccesor;
