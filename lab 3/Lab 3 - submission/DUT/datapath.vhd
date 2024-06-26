@@ -93,7 +93,7 @@ begin
         else
             Data_wren <= Mem_wr;
             DataMem_Data_in <= main_BUS;
-            Data_readAddr <= Bus2Data_readAddr;
+            Data_readAddr <= main_BUS (prog_addr_size-1 downto 0);
             Data_writeAddr <= FF2writeAddr;
         end if;
     end process;
@@ -107,9 +107,9 @@ begin
     
     
     --bidirpins
-    Bus_Cout:       BidirPin        generic map(Dwidth) port map(C, Cout, A, main_BUS);
+    Bus_Cout:       BidirPin        generic map(Dwidth) port map(C, Cout, B, main_BUS);
     Bus_RF_out:     BidirPin        generic map(Dwidth) port map(RF2Bus, RFout, Bus2RF, main_BUS);
-    Bus_Mem_out:    BidirPin        generic map(Dwidth) port map(DataMem2Bus, Mem_out, Bus2Data_readAddr, main_BUS);
+    Bus_Mem_out:    BidirPin        generic map(Dwidth) port map(DataMem2Bus, Mem_out, Bus2RF, main_BUS);
     Bus_Imm1_in:    BidirPin        generic map(Dwidth) port map(Imm_1, Imm1_in, Bus2RF, main_BUS);
     Bus_Imm2_in:    BidirPin        generic map(Dwidth) port map(Imm_2, Imm2_in, B, main_BUS);
     

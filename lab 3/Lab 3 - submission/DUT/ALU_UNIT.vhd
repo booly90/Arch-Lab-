@@ -37,7 +37,7 @@ BEGIN
 	BEGIN
 		if clk'event and clk = '1' then
 			if Ain = '1' then
-				REG_A <= A;	
+				REG_A <= B;	
 			end if;
 			
 			if Cin = '1' then
