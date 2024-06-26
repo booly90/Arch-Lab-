@@ -34,9 +34,9 @@ architecture rtc of tb_TOP is
     signal TB_DTCM_in: std_logic_vector(Dwidth-1 downto 0);
     signal TB_DTCM_out: std_logic_vector(Dwidth-1 downto 0);
 
-   constant read_file_loc : string(1 to 72) :=  "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\ITCMinit.txt";
-    constant read_file_loc2 : string(1 to 72) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\DTCMinit.txt";
-    constant write_file_loc : string(1 to 75) := "C:\Users\user\Documents\GitHub\Arch-Lab-\lab 3\memory files\TopResault.text";
+   constant read_file_loc : string(1 to 60) :=  "C:\Users\user\Desktop\lab3 realtime 2\basictest\ITCMinit.txt";
+    constant read_file_loc2 : string(1 to 60) := "C:\Users\user\Desktop\lab3 realtime 2\basictest\DTCMinit.txt";
+    constant write_file_loc : string(1 to 63) := "C:\Users\user\Desktop\lab3 realtime 2\basictest\DTCMcontent.txt";
     
 begin
     top_tb : entity work.top 

@@ -89,11 +89,10 @@ port(	clk,rst,WregEn: in std_logic;
 );
 end component;
 ----------------------------------------------------------------
-component OPCdecode IS
-	generic(RFAddrWidth: integer:=4); 	-- Register Size
-	port(	IRopBits	:IN std_logic_vector (RFAddrWidth - 1 downto 0);
-			mov, done_DTCM, and_op, or_op, xor_op : OUT std_logic;
-			jnc, jc, jmp, sub, add, ld, st : OUT std_logic);
+component OPCDecoder IS
+	port(Op   : in std_logic_vector(3 downto 0);
+		mov, done, and_bit, or_bit, xor_bit, jnc, jc, jmp, sub, add, ld, st : out std_logic
+		);
 END component;
 ----------------------------------------------------------------
 component progMem IS

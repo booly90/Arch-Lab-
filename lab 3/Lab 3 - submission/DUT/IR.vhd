@@ -35,7 +35,7 @@ begin
   begin
 	if rst = '1' then
 		IR_reg <= (others =>'0');
-    elsif IRin = '1' and (clk'event and clk='1') then
+    elsif (IRin = '1' and (clk'event and clk='1')) then
       IR_reg <= bus_in;
     end if;
   end process;
