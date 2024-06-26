@@ -9,7 +9,6 @@ use work.aux_package.all;
 entity datapath is
 generic( Dwidth: integer:=16;	-- Bus Size
 		 RFAddrWidth: integer:=4; 	-- Register Size
-		 Awidth:  integer:=6;  	-- Address Size
 		 OffsetSize 	: integer := 8;
 		 ImmidSize	: integer := 8;		 
 		 dept:    integer:=64;
