@@ -37,9 +37,9 @@ BEGIN
   
 	
 	-------------------Keys Binding--------------------------
-	process(KEY0, KEY1, KEY2) 
+	process(clk) 
 	begin
-	--	if rising_edge(clk) then
+		if rising_edge(clk) then
 			if KEY0 = '0' then
 				Y     <= SW_i;
 			END if;

@@ -11,6 +11,8 @@ PACKAGE aux_package IS
             s, cout: OUT std_logic
         );
     END COMPONENT;
+	
+------------------------------------------------------------------------------
 
     COMPONENT AdderSub
         GENERIC (n : INTEGER := 8); --bit size of input and outputs signals, default is 8
@@ -21,6 +23,8 @@ PACKAGE aux_package IS
             adderSub_out: OUT STD_LOGIC_VECTOR (n-1 DOWNTO 0)
         );
     END COMPONENT;
+
+------------------------------------------------------------------------------
 
     COMPONENT Logic
         GENERIC (
@@ -33,6 +37,8 @@ PACKAGE aux_package IS
             Logic_out : OUT std_logic_vector (n-1 DOWNTO 0)
         );
     END COMPONENT;
+
+------------------------------------------------------------------------------
 
     COMPONENT Shifter
         GENERIC (
@@ -47,6 +53,8 @@ PACKAGE aux_package IS
             Shifter_out: OUT std_logic_vector (n-1 DOWNTO 0)
         );
     END COMPONENT;
+
+------------------------------------------------------------------------------
 
     COMPONENT top
   GENERIC (n : INTEGER := 8;
@@ -63,6 +71,8 @@ PACKAGE aux_package IS
   ); -- Zflag, Cflag, Nflag, Vflag
     END COMPONENT;
 	
+------------------------------------------------------------------------------	
+
 	COMPONENT PWM	
 	GENERIC (n : INTEGER := 8;
 		   k : integer := 3;   -- k=log2(n)
@@ -85,6 +95,8 @@ PACKAGE aux_package IS
 	q          : out std_logic_vector (7 downto 0));
 	end COMPONENT;
 	
+------------------------------------------------------------------------------	
+	
 	COMPONENT TopIO_Interface
 	  GENERIC (	HEX_num : integer := 7;
 			n : INTEGER := 8
@@ -99,6 +111,19 @@ PACKAGE aux_package IS
   );
 	END COMPONENT;
 
+------------------------------------------------------------------------------
 
-
-END PACKAGE aux_package;
+COMPONENT ALU IS
+  GENERIC (n : INTEGER := 8;
+		   k : integer := 3;   -- k=log2(n)
+		   m : integer := 4	); -- m=2^(k-1)
+  PORT 
+  (  
+	Y_i,X_i: IN STD_LOGIC_vector (n-1 DOWNTO 0);
+	ALUFN_i : IN STD_LOGIC_vector (4 DOWNTO 0);
+	ALUout_o: OUT STD_LOGIC_vector(n-1 downto 0);
+	Nflag_o,Cflag_o,Zflag_o,Vflag_o: OUT STD_LOGIC
+  ); -- Zflag,Cflag,Nflag,Vflag
+END ALU;
+------------------------------------------------------------------------------
+END PACKAGE COMPONENT;

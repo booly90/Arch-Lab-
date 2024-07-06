@@ -11,7 +11,7 @@ ENTITY PWM IS
 
   PORT
   (
-    Y_PWM, X_PWM : IN STD_LOGIC_vector (n-1 DOWNTO 0);
+    Y_PWM_in, X_PWM_in : IN STD_LOGIC_vector (n-1 DOWNTO 0);
     ENA, RST, CLK: in STD_LOGIC;
     ALUFN : IN  STD_LOGIC_vector (2 DOWNTO 0);
     PWM_OUT : out STD_LOGIC
@@ -20,20 +20,37 @@ ENTITY PWM IS
 end PWM;
 
 ARCHITECTURE PWM_MOUDLE OF PWM IS 
+    subtype vector IS STD_LOGIC_vector(n-1 DOWNTO 0);
+    
+	SIGNAL X_PWM_in: vector;
+    SIGNAL Y_PWM_in: vector;
     SIGNAL COUNTER_PWM: std_logic_vector(n-1 downto 0);
-    SIGNAL PWM_0: STD_LOGIC; --IF ALUFN IS 00000, WE WILL GET OUT THIS SIGNAL
-    SIGNAL PWM_1: STD_LOGIC; --IF ALUFN IS 00001, WE WILL GET OUT THIS SIGNAL, WHICH IN NOT(PWM_0)
+    --SIGNAL PWM_0: STD_LOGIC; --IF ALUFN IS 00000, WE WILL GET OUT THIS SIGNAL
+    --SIGNAL PWM_1: STD_LOGIC; --IF ALUFN IS 00001, WE WILL GET OUT THIS SIGNAL, WHICH IN NOT(PWM_0)
   
 begin
-
+	
+	--gate inputs to PWM module when active
+    Y_PWM    <= Y_PWM_in when ALUFN_i(4 DOWNTO 3) = "00" else (others => '0');
+    X_PWM    <= X_PWM_in when ALUFN_i(4 DOWNTO 3) = "00" else (others => '0');
+	
 process(CLK, RST)
+variable PWM_0: STD_LOGIC; --IF ALUFN IS 00000, WE WILL GET OUT THIS SIGNAL
+variable PWM_1: STD_LOGIC; --IF ALUFN IS 00001, WE WILL GET OUT THIS SIGNAL, WHICH IN NOT(PWM_0)
+
 begin
     if RST = '1' then
         COUNTER_PWM <= (others => '0');
     elsif rising_edge(CLK) then
         if ENA = '1' then
-            COUNTER_PWM <= COUNTER_PWM + 1;
-            if COUNTER_PWM < X_PWM then
+			if (COUNTER_PWM = Y_PWM) then 
+			--counter counts only upto Y
+				COUNTER_PWM <= (others => '0');
+			else
+				COUNTER_PWM <= COUNTER_PWM + 1;
+			end if;
+            
+            if COUNTER_PWM >= X_PWM then
                 if COUNTER_PWM < Y_PWM then    
                     PWM_0 <= '1';
                 else
@@ -45,7 +62,9 @@ begin
                 PWM_OUT <= PWM_0;
             elsif ALUFN = "00001" then
                 PWM_OUT <= PWM_1;
-            end if;
+			else 
+				PWM_OUT <= '0';
+			end if;
         end if;
     end if;
 end process;
