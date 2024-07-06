@@ -12,7 +12,7 @@ ENTITY PWM IS
   PORT
   (
     Y_PWM, X_PWM : IN STD_LOGIC_vector (n-1 DOWNTO 0);
-    ENA, RST, CLK : in STD_LOGIC;
+    ENA, RST, CLK: in STD_LOGIC;
     ALUFN : IN  STD_LOGIC_vector (2 DOWNTO 0);
     PWM_OUT : out STD_LOGIC
   );
