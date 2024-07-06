@@ -42,12 +42,15 @@ BEGIN
 	--	if rising_edge(clk) then
 			if KEY0 = '0' then
 				Y     <= SW_i;
-			elsif KEY1 = '0' then
+			END if;
+			
+			if KEY1 = '0' then
 				ALUFN <= SW_i(4 downto 0);
-			elsif KEY2 = '0' then
+			END if;
+			
+			if KEY2 = '0' then
 				X	  <= SW_i;	
 			end if;
---		end if;
 	end process;
 	--------------------LEDS Binding-------------------------
 	LEDs(0) <= Nflag;
