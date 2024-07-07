@@ -22,35 +22,47 @@ ARCHITECTURE struct OF TopIO_Interface IS
 	signal ALUout, X, Y : 	std_logic_vector(n-1 downto 0);
 	signal Nflag, Cflag, Zflag,Vflag, PWMout: STD_LOGIC;
 	signal ALUFN: std_logic_vector(4 downto 0);
+	signal clk, VCC : std_logic;
 	
 BEGIN
+	 
+	VCC <= '1';
 
-	TOPModule: 				Top				
+	-------------------module instantiation--------------------------
+
+	TOPModule: 	Top			
 	port map  (  
     Y_i => Y,X_i => X,
     ALUFN_i => ALUFN,
     ALUout_o => ALUout,
     Nflag_o => Nflag, Cflag_o => Cflag,Zflag_o => Zflag,Vflag_o => Vflag,
-    ENA => SW8, RST => KEY3, CLK=> PIN_AF14,
+    ena => SW8, rst => KEY3, clk=> clk,
     PWM_OUT => PWM_OUT 
   );
-  
+	--------------------------
+	pll_wrap: CounterEnvelope generic map (L => 6) --pll clkDiv by 2^L
+	port map(
+	Clk => PIN_AF14,
+	En => VCC,
+	Qout => clk
+	);
 	
 	-------------------Keys Binding--------------------------
 	process(clk) 
 	begin
-		if rising_edge(clk) then
+		if (rising_edge(clk) and SW8 = '1') then
 			if KEY0 = '0' then
 				Y     <= SW_i;
-			END if;
+			end if;
 			
 			if KEY1 = '0' then
 				ALUFN <= SW_i(4 downto 0);
-			END if;
+			end if;
 			
 			if KEY2 = '0' then
 				X	  <= SW_i;	
 			end if;
+		end if;
 	end process;
 	--------------------LEDS Binding-------------------------
 	LEDs(0) <= Nflag;
@@ -66,6 +78,5 @@ BEGIN
 	HEX4 (3 DOWNTO 0) <= ALUout (3 downto 0);
 	HEX5 (3 DOWNTO 0) <= ALUout (7 downto 4);
 	
-	 
 END struct;
 

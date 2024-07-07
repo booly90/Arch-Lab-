@@ -13,7 +13,7 @@ ENTITY PWM IS
   (
     Y_PWM_in, X_PWM_in : IN STD_LOGIC_vector (n-1 DOWNTO 0);
     ENA, RST, CLK: in STD_LOGIC;
-    ALUFN : IN  STD_LOGIC_vector (2 DOWNTO 0);
+    ALUFN : IN  STD_LOGIC_vector (4 DOWNTO 0);
     PWM_OUT : out STD_LOGIC
   );
 
@@ -22,8 +22,8 @@ end PWM;
 ARCHITECTURE PWM_MOUDLE OF PWM IS 
     subtype vector IS STD_LOGIC_vector(n-1 DOWNTO 0);
     
-	SIGNAL X_PWM_in: vector;
-    SIGNAL Y_PWM_in: vector;
+	SIGNAL X_PWM: vector;
+    SIGNAL Y_PWM: vector;
     SIGNAL COUNTER_PWM: std_logic_vector(n-1 downto 0);
     --SIGNAL PWM_0: STD_LOGIC; --IF ALUFN IS 00000, WE WILL GET OUT THIS SIGNAL
     --SIGNAL PWM_1: STD_LOGIC; --IF ALUFN IS 00001, WE WILL GET OUT THIS SIGNAL, WHICH IN NOT(PWM_0)
@@ -31,8 +31,8 @@ ARCHITECTURE PWM_MOUDLE OF PWM IS
 begin
 	
 	--gate inputs to PWM module when active
-    Y_PWM    <= Y_PWM_in when ALUFN_i(4 DOWNTO 3) = "00" else (others => '0');
-    X_PWM    <= X_PWM_in when ALUFN_i(4 DOWNTO 3) = "00" else (others => '0');
+    Y_PWM    <= Y_PWM_in when ALUFN(4 DOWNTO 3) = "00" else (others => '0');
+    X_PWM    <= X_PWM_in when ALUFN(4 DOWNTO 3) = "00" else (others => '0');
 	
 process(CLK, RST)
 variable PWM_0: STD_LOGIC; --IF ALUFN IS 00000, WE WILL GET OUT THIS SIGNAL
@@ -41,6 +41,7 @@ variable PWM_1: STD_LOGIC; --IF ALUFN IS 00001, WE WILL GET OUT THIS SIGNAL, WHI
 begin
     if RST = '1' then
         COUNTER_PWM <= (others => '0');
+		PWM_OUT 	<= '0';
     elsif rising_edge(CLK) then
         if ENA = '1' then
 			if (COUNTER_PWM = Y_PWM) then 
@@ -52,12 +53,12 @@ begin
             
             if COUNTER_PWM >= X_PWM then
                 if COUNTER_PWM < Y_PWM then    
-                    PWM_0 <= '1';
+                    PWM_0 := '1';
                 else
-                    PWM_0 <= '0';
+                    PWM_0 := '0';
                 end if;
             end if;
-            PWM_1 <= not PWM_0;
+            PWM_1 := not PWM_0;
             if ALUFN = "00000" then
                 PWM_OUT <= PWM_0;
             elsif ALUFN = "00001" then

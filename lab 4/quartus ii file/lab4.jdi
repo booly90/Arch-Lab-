@@ -1,8 +1,16 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="db0aeeffde3e5baeb0b9"/>
+    <hash md5_digest_80b="53ea03951f48029c56e3"/>
   </project>
   <file_info>
     <file device="5CSXFC6D6F31C6" path="lab4.sof" usercode="0xFFFFFFFF"/>
   </file_info>
+  <sld_infos>
+    <sld_info hpath="CounterEnvelope:pll_wrap|pll:u0" name="u0">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME pll HAS_SOPCINFO 1 GENERATION_ID 1720288215"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
 </sld_project_info>

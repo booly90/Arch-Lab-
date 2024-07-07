@@ -1,6 +1,6 @@
 Analysis & Synthesis report for lab4
-Sat Jul 06 14:06:17 2024
-Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Sun Jul  7 11:43:46 2024
+Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
 ---------------------
@@ -13,61 +13,70 @@ Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. User-Specified and Inferred Latches
+  8. Registers Removed During Synthesis
   9. General Register Statistics
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: Top-level Entity: |TopIO_Interface
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |topIO_Interface
  12. Parameter Settings for User Entity Instance: top:TOPModule
- 13. Parameter Settings for User Entity Instance: top:TOPModule|AdderSub:AdderSub_inst
- 14. Parameter Settings for User Entity Instance: top:TOPModule|Shifter:Shifter_inst
- 15. Parameter Settings for User Entity Instance: top:TOPModule|Logic:Logic_inst
- 16. Parameter Settings for User Entity Instance: top:TOPModule|PWM:PWM_inst
- 17. Port Connectivity Checks: "top:TOPModule"
- 18. Elapsed Time Per Partition
- 19. Analysis & Synthesis Messages
+ 13. Parameter Settings for User Entity Instance: top:TOPModule|PWM:PWM_inst
+ 14. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst
+ 15. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst
+ 16. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst
+ 17. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Logic:Logic_inst
+ 18. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap
+ 19. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|counter:m0
+ 20. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i
+ 21. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i"
+ 22. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0"
+ 23. Port Connectivity Checks: "CounterEnvelope:pll_wrap"
+ 24. Port Connectivity Checks: "top:TOPModule"
+ 25. Post-Synthesis Netlist Statistics for Top Partition
+ 26. Elapsed Time Per Partition
+ 27. Analysis & Synthesis Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2013 Altera Corporation
-Your use of Altera Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+Copyright (C) 2021  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Altera Program License 
-Subscription Agreement, Altera MegaCore Function License 
-Agreement, or other applicable license agreement, including, 
-without limitation, that your use is for the sole purpose of 
-programming logic devices manufactured by Altera and sold by 
-Altera or its authorized distributors.  Please refer to the 
-applicable agreement for further details.
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+---------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sat Jul 06 14:06:17 2024      ;
-; Quartus II 64-Bit Version       ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
-; Revision Name                   ; lab4                                       ;
-; Top-level Entity Name           ; TopIO_Interface                            ;
-; Family                          ; Cyclone V                                  ;
-; Logic utilization (in ALMs)     ; N/A                                        ;
-; Total registers                 ; 11                                         ;
-; Total pins                      ; 67                                         ;
-; Total virtual pins              ; 0                                          ;
-; Total block memory bits         ; 0                                          ;
-; Total DSP Blocks                ; 0                                          ;
-; Total HSSI RX PCSs              ; 0                                          ;
-; Total HSSI PMA RX Deserializers ; 0                                          ;
-; Total HSSI TX PCSs              ; 0                                          ;
-; Total HSSI TX Channels          ; 0                                          ;
-; Total PLLs                      ; 0                                          ;
-; Total DLLs                      ; 0                                          ;
-+---------------------------------+--------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Sun Jul  7 11:43:46 2024       ;
+; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
+; Revision Name                   ; lab4                                        ;
+; Top-level Entity Name           ; TopIO_Interface                             ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 38                                          ;
+; Total pins                      ; 67                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 1                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -76,16 +85,16 @@ applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
-; Top-level entity name                                                           ; TopIO_Interface    ; lab4               ;
-; Family name                                                                     ; Cyclone V          ; Cyclone IV GX      ;
+; Top-level entity name                                                           ; topIO_Interface    ; lab4               ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
-; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
 ; Enable compact report table                                                     ; Off                ; Off                ;
 ; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
 ; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
 ; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
 ; Preserve fewer node names                                                       ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                                       ; Off                ; Off                ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
 ; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
 ; State Machine Processing                                                        ; Auto               ; Auto               ;
@@ -136,7 +145,7 @@ applicable agreement for further details.
 ; Report Connectivity Checks                                                      ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
 ; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
-; PowerPlay Power Optimization                                                    ; Normal compilation ; Normal compilation ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
 ; HDL message level                                                               ; Level2             ; Level2             ;
 ; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
 ; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
@@ -152,36 +161,48 @@ applicable agreement for further details.
 ; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
 ; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
 ; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
-; Synthesis Seed                                                                  ; 1                  ; 1                  ;
 ; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 12     ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.1%      ;
++----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                 ;
-+---------------------------------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path                                                ; Used in Netlist ; File Type       ; File Name with Absolute Path                                           ; Library ;
-+---------------------------------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd             ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd             ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd         ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd         ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd           ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd           ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd              ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd              ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd     ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd     ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd        ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd        ;         ;
-; ../../../../Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd             ; yes             ; User VHDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd             ;         ;
-+---------------------------------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                      ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path            ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                             ; Library ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
+; ../DUT/pll/synthesis/pll.vhd                ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd                ;         ;
+; ../DUT/pll/synthesis/submodules/pll_pll_0.v ; yes             ; User Verilog HDL File  ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v ; pll     ;
+; ../DUT/CounterEnvelope.vhd                  ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd                  ;         ;
+; ../DUT/counter.vhd                          ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd                          ;         ;
+; ../DUT/TopIO_Interface.vhd                  ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd                  ;         ;
+; ../DUT/top.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd                              ;         ;
+; ../DUT/Shifter.vhd                          ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd                          ;         ;
+; ../DUT/PWM.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd                              ;         ;
+; ../DUT/Logic.vhd                            ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd                            ;         ;
+; ../DUT/FA.vhd                               ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd                               ;         ;
+; ../DUT/aux_package.vhd                      ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd                      ;         ;
+; ../DUT/ALU.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd                              ;         ;
+; ../DUT/AdderSub.vhd                         ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd                         ;         ;
+; altera_pll.v                                ; yes             ; Megafunction           ; d:/intel/fpga_lite/quartus/libraries/megafunctions/altera_pll.v                          ;         ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
 
 
 +--------------------------------------------------------+
@@ -189,78 +210,67 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimate of Logic utilization (ALMs needed) ; 127      ;
+; Estimate of Logic utilization (ALMs needed) ; 109      ;
 ;                                             ;          ;
-; Combinational ALUT usage for logic          ; 173      ;
+; Combinational ALUT usage for logic          ; 155      ;
 ;     -- 7 input functions                    ; 4        ;
-;     -- 6 input functions                    ; 76       ;
-;     -- 5 input functions                    ; 24       ;
-;     -- 4 input functions                    ; 8        ;
-;     -- <=3 input functions                  ; 61       ;
+;     -- 6 input functions                    ; 55       ;
+;     -- 5 input functions                    ; 28       ;
+;     -- 4 input functions                    ; 19       ;
+;     -- <=3 input functions                  ; 49       ;
 ;                                             ;          ;
-; Dedicated logic registers                   ; 11       ;
+; Dedicated logic registers                   ; 38       ;
 ;                                             ;          ;
 ; I/O pins                                    ; 67       ;
+;                                             ;          ;
 ; Total DSP Blocks                            ; 0        ;
+;                                             ;          ;
+; Total PLLs                                  ; 1        ;
+;     -- PLLs                                 ; 1        ;
+;                                             ;          ;
 ; Maximum fan-out node                        ; ALUFN[3] ;
-; Maximum fan-out                             ; 74       ;
-; Total fan-out                               ; 935      ;
-; Average fan-out                             ; 2.94     ;
+; Maximum fan-out                             ; 56       ;
+; Total fan-out                               ; 920      ;
+; Average fan-out                             ; 2.80     ;
 +---------------------------------------------+----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                              ;
-+--------------------------------+-------------------+--------------+-------------------+------------+------+--------------+------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node     ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                    ; Library Name ;
-+--------------------------------+-------------------+--------------+-------------------+------------+------+--------------+------------------------------------------------------------------------+--------------+
-; |TopIO_Interface               ; 173 (21)          ; 11 (0)       ; 0                 ; 0          ; 67   ; 0            ; |TopIO_Interface                                                       ; work         ;
-;    |top:TOPModule|             ; 152 (35)          ; 11 (0)       ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule                                         ; work         ;
-;       |AdderSub:AdderSub_inst| ; 31 (18)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst                  ; work         ;
-;          |FA:\rest:1:chain|    ; 1 (1)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:1:chain ; work         ;
-;          |FA:\rest:2:chain|    ; 1 (1)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:2:chain ; work         ;
-;          |FA:\rest:3:chain|    ; 2 (2)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:3:chain ; work         ;
-;          |FA:\rest:4:chain|    ; 3 (3)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:4:chain ; work         ;
-;          |FA:\rest:5:chain|    ; 1 (1)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:5:chain ; work         ;
-;          |FA:\rest:6:chain|    ; 2 (2)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:6:chain ; work         ;
-;          |FA:\rest:7:chain|    ; 1 (1)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:\rest:7:chain ; work         ;
-;          |FA:first|            ; 2 (2)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|FA:first         ; work         ;
-;       |Logic:Logic_inst|       ; 8 (8)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|Logic:Logic_inst                        ; work         ;
-;       |PWM:PWM_inst|           ; 25 (25)           ; 11 (11)      ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|PWM:PWM_inst                            ; work         ;
-;       |Shifter:Shifter_inst|   ; 53 (53)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|Shifter:Shifter_inst                    ; work         ;
-+--------------------------------+-------------------+--------------+-------------------+------------+------+--------------+------------------------------------------------------------------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                        ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node            ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                      ; Entity Name     ; Library Name ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
+; |TopIO_Interface                      ; 155 (3)             ; 38 (21)                   ; 0                 ; 0          ; 67   ; 0            ; |TopIO_Interface                                                                         ; TopIO_Interface ; work         ;
+;    |CounterEnvelope:pll_wrap|         ; 7 (0)               ; 7 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap                                                ; CounterEnvelope ; work         ;
+;       |counter:m0|                    ; 7 (7)               ; 7 (7)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|counter:m0                                     ; counter         ; work         ;
+;       |pll:u0|                        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0                                         ; pll             ; work         ;
+;          |pll_pll_0:pll_0|            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0                         ; pll_pll_0       ; pll          ;
+;             |altera_pll:altera_pll_i| ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i ; altera_pll      ; work         ;
+;    |top:TOPModule|                    ; 145 (0)             ; 10 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule                                                           ; top             ; work         ;
+;       |ALU:ALU_inst|                  ; 107 (35)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst                                              ; ALU             ; work         ;
+;          |AdderSub:AdderSub_inst|     ; 25 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst                       ; AdderSub        ; work         ;
+;             |FA:\rest:1:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:1:chain      ; FA              ; work         ;
+;             |FA:\rest:2:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:2:chain      ; FA              ; work         ;
+;             |FA:\rest:3:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:3:chain      ; FA              ; work         ;
+;             |FA:\rest:4:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:4:chain      ; FA              ; work         ;
+;             |FA:\rest:5:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:5:chain      ; FA              ; work         ;
+;             |FA:\rest:7:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:7:chain      ; FA              ; work         ;
+;             |FA:first|                ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:first              ; FA              ; work         ;
+;          |Logic:Logic_inst|           ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst                             ; Logic           ; work         ;
+;          |Shifter:Shifter_inst|       ; 39 (39)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst                         ; Shifter         ; work         ;
+;       |PWM:PWM_inst|                  ; 38 (38)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|PWM:PWM_inst                                              ; PWM             ; work         ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+----------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                ;
-+-----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------+------------------------+
-; X[0]                                                ; KEY2                ; yes                    ;
-; X[1]                                                ; KEY2                ; yes                    ;
-; X[2]                                                ; KEY2                ; yes                    ;
-; X[3]                                                ; KEY2                ; yes                    ;
-; X[4]                                                ; KEY2                ; yes                    ;
-; X[5]                                                ; KEY2                ; yes                    ;
-; X[6]                                                ; KEY2                ; yes                    ;
-; X[7]                                                ; KEY2                ; yes                    ;
-; Y[0]                                                ; KEY0                ; yes                    ;
-; Y[1]                                                ; KEY0                ; yes                    ;
-; Y[2]                                                ; KEY0                ; yes                    ;
-; Y[3]                                                ; KEY0                ; yes                    ;
-; Y[4]                                                ; KEY0                ; yes                    ;
-; Y[5]                                                ; KEY0                ; yes                    ;
-; Y[6]                                                ; KEY0                ; yes                    ;
-; Y[7]                                                ; KEY0                ; yes                    ;
-; ALUFN[3]                                            ; KEY1                ; yes                    ;
-; ALUFN[4]                                            ; KEY1                ; yes                    ;
-; ALUFN[1]                                            ; KEY1                ; yes                    ;
-; ALUFN[2]                                            ; KEY1                ; yes                    ;
-; ALUFN[0]                                            ; KEY1                ; yes                    ;
-; Number of user-specified and inferred latches = 21  ;                     ;                        ;
-+-----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
++-----------------------------------------------------------------------+
+; Registers Removed During Synthesis                                    ;
++--------------------------------------------------+--------------------+
+; Register name                                    ; Reason for Removal ;
++--------------------------------------------------+--------------------+
+; CounterEnvelope:pll_wrap|counter:m0|q_int[7..31] ; Lost fanout        ;
+; Total Number of Removed Registers = 25           ;                    ;
++--------------------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -268,32 +278,32 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 11    ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 38    ;
+; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 8     ;
+; Number of registers using Asynchronous Clear ; 9     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 10    ;
+; Number of registers using Clock Enable       ; 29    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                          ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALUout_o[6]                                ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|AdderSub:AdderSub_inst|y_adderSub_gated[7] ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|Shifter:Shifter_inst|Mux9                  ;
-; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|Logic:Logic_inst|Logic_out[0]              ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|Shifter:Shifter_inst|Shifter_out[4]        ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|Shifter:Shifter_inst|Shifter_out[1]        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|ALUout_o[0]                                ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|y_adderSub_gated[4] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux10                 ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux7                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux9                  ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst|Logic_out[5]              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |TopIO_Interface ;
+; Parameter Settings for User Entity Instance: Top-level Entity: |topIO_Interface ;
 +----------------+-------+--------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                   ;
 +----------------+-------+--------------------------------------------------------+
@@ -315,38 +325,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: top:TOPModule|AdderSub:AdderSub_inst ;
-+----------------+-------+----------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                     ;
-+----------------+-------+----------------------------------------------------------+
-; n              ; 8     ; Signed Integer                                           ;
-+----------------+-------+----------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: top:TOPModule|Shifter:Shifter_inst ;
-+----------------+-------+--------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                   ;
-+----------------+-------+--------------------------------------------------------+
-; n              ; 8     ; Signed Integer                                         ;
-; k              ; 3     ; Signed Integer                                         ;
-+----------------+-------+--------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: top:TOPModule|Logic:Logic_inst ;
-+----------------+-------+----------------------------------------------------+
-; Parameter Name ; Value ; Type                                               ;
-+----------------+-------+----------------------------------------------------+
-; n              ; 8     ; Signed Integer                                     ;
-; op             ; 8     ; Signed Integer                                     ;
-+----------------+-------+----------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-------------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: top:TOPModule|PWM:PWM_inst ;
 +----------------+-------+------------------------------------------------+
@@ -359,6 +337,366 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst ;
++----------------+-------+------------------------------------------------+
+; Parameter Name ; Value ; Type                                           ;
++----------------+-------+------------------------------------------------+
+; n              ; 8     ; Signed Integer                                 ;
+; k              ; 3     ; Signed Integer                                 ;
+; m              ; 4     ; Signed Integer                                 ;
++----------------+-------+------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst ;
++----------------+-------+-----------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                  ;
++----------------+-------+-----------------------------------------------------------------------+
+; n              ; 8     ; Signed Integer                                                        ;
++----------------+-------+-----------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; n              ; 8     ; Signed Integer                                                      ;
+; k              ; 3     ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Logic:Logic_inst ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; n              ; 8     ; Signed Integer                                                  ;
+; op             ; 8     ; Signed Integer                                                  ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; l              ; 6     ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|counter:m0 ;
++----------------+-------+---------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                    ;
++----------------+-------+---------------------------------------------------------+
+; l              ; 6     ; Signed Integer                                          ;
++----------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i ;
++--------------------------------------+------------------------+------------------------------------------------------+
+; Parameter Name                       ; Value                  ; Type                                                 ;
++--------------------------------------+------------------------+------------------------------------------------------+
+; reference_clock_frequency            ; 50.0 MHz               ; String                                               ;
+; fractional_vco_multiplier            ; false                  ; String                                               ;
+; pll_type                             ; General                ; String                                               ;
+; pll_subtype                          ; General                ; String                                               ;
+; number_of_clocks                     ; 1                      ; Signed Integer                                       ;
+; operation_mode                       ; direct                 ; String                                               ;
+; deserialization_factor               ; 4                      ; Signed Integer                                       ;
+; data_rate                            ; 0                      ; Signed Integer                                       ;
+; sim_additional_refclk_cycles_to_lock ; 0                      ; Signed Integer                                       ;
+; output_clock_frequency0              ; 2.000000 MHz           ; String                                               ;
+; phase_shift0                         ; 0 ps                   ; String                                               ;
+; duty_cycle0                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency1              ; 0 MHz                  ; String                                               ;
+; phase_shift1                         ; 0 ps                   ; String                                               ;
+; duty_cycle1                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency2              ; 0 MHz                  ; String                                               ;
+; phase_shift2                         ; 0 ps                   ; String                                               ;
+; duty_cycle2                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency3              ; 0 MHz                  ; String                                               ;
+; phase_shift3                         ; 0 ps                   ; String                                               ;
+; duty_cycle3                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency4              ; 0 MHz                  ; String                                               ;
+; phase_shift4                         ; 0 ps                   ; String                                               ;
+; duty_cycle4                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency5              ; 0 MHz                  ; String                                               ;
+; phase_shift5                         ; 0 ps                   ; String                                               ;
+; duty_cycle5                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency6              ; 0 MHz                  ; String                                               ;
+; phase_shift6                         ; 0 ps                   ; String                                               ;
+; duty_cycle6                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency7              ; 0 MHz                  ; String                                               ;
+; phase_shift7                         ; 0 ps                   ; String                                               ;
+; duty_cycle7                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency8              ; 0 MHz                  ; String                                               ;
+; phase_shift8                         ; 0 ps                   ; String                                               ;
+; duty_cycle8                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency9              ; 0 MHz                  ; String                                               ;
+; phase_shift9                         ; 0 ps                   ; String                                               ;
+; duty_cycle9                          ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency10             ; 0 MHz                  ; String                                               ;
+; phase_shift10                        ; 0 ps                   ; String                                               ;
+; duty_cycle10                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency11             ; 0 MHz                  ; String                                               ;
+; phase_shift11                        ; 0 ps                   ; String                                               ;
+; duty_cycle11                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency12             ; 0 MHz                  ; String                                               ;
+; phase_shift12                        ; 0 ps                   ; String                                               ;
+; duty_cycle12                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency13             ; 0 MHz                  ; String                                               ;
+; phase_shift13                        ; 0 ps                   ; String                                               ;
+; duty_cycle13                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency14             ; 0 MHz                  ; String                                               ;
+; phase_shift14                        ; 0 ps                   ; String                                               ;
+; duty_cycle14                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency15             ; 0 MHz                  ; String                                               ;
+; phase_shift15                        ; 0 ps                   ; String                                               ;
+; duty_cycle15                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency16             ; 0 MHz                  ; String                                               ;
+; phase_shift16                        ; 0 ps                   ; String                                               ;
+; duty_cycle16                         ; 50                     ; Signed Integer                                       ;
+; output_clock_frequency17             ; 0 MHz                  ; String                                               ;
+; phase_shift17                        ; 0 ps                   ; String                                               ;
+; duty_cycle17                         ; 50                     ; Signed Integer                                       ;
+; clock_name_0                         ;                        ; String                                               ;
+; clock_name_1                         ;                        ; String                                               ;
+; clock_name_2                         ;                        ; String                                               ;
+; clock_name_3                         ;                        ; String                                               ;
+; clock_name_4                         ;                        ; String                                               ;
+; clock_name_5                         ;                        ; String                                               ;
+; clock_name_6                         ;                        ; String                                               ;
+; clock_name_7                         ;                        ; String                                               ;
+; clock_name_8                         ;                        ; String                                               ;
+; clock_name_global_0                  ; false                  ; String                                               ;
+; clock_name_global_1                  ; false                  ; String                                               ;
+; clock_name_global_2                  ; false                  ; String                                               ;
+; clock_name_global_3                  ; false                  ; String                                               ;
+; clock_name_global_4                  ; false                  ; String                                               ;
+; clock_name_global_5                  ; false                  ; String                                               ;
+; clock_name_global_6                  ; false                  ; String                                               ;
+; clock_name_global_7                  ; false                  ; String                                               ;
+; clock_name_global_8                  ; false                  ; String                                               ;
+; m_cnt_hi_div                         ; 1                      ; Signed Integer                                       ;
+; m_cnt_lo_div                         ; 1                      ; Signed Integer                                       ;
+; m_cnt_bypass_en                      ; false                  ; String                                               ;
+; m_cnt_odd_div_duty_en                ; false                  ; String                                               ;
+; n_cnt_hi_div                         ; 1                      ; Signed Integer                                       ;
+; n_cnt_lo_div                         ; 1                      ; Signed Integer                                       ;
+; n_cnt_bypass_en                      ; false                  ; String                                               ;
+; n_cnt_odd_div_duty_en                ; false                  ; String                                               ;
+; c_cnt_hi_div0                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div0                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en0                     ; false                  ; String                                               ;
+; c_cnt_in_src0                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en0               ; false                  ; String                                               ;
+; c_cnt_prst0                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst0                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div1                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div1                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en1                     ; false                  ; String                                               ;
+; c_cnt_in_src1                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en1               ; false                  ; String                                               ;
+; c_cnt_prst1                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst1                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div2                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div2                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en2                     ; false                  ; String                                               ;
+; c_cnt_in_src2                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en2               ; false                  ; String                                               ;
+; c_cnt_prst2                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst2                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div3                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div3                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en3                     ; false                  ; String                                               ;
+; c_cnt_in_src3                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en3               ; false                  ; String                                               ;
+; c_cnt_prst3                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst3                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div4                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div4                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en4                     ; false                  ; String                                               ;
+; c_cnt_in_src4                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en4               ; false                  ; String                                               ;
+; c_cnt_prst4                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst4                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div5                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div5                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en5                     ; false                  ; String                                               ;
+; c_cnt_in_src5                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en5               ; false                  ; String                                               ;
+; c_cnt_prst5                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst5                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div6                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div6                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en6                     ; false                  ; String                                               ;
+; c_cnt_in_src6                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en6               ; false                  ; String                                               ;
+; c_cnt_prst6                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst6                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div7                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div7                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en7                     ; false                  ; String                                               ;
+; c_cnt_in_src7                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en7               ; false                  ; String                                               ;
+; c_cnt_prst7                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst7                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div8                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div8                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en8                     ; false                  ; String                                               ;
+; c_cnt_in_src8                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en8               ; false                  ; String                                               ;
+; c_cnt_prst8                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst8                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div9                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div9                        ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en9                     ; false                  ; String                                               ;
+; c_cnt_in_src9                        ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en9               ; false                  ; String                                               ;
+; c_cnt_prst9                          ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst9                   ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div10                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div10                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en10                    ; false                  ; String                                               ;
+; c_cnt_in_src10                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en10              ; false                  ; String                                               ;
+; c_cnt_prst10                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst10                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div11                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div11                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en11                    ; false                  ; String                                               ;
+; c_cnt_in_src11                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en11              ; false                  ; String                                               ;
+; c_cnt_prst11                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst11                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div12                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div12                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en12                    ; false                  ; String                                               ;
+; c_cnt_in_src12                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en12              ; false                  ; String                                               ;
+; c_cnt_prst12                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst12                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div13                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div13                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en13                    ; false                  ; String                                               ;
+; c_cnt_in_src13                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en13              ; false                  ; String                                               ;
+; c_cnt_prst13                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst13                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div14                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div14                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en14                    ; false                  ; String                                               ;
+; c_cnt_in_src14                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en14              ; false                  ; String                                               ;
+; c_cnt_prst14                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst14                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div15                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div15                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en15                    ; false                  ; String                                               ;
+; c_cnt_in_src15                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en15              ; false                  ; String                                               ;
+; c_cnt_prst15                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst15                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div16                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div16                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en16                    ; false                  ; String                                               ;
+; c_cnt_in_src16                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en16              ; false                  ; String                                               ;
+; c_cnt_prst16                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst16                  ; 0                      ; Signed Integer                                       ;
+; c_cnt_hi_div17                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_lo_div17                       ; 1                      ; Signed Integer                                       ;
+; c_cnt_bypass_en17                    ; false                  ; String                                               ;
+; c_cnt_in_src17                       ; ph_mux_clk             ; String                                               ;
+; c_cnt_odd_div_duty_en17              ; false                  ; String                                               ;
+; c_cnt_prst17                         ; 1                      ; Signed Integer                                       ;
+; c_cnt_ph_mux_prst17                  ; 0                      ; Signed Integer                                       ;
+; pll_vco_div                          ; 1                      ; Signed Integer                                       ;
+; pll_slf_rst                          ; false                  ; String                                               ;
+; pll_bw_sel                           ; low                    ; String                                               ;
+; pll_output_clk_frequency             ; 0 MHz                  ; String                                               ;
+; pll_cp_current                       ; 0                      ; Signed Integer                                       ;
+; pll_bwctrl                           ; 0                      ; Signed Integer                                       ;
+; pll_fractional_division              ; 1                      ; Signed Integer                                       ;
+; pll_fractional_cout                  ; 24                     ; Signed Integer                                       ;
+; pll_dsm_out_sel                      ; 1st_order              ; String                                               ;
+; mimic_fbclk_type                     ; gclk                   ; String                                               ;
+; pll_fbclk_mux_1                      ; glb                    ; String                                               ;
+; pll_fbclk_mux_2                      ; fb_1                   ; String                                               ;
+; pll_m_cnt_in_src                     ; ph_mux_clk             ; String                                               ;
+; pll_vcoph_div                        ; 1                      ; Signed Integer                                       ;
+; refclk1_frequency                    ; 0 MHz                  ; String                                               ;
+; pll_clkin_0_src                      ; clk_0                  ; String                                               ;
+; pll_clkin_1_src                      ; clk_0                  ; String                                               ;
+; pll_clk_loss_sw_en                   ; false                  ; String                                               ;
+; pll_auto_clk_sw_en                   ; false                  ; String                                               ;
+; pll_manu_clk_sw_en                   ; false                  ; String                                               ;
+; pll_clk_sw_dly                       ; 0                      ; Signed Integer                                       ;
+; pll_extclk_0_cnt_src                 ; pll_extclk_cnt_src_vss ; String                                               ;
+; pll_extclk_1_cnt_src                 ; pll_extclk_cnt_src_vss ; String                                               ;
++--------------------------------------+------------------------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i"                                                                                  ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port              ; Type   ; Severity ; Details                                                                                                                                      ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; fboutclk          ; Output ; Info     ; Explicitly unconnected                                                                                                                       ;
+; fbclk             ; Input  ; Info     ; Stuck at GND                                                                                                                                 ;
+; refclk1           ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; phase_en          ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; updn              ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; num_phase_shifts  ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; scanclk           ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; cntsel            ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; reconfig_to_pll   ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; extswitch         ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; adjpllin          ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; cclk              ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; phase_done        ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; reconfig_from_pll ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; activeclk         ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; clkbad            ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; phout             ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; lvds_clk          ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; loaden            ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; extclk_out        ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; cascade_out       ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; zdbfbclk          ; Bidir  ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0"                                                      ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; locked ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; rst    ; Input  ; Info     ; Stuck at GND                                                                        ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "CounterEnvelope:pll_wrap" ;
++------+-------+----------+----------------------------+
+; Port ; Type  ; Severity ; Details                    ;
++------+-------+----------+----------------------------+
+; en   ; Input ; Info     ; Stuck at VCC               ;
++------+-------+----------+----------------------------+
+
+
 +-------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "top:TOPModule"                                                                         ;
 +---------+--------+----------+-------------------------------------------------------------------------------------+
@@ -368,12 +706,44 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------+--------+----------+-------------------------------------------------------------------------------------+
 
 
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 38                          ;
+;     CLR               ; 1                           ;
+;     ENA               ; 21                          ;
+;     ENA CLR SCLR      ; 8                           ;
+;     plain             ; 8                           ;
+; arriav_lcell_comb     ; 156                         ;
+;     arith             ; 14                          ;
+;         1 data inputs ; 13                          ;
+;         2 data inputs ; 1                           ;
+;     extend            ; 4                           ;
+;         7 data inputs ; 4                           ;
+;     normal            ; 138                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 8                           ;
+;         3 data inputs ; 26                          ;
+;         4 data inputs ; 19                          ;
+;         5 data inputs ; 28                          ;
+;         6 data inputs ; 55                          ;
+; boundary_port         ; 67                          ;
+; generic_pll           ; 1                           ;
+;                       ;                             ;
+; Max LUT depth         ; 6.00                        ;
+; Average LUT depth     ; 4.02                        ;
++-----------------------+-----------------------------+
+
+
 +-------------------------------+
 ; Elapsed Time Per Partition    ;
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -381,111 +751,171 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit Analysis & Synthesis
-    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Sat Jul 06 14:06:15 2024
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+    Info: Processing started: Sun Jul  7 11:43:24 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab4 -c lab4
-Warning (20028): Parallel compilation is not licensed and has been disabled
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/topio_interface.vhd
-    Info (12022): Found design unit 1: TopIO_Interface-struct
-    Info (12023): Found entity 1: TopIO_Interface
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/top.vhd
-    Info (12022): Found design unit 1: top-struct
-    Info (12023): Found entity 1: top
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/shifter.vhd
-    Info (12022): Found design unit 1: Shifter-dataflow
-    Info (12023): Found entity 1: Shifter
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/logic.vhd
-    Info (12022): Found design unit 1: Logic-Logic_arch
-    Info (12023): Found entity 1: Logic
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/fa.vhd
-    Info (12022): Found design unit 1: FA-dataflow
-    Info (12023): Found entity 1: FA
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/counter.vhd
-    Info (12022): Found design unit 1: counter-rtl
-    Info (12023): Found entity 1: counter
-Info (12021): Found 1 design units, including 0 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/aux_package.vhd
-    Info (12022): Found design unit 1: aux_package
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/addersub.vhd
-    Info (12022): Found design unit 1: AdderSub-AS_arch
-    Info (12023): Found entity 1: AdderSub
-Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/pwm.vhd
-    Info (12022): Found design unit 1: PWM-PWM_MOUDLE
-    Info (12023): Found entity 1: PWM
-Info (12127): Elaborating entity "TopIO_Interface" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at TopIO_Interface.vhd(23): object "Vflag" assigned a value but never read
-Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(44): signal "SW_i" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(48): signal "SW_i" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(52): signal "SW_i" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10631): VHDL Process Statement warning at TopIO_Interface.vhd(40): inferring latch(es) for signal or variable "Y", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at TopIO_Interface.vhd(40): inferring latch(es) for signal or variable "ALUFN", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at TopIO_Interface.vhd(40): inferring latch(es) for signal or variable "X", which holds its previous value in one or more paths through the process
-Warning (10873): Using initial value X (don't care) for net "HEX0[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "HEX1[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "HEX2[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "HEX3[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "HEX4[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "HEX5[6..4]" at TopIO_Interface.vhd(15)
-Warning (10873): Using initial value X (don't care) for net "LEDs[4..3]" at TopIO_Interface.vhd(16)
-Info (10041): Inferred latch for "X[0]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[1]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[2]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[3]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[4]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[5]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[6]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "X[7]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "ALUFN[0]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "ALUFN[1]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "ALUFN[2]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "ALUFN[3]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "ALUFN[4]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[0]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[1]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[2]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[3]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[4]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[5]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[6]" at TopIO_Interface.vhd(40)
-Info (10041): Inferred latch for "Y[7]" at TopIO_Interface.vhd(40)
-Info (12128): Elaborating entity "top" for hierarchy "top:TOPModule"
-Info (12128): Elaborating entity "AdderSub" for hierarchy "top:TOPModule|AdderSub:AdderSub_inst"
-Info (12128): Elaborating entity "FA" for hierarchy "top:TOPModule|AdderSub:AdderSub_inst|FA:first"
-Info (12128): Elaborating entity "Shifter" for hierarchy "top:TOPModule|Shifter:Shifter_inst"
-Info (12128): Elaborating entity "Logic" for hierarchy "top:TOPModule|Logic:Logic_inst"
-Info (12128): Elaborating entity "PWM" for hierarchy "top:TOPModule|PWM:PWM_inst"
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pll/synthesis/pll.vhd
+    Info (12022): Found design unit 1: pll-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 18
+    Info (12023): Found entity 1: pll File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pll/synthesis/submodules/pll_pll_0.v
+    Info (12023): Found entity 1: pll_pll_0 File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 2
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/counterenvelope.vhd
+    Info (12022): Found design unit 1: CounterEnvelope-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 12
+    Info (12023): Found entity 1: CounterEnvelope File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/counter.vhd
+    Info (12022): Found design unit 1: counter-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 14
+    Info (12023): Found entity 1: counter File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/topio_interface.vhd
+    Info (12022): Found design unit 1: TopIO_Interface-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 21
+    Info (12023): Found entity 1: TopIO_Interface File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/top.vhd
+    Info (12022): Found design unit 1: top-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 24
+    Info (12023): Found entity 1: top File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/shifter.vhd
+    Info (12022): Found design unit 1: Shifter-dataflow File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 24
+    Info (12023): Found entity 1: Shifter File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pwm.vhd
+    Info (12022): Found design unit 1: PWM-PWM_MOUDLE File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 22
+    Info (12023): Found entity 1: PWM File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/logic.vhd
+    Info (12022): Found design unit 1: Logic-Logic_arch File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 15
+    Info (12023): Found entity 1: Logic File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/fa.vhd
+    Info (12022): Found design unit 1: FA-dataflow File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 10
+    Info (12023): Found entity 1: FA File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 5
+Info (12021): Found 1 design units, including 0 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/aux_package.vhd
+    Info (12022): Found design unit 1: aux_package File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/alu.vhd
+    Info (12022): Found design unit 1: ALU-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 20
+    Info (12023): Found entity 1: ALU File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/addersub.vhd
+    Info (12022): Found design unit 1: AdderSub-AS_arch File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 18
+    Info (12023): Found entity 1: AdderSub File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 6
+Info (12127): Elaborating entity "topIO_Interface" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at TopIO_Interface.vhd(23): object "Vflag" assigned a value but never read File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 23
+Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(53): signal "SW8" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 53
+Warning (10873): Using initial value X (don't care) for net "HEX0[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "HEX1[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "HEX2[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "HEX3[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "HEX4[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "HEX5[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+Warning (10873): Using initial value X (don't care) for net "LEDs[4..3]" at TopIO_Interface.vhd(16) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
+Info (12128): Elaborating entity "top" for hierarchy "top:TOPModule" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 33
+Info (12128): Elaborating entity "PWM" for hierarchy "top:TOPModule|PWM:PWM_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 34
+Info (12128): Elaborating entity "ALU" for hierarchy "top:TOPModule|ALU:ALU_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 45
+Info (12128): Elaborating entity "AdderSub" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 45
+Info (12128): Elaborating entity "FA" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:first" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 36
+Info (12128): Elaborating entity "Shifter" for hierarchy "top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 54
+Info (12128): Elaborating entity "Logic" for hierarchy "top:TOPModule|ALU:ALU_inst|Logic:Logic_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 63
+Info (12128): Elaborating entity "CounterEnvelope" for hierarchy "CounterEnvelope:pll_wrap" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 43
+Info (12128): Elaborating entity "counter" for hierarchy "CounterEnvelope:pll_wrap|counter:m0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 33
+Info (12128): Elaborating entity "pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 34
+Info (12128): Elaborating entity "pll_pll_0" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 30
+Info (12128): Elaborating entity "altera_pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
+Info (12130): Elaborated megafunction instantiation "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+Info (12133): Instantiated megafunction "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" with the following parameter: File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+    Info (12134): Parameter "fractional_vco_multiplier" = "false"
+    Info (12134): Parameter "reference_clock_frequency" = "50.0 MHz"
+    Info (12134): Parameter "operation_mode" = "direct"
+    Info (12134): Parameter "number_of_clocks" = "1"
+    Info (12134): Parameter "output_clock_frequency0" = "2.000000 MHz"
+    Info (12134): Parameter "phase_shift0" = "0 ps"
+    Info (12134): Parameter "duty_cycle0" = "50"
+    Info (12134): Parameter "output_clock_frequency1" = "0 MHz"
+    Info (12134): Parameter "phase_shift1" = "0 ps"
+    Info (12134): Parameter "duty_cycle1" = "50"
+    Info (12134): Parameter "output_clock_frequency2" = "0 MHz"
+    Info (12134): Parameter "phase_shift2" = "0 ps"
+    Info (12134): Parameter "duty_cycle2" = "50"
+    Info (12134): Parameter "output_clock_frequency3" = "0 MHz"
+    Info (12134): Parameter "phase_shift3" = "0 ps"
+    Info (12134): Parameter "duty_cycle3" = "50"
+    Info (12134): Parameter "output_clock_frequency4" = "0 MHz"
+    Info (12134): Parameter "phase_shift4" = "0 ps"
+    Info (12134): Parameter "duty_cycle4" = "50"
+    Info (12134): Parameter "output_clock_frequency5" = "0 MHz"
+    Info (12134): Parameter "phase_shift5" = "0 ps"
+    Info (12134): Parameter "duty_cycle5" = "50"
+    Info (12134): Parameter "output_clock_frequency6" = "0 MHz"
+    Info (12134): Parameter "phase_shift6" = "0 ps"
+    Info (12134): Parameter "duty_cycle6" = "50"
+    Info (12134): Parameter "output_clock_frequency7" = "0 MHz"
+    Info (12134): Parameter "phase_shift7" = "0 ps"
+    Info (12134): Parameter "duty_cycle7" = "50"
+    Info (12134): Parameter "output_clock_frequency8" = "0 MHz"
+    Info (12134): Parameter "phase_shift8" = "0 ps"
+    Info (12134): Parameter "duty_cycle8" = "50"
+    Info (12134): Parameter "output_clock_frequency9" = "0 MHz"
+    Info (12134): Parameter "phase_shift9" = "0 ps"
+    Info (12134): Parameter "duty_cycle9" = "50"
+    Info (12134): Parameter "output_clock_frequency10" = "0 MHz"
+    Info (12134): Parameter "phase_shift10" = "0 ps"
+    Info (12134): Parameter "duty_cycle10" = "50"
+    Info (12134): Parameter "output_clock_frequency11" = "0 MHz"
+    Info (12134): Parameter "phase_shift11" = "0 ps"
+    Info (12134): Parameter "duty_cycle11" = "50"
+    Info (12134): Parameter "output_clock_frequency12" = "0 MHz"
+    Info (12134): Parameter "phase_shift12" = "0 ps"
+    Info (12134): Parameter "duty_cycle12" = "50"
+    Info (12134): Parameter "output_clock_frequency13" = "0 MHz"
+    Info (12134): Parameter "phase_shift13" = "0 ps"
+    Info (12134): Parameter "duty_cycle13" = "50"
+    Info (12134): Parameter "output_clock_frequency14" = "0 MHz"
+    Info (12134): Parameter "phase_shift14" = "0 ps"
+    Info (12134): Parameter "duty_cycle14" = "50"
+    Info (12134): Parameter "output_clock_frequency15" = "0 MHz"
+    Info (12134): Parameter "phase_shift15" = "0 ps"
+    Info (12134): Parameter "duty_cycle15" = "50"
+    Info (12134): Parameter "output_clock_frequency16" = "0 MHz"
+    Info (12134): Parameter "phase_shift16" = "0 ps"
+    Info (12134): Parameter "duty_cycle16" = "50"
+    Info (12134): Parameter "output_clock_frequency17" = "0 MHz"
+    Info (12134): Parameter "phase_shift17" = "0 ps"
+    Info (12134): Parameter "duty_cycle17" = "50"
+    Info (12134): Parameter "pll_type" = "General"
+    Info (12134): Parameter "pll_subtype" = "General"
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "HEX0[4]" is stuck at GND
-    Warning (13410): Pin "HEX0[5]" is stuck at GND
-    Warning (13410): Pin "HEX0[6]" is stuck at GND
-    Warning (13410): Pin "HEX1[4]" is stuck at GND
-    Warning (13410): Pin "HEX1[5]" is stuck at GND
-    Warning (13410): Pin "HEX1[6]" is stuck at GND
-    Warning (13410): Pin "HEX2[4]" is stuck at GND
-    Warning (13410): Pin "HEX2[5]" is stuck at GND
-    Warning (13410): Pin "HEX2[6]" is stuck at GND
-    Warning (13410): Pin "HEX3[4]" is stuck at GND
-    Warning (13410): Pin "HEX3[5]" is stuck at GND
-    Warning (13410): Pin "HEX3[6]" is stuck at GND
-    Warning (13410): Pin "HEX4[4]" is stuck at GND
-    Warning (13410): Pin "HEX4[5]" is stuck at GND
-    Warning (13410): Pin "HEX4[6]" is stuck at GND
-    Warning (13410): Pin "HEX5[4]" is stuck at GND
-    Warning (13410): Pin "HEX5[5]" is stuck at GND
-    Warning (13410): Pin "HEX5[6]" is stuck at GND
-    Warning (13410): Pin "LEDs[3]" is stuck at GND
-    Warning (13410): Pin "LEDs[4]" is stuck at GND
+    Warning (13410): Pin "HEX0[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "LEDs[3]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
+    Warning (13410): Pin "LEDs[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 25 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 240 device resources after synthesis - the final resource count might be different
+    Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Warning: RST port on the PLL is not properly connected on instance CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: d:/intel/fpga_lite/quartus/libraries/megafunctions/altera_pll.v Line: 749
+    Info: Must be connected
+Info (21057): Implemented 244 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 14 input pins
     Info (21059): Implemented 53 output pins
-    Info (21061): Implemented 173 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 36 warnings
-    Info: Peak virtual memory: 4712 megabytes
-    Info: Processing ended: Sat Jul 06 14:06:17 2024
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+    Info (21061): Implemented 176 logic cells
+    Info (21065): Implemented 1 PLLs
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 33 warnings
+    Info: Peak virtual memory: 4883 megabytes
+    Info: Processing ended: Sun Jul  7 11:43:46 2024
+    Info: Elapsed time: 00:00:22
+    Info: Total CPU time (on all processors): 00:00:28
 
 

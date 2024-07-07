@@ -66,34 +66,36 @@ PACKAGE aux_package IS
     ALUFN_i : IN STD_LOGIC_vector (4 DOWNTO 0); --5 bit vector
     ALUout_o: OUT STD_LOGIC_vector(n-1 downto 0);
     Nflag_o, Cflag_o, Zflag_o, Vflag_o: OUT STD_LOGIC;
-    ENA, RST, CLK : in STD_LOGIC;
+    ena, rst, clk : in STD_LOGIC;
     PWM_OUT : out STD_LOGIC
   ); -- Zflag, Cflag, Nflag, Vflag
     END COMPONENT;
 	
 ------------------------------------------------------------------------------	
 
-	COMPONENT PWM	
-	GENERIC (n : INTEGER := 8;
-		   k : integer := 3;   -- k=log2(n)
-		   m : integer := 4	); -- m=2^(k-1)
-	
+COMPONENT PWM IS
+  GENERIC (n : INTEGER := 8;
+           k : integer := 3;   -- k=log2(n)
+           m : integer := 4 ); -- m=2^(k-1)
 
   PORT
   (
-	Y_PWM,X_PWM : IN STD_LOGIC_vector (n-1 DOWNTO 0);
-	ENA,RST,CLK : in STD_LOGIC;
-	ALUFN :IN  STD_LOGIC_vector (2 DOWNTO 0);
-	PWM_OUT : out STD_LOGIC
-	);
-    END COMPONENT;
+    Y_PWM_in, X_PWM_in : IN STD_LOGIC_vector (n-1 DOWNTO 0);
+    ena, rst, clk: in STD_LOGIC;
+    ALUFN : IN  STD_LOGIC_vector (4 DOWNTO 0);
+    PWM_OUT : out STD_LOGIC
+  );
 
+end COMPONENT;
 
-	COMPONENT counter
-	port(
+------------------------------------------------------------------------------
+
+COMPONENT counter
+generic(L :integer := 6 );
+port(
 	clk,enable : in std_logic;	
-	q          : out std_logic_vector (7 downto 0));
-	end COMPONENT;
+	q          : out std_logic);
+end COMPONENT;
 	
 ------------------------------------------------------------------------------	
 	
@@ -124,6 +126,27 @@ COMPONENT ALU IS
 	ALUout_o: OUT STD_LOGIC_vector(n-1 downto 0);
 	Nflag_o,Cflag_o,Zflag_o,Vflag_o: OUT STD_LOGIC
   ); -- Zflag,Cflag,Nflag,Vflag
-END ALU;
+END COMPONENT;
 ------------------------------------------------------------------------------
-END PACKAGE COMPONENT;
+
+component pll is
+	port (
+		locked   : out std_logic;        --  locked.export
+		outclk_0 : out std_logic;        -- outclk0.clk
+		refclk   : in  std_logic := '0'; --  refclk.clk
+		rst      : in  std_logic := '0'  --   reset.reset
+	);
+end component pll;
+	
+	------------------------------------------------------------------------------
+	
+	COMPONENT CounterEnvelope is 
+	generic(L :integer := 6 );
+	port (
+	Clk,En : in std_logic;	
+	Qout          : out std_logic
+	);
+end COMPONENT;
+	
+	
+END PACKAGE ;
