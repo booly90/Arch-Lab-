@@ -1,11 +1,13 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use IEEE.std_logic_unsigned.all; 
- 
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+USE work.aux_package.all;
+
 entity counter is 
 	generic(L :integer := 6 );
 	port (
-	clk,enable : in std_logic;	
+	clk,enable,rst : in std_logic;	
 	q          : out std_logic
 	
 	);
@@ -14,9 +16,10 @@ end counter;
 architecture rtl of counter is
     signal q_int : std_logic_vector (31 downto 0):=x"00000000";
 begin
-    process (clk)
+    process (clk,rst)
     begin
-        if (rising_edge(clk)) then
+		if rst ='1' then q_int <= (others => '0');
+        elsif (rising_edge(clk)) then
            if enable = '1' then	   
 		        q_int <= q_int + 1;
            end if;

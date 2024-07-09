@@ -93,7 +93,7 @@ end COMPONENT;
 COMPONENT counter
 generic(L :integer := 6 );
 port(
-	clk,enable : in std_logic;	
+	clk,enable,rst : in std_logic;	
 	q          : out std_logic);
 end COMPONENT;
 	
@@ -143,7 +143,7 @@ end component pll;
 	COMPONENT CounterEnvelope is 
 	generic(L :integer := 6 );
 	port (
-	Clk,En : in std_logic;	
+	Clk,En,rst : in std_logic;	
 	Qout          : out std_logic
 	);
 end COMPONENT;
