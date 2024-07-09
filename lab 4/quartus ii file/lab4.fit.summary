@@ -1,12 +1,12 @@
-Fitter Status : Successful - Sun Jul  7 11:44:41 2024
+Fitter Status : Successful - Tue Jul  9 16:45:09 2024
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : lab4
 Top-level Entity Name : TopIO_Interface
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 102 / 41,910 ( < 1 % )
-Total registers : 38
+Logic utilization (in ALMs) : 88 / 41,910 ( < 1 % )
+Total registers : 37
 Total pins : 67 / 499 ( 13 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 5,662,720 ( 0 % )
