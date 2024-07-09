@@ -40,6 +40,17 @@ BEGIN
     ena => SW8, rst => rst, clk=> clk,
     PWM_OUT => PWM_OUT 
   );
+  
+  ----------------------------
+  	-- Display X on 7 segment
+	DecoderModuleXHex0: 	SegDecoder	port map(X(3 downto 0) , HEX0);
+	DecoderModuleXHex1: 	SegDecoder	port map(X(7 downto 4) , HEX1);
+	-- Display Y on 7 segment
+	DecoderModuleYHex2: 	SegDecoder	port map(Y(3 downto 0) , HEX2);
+	DecoderModuleYHex3: 	SegDecoder	port map(Y(7 downto 4) , HEX3);
+	-- Display ALU output on 7 segment
+	DecoderModuleOutHex4: 	SegDecoder	port map(ALUout(3 downto 0) , HEX4);
+	DecoderModuleOutHex5: 	SegDecoder	port map(ALUout(7 downto 4) , HEX5);
 	--------------------------
 	pll_wrap: CounterEnvelope generic map (L => 6) --pll clkDiv by 2^L
 	port map(
