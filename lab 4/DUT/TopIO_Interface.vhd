@@ -47,8 +47,15 @@ BEGIN
 	En => VCC,
 	rst => rst,
 	Qout => clk
-	
 	);
+	-------------------------- 7seg led display decoders
+	X_lsb: segDecoder 		port map(X		(0  downto  4), HEX0);
+	X_msb: segDecoder 		port map(X		(4  downto  7), HEX1);
+	Y_lsb: segDecoder 		port map(Y		(0  downto  4), HEX2);
+	Y_msb: segDecoder 		port map(Y		(4  downto  7), HEX3);
+	ALUout_lsb: segDecoder	port map(ALUout	(0  downto  4), HEX4);
+	ALUout_msb: segDecoder 	port map(ALUout	(4  downto  7), HEX5);
+	
 	
 	-------------------Keys Binding--------------------------
 	process(clk) 
@@ -74,13 +81,13 @@ BEGIN
 	LEDs(3) <= Vflag;
 	LEDs(9 downto 5) <= ALUFN;
 	
-	------------------hex------------------------------------
-	HEX0 (3 DOWNTO 0) <= X (3 downto 0);
-	HEX1 (3 DOWNTO 0) <= X (7 downto 4);	
-	HEX2 (3 DOWNTO 0) <= Y (3 downto 0);
-	HEX3 (3 DOWNTO 0) <= Y (7 downto 4);
-	HEX4 (3 DOWNTO 0) <= ALUout (3 downto 0);
-	HEX5 (3 DOWNTO 0) <= ALUout (7 downto 4);
+--	------------------hex------------------------------------
+--	HEX0 (3 DOWNTO 0) <= X (3 downto 0);
+--	HEX1 (3 DOWNTO 0) <= X (7 downto 4);	
+--	HEX2 (3 DOWNTO 0) <= Y (3 downto 0);
+--	HEX3 (3 DOWNTO 0) <= Y (7 downto 4);
+--	HEX4 (3 DOWNTO 0) <= ALUout (3 downto 0);
+--	HEX5 (3 DOWNTO 0) <= ALUout (7 downto 4);
 	
 END struct;
 
