@@ -30,6 +30,7 @@ BEGIN
 --component instantiation section
 --==========================================================--
 
+  
     
     PWM_inst: PWM GENERIC map(n=>n, k=>k, m=>m)
         PORT MAP (

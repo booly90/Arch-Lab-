@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab4
-Sun Jul  7 11:43:46 2024
+Tue Jul  9 16:43:52 2024
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -23,16 +23,21 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
  15. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst
  16. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst
  17. Parameter Settings for User Entity Instance: top:TOPModule|ALU:ALU_inst|Logic:Logic_inst
- 18. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap
- 19. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|counter:m0
- 20. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i
- 21. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i"
- 22. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0"
- 23. Port Connectivity Checks: "CounterEnvelope:pll_wrap"
- 24. Port Connectivity Checks: "top:TOPModule"
- 25. Post-Synthesis Netlist Statistics for Top Partition
- 26. Elapsed Time Per Partition
- 27. Analysis & Synthesis Messages
+ 18. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleXHex0
+ 19. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleXHex1
+ 20. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleYHex2
+ 21. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleYHex3
+ 22. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleOutHex4
+ 23. Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleOutHex5
+ 24. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap
+ 25. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|counter:m0
+ 26. Parameter Settings for User Entity Instance: CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i
+ 27. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i"
+ 28. Port Connectivity Checks: "CounterEnvelope:pll_wrap|pll:u0"
+ 29. Port Connectivity Checks: "CounterEnvelope:pll_wrap"
+ 30. Post-Synthesis Netlist Statistics for Top Partition
+ 31. Elapsed Time Per Partition
+ 32. Analysis & Synthesis Messages
 
 
 
@@ -59,13 +64,13 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Jul  7 11:43:46 2024       ;
+; Analysis & Synthesis Status     ; Successful - Tue Jul  9 16:43:52 2024       ;
 ; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                   ; lab4                                        ;
 ; Top-level Entity Name           ; TopIO_Interface                             ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 38                                          ;
+; Total registers                 ; 37                                          ;
 ; Total pins                      ; 67                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
@@ -171,38 +176,39 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 4           ;
+; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.1%      ;
+;     Processors 2-6         ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                      ;
-+---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path            ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                             ; Library ;
-+---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
-; ../DUT/pll/synthesis/pll.vhd                ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd                ;         ;
-; ../DUT/pll/synthesis/submodules/pll_pll_0.v ; yes             ; User Verilog HDL File  ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v ; pll     ;
-; ../DUT/CounterEnvelope.vhd                  ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd                  ;         ;
-; ../DUT/counter.vhd                          ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd                          ;         ;
-; ../DUT/TopIO_Interface.vhd                  ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd                  ;         ;
-; ../DUT/top.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd                              ;         ;
-; ../DUT/Shifter.vhd                          ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd                          ;         ;
-; ../DUT/PWM.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd                              ;         ;
-; ../DUT/Logic.vhd                            ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd                            ;         ;
-; ../DUT/FA.vhd                               ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd                               ;         ;
-; ../DUT/aux_package.vhd                      ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd                      ;         ;
-; ../DUT/ALU.vhd                              ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd                              ;         ;
-; ../DUT/AdderSub.vhd                         ; yes             ; User VHDL File         ; C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd                         ;         ;
-; altera_pll.v                                ; yes             ; Megafunction           ; d:/intel/fpga_lite/quartus/libraries/megafunctions/altera_pll.v                          ;         ;
-+---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                     ;
++---------------------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path            ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                            ; Library ;
++---------------------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; ../DUT/segDecoder.vhd                       ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/segDecoder.vhd                       ;         ;
+; ../DUT/pll/synthesis/pll.vhd                ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd                ; pll     ;
+; ../DUT/pll/synthesis/submodules/pll_pll_0.v ; yes             ; User Verilog HDL File  ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v ; pll     ;
+; ../DUT/CounterEnvelope.vhd                  ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd                  ;         ;
+; ../DUT/counter.vhd                          ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd                          ;         ;
+; ../DUT/TopIO_Interface.vhd                  ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd                  ;         ;
+; ../DUT/top.vhd                              ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd                              ;         ;
+; ../DUT/Shifter.vhd                          ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd                          ;         ;
+; ../DUT/PWM.vhd                              ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd                              ;         ;
+; ../DUT/Logic.vhd                            ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd                            ;         ;
+; ../DUT/FA.vhd                               ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd                               ;         ;
+; ../DUT/aux_package.vhd                      ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd                      ;         ;
+; ../DUT/ALU.vhd                              ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd                              ;         ;
+; ../DUT/AdderSub.vhd                         ; yes             ; User VHDL File         ; C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd                         ;         ;
+; altera_pll.v                                ; yes             ; Megafunction           ; c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altera_pll.v                     ;         ;
++---------------------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
 +--------------------------------------------------------+
@@ -210,16 +216,16 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimate of Logic utilization (ALMs needed) ; 109      ;
+; Estimate of Logic utilization (ALMs needed) ; 91       ;
 ;                                             ;          ;
-; Combinational ALUT usage for logic          ; 155      ;
-;     -- 7 input functions                    ; 4        ;
-;     -- 6 input functions                    ; 55       ;
-;     -- 5 input functions                    ; 28       ;
-;     -- 4 input functions                    ; 19       ;
-;     -- <=3 input functions                  ; 49       ;
+; Combinational ALUT usage for logic          ; 129      ;
+;     -- 7 input functions                    ; 0        ;
+;     -- 6 input functions                    ; 49       ;
+;     -- 5 input functions                    ; 24       ;
+;     -- 4 input functions                    ; 15       ;
+;     -- <=3 input functions                  ; 41       ;
 ;                                             ;          ;
-; Dedicated logic registers                   ; 38       ;
+; Dedicated logic registers                   ; 37       ;
 ;                                             ;          ;
 ; I/O pins                                    ; 67       ;
 ;                                             ;          ;
@@ -229,9 +235,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1        ;
 ;                                             ;          ;
 ; Maximum fan-out node                        ; ALUFN[3] ;
-; Maximum fan-out                             ; 56       ;
-; Total fan-out                               ; 920      ;
-; Average fan-out                             ; 2.80     ;
+; Maximum fan-out                             ; 44       ;
+; Total fan-out                               ; 779      ;
+; Average fan-out                             ; 2.59     ;
 +---------------------------------------------+----------+
 
 
@@ -240,25 +246,24 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node            ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                      ; Entity Name     ; Library Name ;
 +---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
-; |TopIO_Interface                      ; 155 (3)             ; 38 (21)                   ; 0                 ; 0          ; 67   ; 0            ; |TopIO_Interface                                                                         ; TopIO_Interface ; work         ;
+; |TopIO_Interface                      ; 129 (3)             ; 37 (21)                   ; 0                 ; 0          ; 67   ; 0            ; |TopIO_Interface                                                                         ; TopIO_Interface ; work         ;
 ;    |CounterEnvelope:pll_wrap|         ; 7 (0)               ; 7 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap                                                ; CounterEnvelope ; work         ;
 ;       |counter:m0|                    ; 7 (7)               ; 7 (7)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|counter:m0                                     ; counter         ; work         ;
-;       |pll:u0|                        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0                                         ; pll             ; work         ;
+;       |pll:u0|                        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0                                         ; pll             ; pll          ;
 ;          |pll_pll_0:pll_0|            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0                         ; pll_pll_0       ; pll          ;
 ;             |altera_pll:altera_pll_i| ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i ; altera_pll      ; work         ;
-;    |top:TOPModule|                    ; 145 (0)             ; 10 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule                                                           ; top             ; work         ;
-;       |ALU:ALU_inst|                  ; 107 (35)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst                                              ; ALU             ; work         ;
-;          |AdderSub:AdderSub_inst|     ; 25 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst                       ; AdderSub        ; work         ;
+;    |top:TOPModule|                    ; 119 (0)             ; 9 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule                                                           ; top             ; work         ;
+;       |ALU:ALU_inst|                  ; 89 (49)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst                                              ; ALU             ; work         ;
+;          |AdderSub:AdderSub_inst|     ; 24 (15)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst                       ; AdderSub        ; work         ;
 ;             |FA:\rest:1:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:1:chain      ; FA              ; work         ;
-;             |FA:\rest:2:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:2:chain      ; FA              ; work         ;
-;             |FA:\rest:3:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:3:chain      ; FA              ; work         ;
-;             |FA:\rest:4:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:4:chain      ; FA              ; work         ;
+;             |FA:\rest:3:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:3:chain      ; FA              ; work         ;
+;             |FA:\rest:4:chain|        ; 3 (3)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:4:chain      ; FA              ; work         ;
 ;             |FA:\rest:5:chain|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:5:chain      ; FA              ; work         ;
+;             |FA:\rest:6:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:6:chain      ; FA              ; work         ;
 ;             |FA:\rest:7:chain|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:\rest:7:chain      ; FA              ; work         ;
-;             |FA:first|                ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:first              ; FA              ; work         ;
-;          |Logic:Logic_inst|           ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst                             ; Logic           ; work         ;
-;          |Shifter:Shifter_inst|       ; 39 (39)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst                         ; Shifter         ; work         ;
-;       |PWM:PWM_inst|                  ; 38 (38)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|PWM:PWM_inst                                              ; PWM             ; work         ;
+;          |Logic:Logic_inst|           ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst                             ; Logic           ; work         ;
+;          |Shifter:Shifter_inst|       ; 15 (15)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst                         ; Shifter         ; work         ;
+;       |PWM:PWM_inst|                  ; 30 (30)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |TopIO_Interface|top:TOPModule|PWM:PWM_inst                                              ; PWM             ; work         ;
 +---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -278,10 +283,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 38    ;
+; Total registers                              ; 37    ;
 ; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 9     ;
+; Number of registers using Asynchronous Clear ; 16    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 29    ;
 ; Number of registers using Preset             ; 0     ;
@@ -293,12 +298,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|ALUout_o[0]                                ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|y_adderSub_gated[4] ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux10                 ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux7                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|y_adderSub_gated[2] ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux9                  ;
-; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst|Logic_out[5]              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux1                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst|Mux1                  ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |TopIO_Interface|top:TOPModule|ALU:ALU_inst|Logic:Logic_inst|Logic_out[2]              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 
 
@@ -378,6 +382,72 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; n              ; 8     ; Signed Integer                                                  ;
 ; op             ; 8     ; Signed Integer                                                  ;
 +----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleXHex0 ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; n              ; 4     ; Signed Integer                                    ;
+; segmentsize    ; 7     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleXHex1 ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; n              ; 4     ; Signed Integer                                    ;
+; segmentsize    ; 7     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleYHex2 ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; n              ; 4     ; Signed Integer                                    ;
+; segmentsize    ; 7     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleYHex3 ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; n              ; 4     ; Signed Integer                                    ;
+; segmentsize    ; 7     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleOutHex4 ;
++----------------+-------+-----------------------------------------------------+
+; Parameter Name ; Value ; Type                                                ;
++----------------+-------+-----------------------------------------------------+
+; n              ; 4     ; Signed Integer                                      ;
+; segmentsize    ; 7     ; Signed Integer                                      ;
++----------------+-------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SegDecoder:DecoderModuleOutHex5 ;
++----------------+-------+-----------------------------------------------------+
+; Parameter Name ; Value ; Type                                                ;
++----------------+-------+-----------------------------------------------------+
+; n              ; 4     ; Signed Integer                                      ;
+; segmentsize    ; 7     ; Signed Integer                                      ;
++----------------+-------+-----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -684,7 +754,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Port   ; Type   ; Severity ; Details                                                                             ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 ; locked ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; rst    ; Input  ; Info     ; Stuck at GND                                                                        ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -697,44 +766,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+----------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "top:TOPModule"                                                                         ;
-+---------+--------+----------+-------------------------------------------------------------------------------------+
-; Port    ; Type   ; Severity ; Details                                                                             ;
-+---------+--------+----------+-------------------------------------------------------------------------------------+
-; vflag_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+---------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 38                          ;
-;     CLR               ; 1                           ;
+; arriav_ff             ; 37                          ;
+;     CLR               ; 8                           ;
 ;     ENA               ; 21                          ;
 ;     ENA CLR SCLR      ; 8                           ;
-;     plain             ; 8                           ;
-; arriav_lcell_comb     ; 156                         ;
+; arriav_lcell_comb     ; 131                         ;
 ;     arith             ; 14                          ;
 ;         1 data inputs ; 13                          ;
 ;         2 data inputs ; 1                           ;
-;     extend            ; 4                           ;
-;         7 data inputs ; 4                           ;
-;     normal            ; 138                         ;
-;         0 data inputs ; 1                           ;
+;     normal            ; 117                         ;
+;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 8                           ;
-;         3 data inputs ; 26                          ;
-;         4 data inputs ; 19                          ;
-;         5 data inputs ; 28                          ;
-;         6 data inputs ; 55                          ;
+;         3 data inputs ; 18                          ;
+;         4 data inputs ; 15                          ;
+;         5 data inputs ; 24                          ;
+;         6 data inputs ; 49                          ;
 ; boundary_port         ; 67                          ;
 ; generic_pll           ; 1                           ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.00                        ;
-; Average LUT depth     ; 4.02                        ;
+; Average LUT depth     ; 3.79                        ;
 +-----------------------+-----------------------------+
 
 
@@ -743,7 +800,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -753,72 +810,69 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sun Jul  7 11:43:24 2024
+    Info: Processing started: Tue Jul  9 16:43:40 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab4 -c lab4
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pll/synthesis/pll.vhd
-    Info (12022): Found design unit 1: pll-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 18
-    Info (12023): Found entity 1: pll File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 9
-Info (12021): Found 1 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pll/synthesis/submodules/pll_pll_0.v
-    Info (12023): Found entity 1: pll_pll_0 File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 2
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/counterenvelope.vhd
-    Info (12022): Found design unit 1: CounterEnvelope-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 12
-    Info (12023): Found entity 1: CounterEnvelope File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 5
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/counter.vhd
-    Info (12022): Found design unit 1: counter-rtl File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 14
-    Info (12023): Found entity 1: counter File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 5
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/topio_interface.vhd
-    Info (12022): Found design unit 1: TopIO_Interface-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 21
-    Info (12023): Found entity 1: TopIO_Interface File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/top.vhd
-    Info (12022): Found design unit 1: top-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 24
-    Info (12023): Found entity 1: top File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/shifter.vhd
-    Info (12022): Found design unit 1: Shifter-dataflow File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 24
-    Info (12023): Found entity 1: Shifter File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/pwm.vhd
-    Info (12022): Found design unit 1: PWM-PWM_MOUDLE File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 22
-    Info (12023): Found entity 1: PWM File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/logic.vhd
-    Info (12022): Found design unit 1: Logic-Logic_arch File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 15
-    Info (12023): Found entity 1: Logic File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 6
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/fa.vhd
-    Info (12022): Found design unit 1: FA-dataflow File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 10
-    Info (12023): Found entity 1: FA File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 5
-Info (12021): Found 1 design units, including 0 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/aux_package.vhd
-    Info (12022): Found design unit 1: aux_package File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd Line: 6
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/alu.vhd
-    Info (12022): Found design unit 1: ALU-struct File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 20
-    Info (12023): Found entity 1: ALU File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /users/barmu/documents/github/arch-lab-/lab 4/dut/addersub.vhd
-    Info (12022): Found design unit 1: AdderSub-AS_arch File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 18
-    Info (12023): Found entity 1: AdderSub File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 6
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/segdecoder.vhd
+    Info (12022): Found design unit 1: SegDecoder-dfl File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/segDecoder.vhd Line: 14
+    Info (12023): Found entity 1: SegDecoder File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/segDecoder.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/pll/synthesis/pll.vhd
+    Info (12022): Found design unit 1: pll-rtl File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 18
+    Info (12023): Found entity 1: pll File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/pll/synthesis/submodules/pll_pll_0.v
+    Info (12023): Found entity 1: pll_pll_0 File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 2
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/counterenvelope.vhd
+    Info (12022): Found design unit 1: CounterEnvelope-rtl File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 14
+    Info (12023): Found entity 1: CounterEnvelope File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/counter.vhd
+    Info (12022): Found design unit 1: counter-rtl File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 16
+    Info (12023): Found entity 1: counter File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/counter.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/topio_interface.vhd
+    Info (12022): Found design unit 1: TopIO_Interface-struct File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 21
+    Info (12023): Found entity 1: TopIO_Interface File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/top.vhd
+    Info (12022): Found design unit 1: top-struct File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 24
+    Info (12023): Found entity 1: top File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/shifter.vhd
+    Info (12022): Found design unit 1: Shifter-dataflow File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 24
+    Info (12023): Found entity 1: Shifter File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Shifter.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/pwm.vhd
+    Info (12022): Found design unit 1: PWM-PWM_MODULE File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 20
+    Info (12023): Found entity 1: PWM File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/PWM.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/logic.vhd
+    Info (12022): Found design unit 1: Logic-Logic_arch File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 15
+    Info (12023): Found entity 1: Logic File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/Logic.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/fa.vhd
+    Info (12022): Found design unit 1: FA-dataflow File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 10
+    Info (12023): Found entity 1: FA File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/FA.vhd Line: 5
+Info (12021): Found 1 design units, including 0 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/aux_package.vhd
+    Info (12022): Found design unit 1: aux_package File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/aux_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/alu.vhd
+    Info (12022): Found design unit 1: ALU-struct File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 20
+    Info (12023): Found entity 1: ALU File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /users/user/documents/github/arch-lab-/lab 4/dut/addersub.vhd
+    Info (12022): Found design unit 1: AdderSub-AS_arch File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 18
+    Info (12023): Found entity 1: AdderSub File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 6
 Info (12127): Elaborating entity "topIO_Interface" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at TopIO_Interface.vhd(23): object "Vflag" assigned a value but never read File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 23
-Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(53): signal "SW8" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 53
-Warning (10873): Using initial value X (don't care) for net "HEX0[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "HEX1[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "HEX2[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "HEX3[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "HEX4[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "HEX5[6..4]" at TopIO_Interface.vhd(15) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-Warning (10873): Using initial value X (don't care) for net "LEDs[4..3]" at TopIO_Interface.vhd(16) File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
-Info (12128): Elaborating entity "top" for hierarchy "top:TOPModule" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 33
-Info (12128): Elaborating entity "PWM" for hierarchy "top:TOPModule|PWM:PWM_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 34
-Info (12128): Elaborating entity "ALU" for hierarchy "top:TOPModule|ALU:ALU_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 45
-Info (12128): Elaborating entity "AdderSub" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 45
-Info (12128): Elaborating entity "FA" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:first" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 36
-Info (12128): Elaborating entity "Shifter" for hierarchy "top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 54
-Info (12128): Elaborating entity "Logic" for hierarchy "top:TOPModule|ALU:ALU_inst|Logic:Logic_inst" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 63
-Info (12128): Elaborating entity "CounterEnvelope" for hierarchy "CounterEnvelope:pll_wrap" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 43
-Info (12128): Elaborating entity "counter" for hierarchy "CounterEnvelope:pll_wrap|counter:m0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 33
-Info (12128): Elaborating entity "pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 34
-Info (12128): Elaborating entity "pll_pll_0" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 30
-Info (12128): Elaborating entity "altera_pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+Warning (10492): VHDL Process Statement warning at TopIO_Interface.vhd(67): signal "SW8" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 67
+Warning (10873): Using initial value X (don't care) for net "LEDs[4]" at TopIO_Interface.vhd(16) File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
+Info (12128): Elaborating entity "top" for hierarchy "top:TOPModule" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 34
+Info (12128): Elaborating entity "PWM" for hierarchy "top:TOPModule|PWM:PWM_inst" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 35
+Info (12128): Elaborating entity "ALU" for hierarchy "top:TOPModule|ALU:ALU_inst" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/top.vhd Line: 46
+Info (12128): Elaborating entity "AdderSub" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 45
+Info (12128): Elaborating entity "FA" for hierarchy "top:TOPModule|ALU:ALU_inst|AdderSub:AdderSub_inst|FA:first" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/AdderSub.vhd Line: 36
+Info (12128): Elaborating entity "Shifter" for hierarchy "top:TOPModule|ALU:ALU_inst|Shifter:Shifter_inst" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 54
+Info (12128): Elaborating entity "Logic" for hierarchy "top:TOPModule|ALU:ALU_inst|Logic:Logic_inst" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/ALU.vhd Line: 63
+Info (12128): Elaborating entity "SegDecoder" for hierarchy "SegDecoder:DecoderModuleXHex0" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 46
+Info (12128): Elaborating entity "CounterEnvelope" for hierarchy "CounterEnvelope:pll_wrap" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 55
+Info (12128): Elaborating entity "counter" for hierarchy "CounterEnvelope:pll_wrap|counter:m0" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 35
+Info (12128): Elaborating entity "pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/CounterEnvelope.vhd Line: 36
+Info (12128): Elaborating entity "pll_pll_0" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/pll.vhd Line: 30
+Info (12128): Elaborating entity "altera_pll" for hierarchy "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
-Info (12130): Elaborated megafunction instantiation "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
-Info (12133): Instantiated megafunction "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" with the following parameter: File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+Info (12130): Elaborated megafunction instantiation "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
+Info (12133): Instantiated megafunction "CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i" with the following parameter: File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/pll/synthesis/submodules/pll_pll_0.v Line: 85
     Info (12134): Parameter "fractional_vco_multiplier" = "false"
     Info (12134): Parameter "reference_clock_frequency" = "50.0 MHz"
     Info (12134): Parameter "operation_mode" = "direct"
@@ -881,41 +935,62 @@ Info (12133): Instantiated megafunction "CounterEnvelope:pll_wrap|pll:u0|pll_pll
     Info (12134): Parameter "pll_subtype" = "General"
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "HEX0[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX0[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX0[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX1[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX1[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX1[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX2[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX2[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX2[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX3[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX3[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX3[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX4[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX4[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX4[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX5[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX5[5]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "HEX5[6]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
-    Warning (13410): Pin "LEDs[3]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
-    Warning (13410): Pin "LEDs[4]" is stuck at GND File: C:/Users/barmu/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
+    Warning (13410): Pin "HEX0[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX0[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX1[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX2[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX3[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX4[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[0]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[1]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[2]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[3]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[4]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[5]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "HEX5[6]" is stuck at VCC File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 15
+    Warning (13410): Pin "LEDs[4]" is stuck at GND File: C:/Users/user/Documents/GitHub/Arch-Lab-/lab 4/DUT/TopIO_Interface.vhd Line: 16
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 25 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Warning: RST port on the PLL is not properly connected on instance CounterEnvelope:pll_wrap|pll:u0|pll_pll_0:pll_0|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: d:/intel/fpga_lite/quartus/libraries/megafunctions/altera_pll.v Line: 749
-    Info: Must be connected
-Info (21057): Implemented 244 device resources after synthesis - the final resource count might be different
+    Info (16011): Adding 5 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 218 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 14 input pins
     Info (21059): Implemented 53 output pins
-    Info (21061): Implemented 176 logic cells
+    Info (21061): Implemented 150 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 33 warnings
-    Info: Peak virtual memory: 4883 megabytes
-    Info: Processing ended: Sun Jul  7 11:43:46 2024
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:28
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 48 warnings
+    Info: Peak virtual memory: 4889 megabytes
+    Info: Processing ended: Tue Jul  9 16:43:52 2024
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:18
 
 

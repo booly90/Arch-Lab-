@@ -4,102 +4,6 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "HEX0[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX0[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX0[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX0[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX1[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX1[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX1[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX1[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX2[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX2[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX2[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX2[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX5[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX5[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX5[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX5[3]",
-					"strict" : false
-				},
-				{
 					"name" : "LEDs[0]",
 					"strict" : false
 				},
@@ -109,6 +13,10 @@
 				},
 				{
 					"name" : "LEDs[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[3]",
 					"strict" : false
 				},
 				{
@@ -136,7 +44,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "SW_i[0]",
+					"name" : "SW_i[3]",
 					"strict" : false
 				},
 				{
@@ -144,19 +52,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "KEY2",
-					"strict" : false
-				},
-				{
-					"name" : "SW_i[1]",
-					"strict" : false
-				},
-				{
-					"name" : "SW_i[2]",
-					"strict" : false
-				},
-				{
-					"name" : "SW_i[3]",
+					"name" : "KEY1",
 					"strict" : false
 				},
 				{
@@ -164,7 +60,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "SW_i[5]",
+					"name" : "SW_i[2]",
+					"strict" : false
+				},
+				{
+					"name" : "SW_i[1]",
 					"strict" : false
 				},
 				{
@@ -172,15 +72,23 @@
 					"strict" : false
 				},
 				{
-					"name" : "SW_i[7]",
-					"strict" : false
-				},
-				{
 					"name" : "KEY0",
 					"strict" : false
 				},
 				{
-					"name" : "KEY1",
+					"name" : "SW_i[0]",
+					"strict" : false
+				},
+				{
+					"name" : "KEY2",
+					"strict" : false
+				},
+				{
+					"name" : "SW_i[5]",
+					"strict" : false
+				},
+				{
+					"name" : "SW_i[7]",
 					"strict" : false
 				},
 				{

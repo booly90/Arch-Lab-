@@ -41,8 +41,8 @@ BEGIN
     PWM_OUT => PWM_OUT 
   );
   
-  ----------------------------
-  	-- Display X on 7 segment
+  	---------------------Segment Decoder-----------------------------
+	-- Display X on 7 segment
 	DecoderModuleXHex0: 	SegDecoder	port map(X(3 downto 0) , HEX0);
 	DecoderModuleXHex1: 	SegDecoder	port map(X(7 downto 4) , HEX1);
 	-- Display Y on 7 segment
@@ -86,12 +86,7 @@ BEGIN
 	LEDs(9 downto 5) <= ALUFN;
 	
 	------------------hex------------------------------------
-	HEX0 (3 DOWNTO 0) <= X (3 downto 0);
-	HEX1 (3 DOWNTO 0) <= X (7 downto 4);	
-	HEX2 (3 DOWNTO 0) <= Y (3 downto 0);
-	HEX3 (3 DOWNTO 0) <= Y (7 downto 4);
-	HEX4 (3 DOWNTO 0) <= ALUout (3 downto 0);
-	HEX5 (3 DOWNTO 0) <= ALUout (7 downto 4);
+
 	
 END struct;
 
