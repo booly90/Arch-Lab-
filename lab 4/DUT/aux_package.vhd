@@ -147,13 +147,15 @@ end component pll;
 	Qout          : out std_logic
 	);
 end COMPONENT;
+	
+------------------------------------------------------------------------------
 
+component segDecoder IS
+  PORT (data		: in STD_LOGIC_VECTOR (3 DOWNTO 0);
+		seg   		: out STD_LOGIC_VECTOR (6 downto 0));
+END component;
 
-COMPONENT SegDecoder is
-  GENERIC (	n			: INTEGER := 4;
-			SegmentSize	: integer := 7);
-  PORT (data		: in STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-		seg   		: out STD_LOGIC_VECTOR (SegmentSize-1 downto 0));
-end COMPONENT;	
+------------------------------------------------------------------------------
+
 	
 END PACKAGE ;
