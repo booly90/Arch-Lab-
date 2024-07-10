@@ -33,7 +33,7 @@ BEGIN
             COUNTER_PWM <= (others => '0');
             PWM_OUT_REG <= '0';
         elsif rising_edge(CLK) then
-            if ENA = '1' then
+            if ENA = '1' and ALUFN(4 DOWNTO 3) = "00" then
                 if COUNTER_PWM = Y_PWM then
                     COUNTER_PWM <= (others => '0');
                 else
@@ -41,13 +41,13 @@ BEGIN
                 end if;
 
                 if ALUFN = "00000" then
-                    if (COUNTER_PWM > X_PWM) and (COUNTER_PWM < Y_PWM) then
+                    if (COUNTER_PWM >= X_PWM) and (COUNTER_PWM <= Y_PWM) then
                         PWM_OUT_REG <= '1';
                     else
                         PWM_OUT_REG <= '0';
                     end if;
                 elsif ALUFN = "00001" then
-                    if (COUNTER_PWM > X_PWM) and (COUNTER_PWM < Y_PWM) then
+                    if (COUNTER_PWM >= X_PWM) and (COUNTER_PWM <= Y_PWM) then
                         PWM_OUT_REG <= '0';
                     else
                         PWM_OUT_REG <= '1';
