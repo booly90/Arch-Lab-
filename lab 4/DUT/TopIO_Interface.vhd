@@ -59,18 +59,16 @@ BEGIN
 	rst => rst,
 	Qout => clk
 	);
-	-------------------------- 7seg led display decoders
-	X_lsb: segDecoder 		port map(X		(0  downto  4), HEX0);
-	X_msb: segDecoder 		port map(X		(4  downto  7), HEX1);
-	Y_lsb: segDecoder 		port map(Y		(0  downto  4), HEX2);
-	Y_msb: segDecoder 		port map(Y		(4  downto  7), HEX3);
-	ALUout_lsb: segDecoder	port map(ALUout	(0  downto  4), HEX4);
-	ALUout_msb: segDecoder 	port map(ALUout	(4  downto  7), HEX5);
-	
+
 	
 	-------------------Keys Binding--------------------------
 	process(clk) 
 	begin
+	IF RST = '1' then
+		Y <= (others => '0');
+		ALUFN <= (others => '0');
+		X <= (others => '0');
+	else
 		if (rising_edge(clk) and SW8 = '1') then
 			if KEY0 = '0' then
 				Y     <= SW_i;
@@ -84,6 +82,7 @@ BEGIN
 				X	  <= SW_i;	
 			end if;
 		end if;
+	end if;
 	end process;
 	--------------------LEDS Binding-------------------------
 	LEDs(0) <= Nflag;
