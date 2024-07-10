@@ -32,12 +32,13 @@ end component pll;
     signal PLLOut : std_logic ;
 
 begin
-     m0: counter generic map (L=>6) port map(PLLOut,En,rst,Qout);
+     --m0: counter generic map (L=>6) port map(PLLOut,En,rst,Qout);
 	  u0: pll port map(
 	     refclk => Clk,
 		 rst => rst,
 		  outclk_0 => PLLOut
 	   );
+q <= PLLOut;
 end rtl;
 
 
