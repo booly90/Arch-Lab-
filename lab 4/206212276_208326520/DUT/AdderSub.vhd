@@ -21,6 +21,7 @@ ARCHITECTURE AS_arch OF AdderSub IS
   SIGNAL x_adderSub_xor : vector; --can be inverted with cin signal for sub op
   SIGNAL y_adderSub_gated : vector; --gated to be 'b0 for neg op
   SIGNAL sub_control : std_logic;
+  signal x_swapped, adderSub_temp_out : vector;
 	
 BEGIN
   sub_control <= '1' when (ALUFN = "001" or ALUFN = "010") else '0';
@@ -37,7 +38,7 @@ BEGIN
     xi => x_adderSub_xor(0),
     yi => y_adderSub_gated(0),
     cin => sub_control,
-    s => adderSub_out(0),
+    s => adderSub_temp_out(0),
     cout => reg(0)  -- assumed correct name for carry output
   );
 
@@ -46,12 +47,17 @@ BEGIN
       xi => x_adderSub_xor(i),
       yi => y_adderSub_gated(i),
       cin => reg(i-1),
-      s => adderSub_out(i),
+      s => adderSub_temp_out(i),
       cout => reg(i)  -- assumed correct name for carry output
     );
   end generate;
 
+	x_swapped <= 	x_adderSub_in(3 downto 0) & x_adderSub_in (7 downto 4);
+
   adderSub_cout <= reg(n-1);
+  adderSub_out 	<= x_swapped when (ALUFN = "011") else
+				   adderSub_temp_out;
+  
 
 END AS_arch;
 

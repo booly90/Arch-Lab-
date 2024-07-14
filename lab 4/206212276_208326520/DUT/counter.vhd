@@ -25,7 +25,7 @@ begin
            end if;
 	     end if;
     end process;
-    q <= q_int(L);  -- Output only bit #6, meaning toggle once every 32 pll_clk cycles
+    q <= q_int(L-1);  -- Output only bit #6, meaning toggle once every 32 pll_clk cycles
 					-- or conversely, with frequency which is 1/64 of pll_clk
 end rtl;
 
