@@ -1,0 +1,109 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "PWM_OUT",
+					"strict" : false
+				},
+				{
+					"name" : "ENA",
+					"strict" : false
+				},
+				{
+					"name" : "ALUFN[0]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ALUFN[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ALUFN[4]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[6]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[5]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[1]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "X_PWM_in[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[7]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Y_PWM_in[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ALUFN[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ALUFN[2]",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				},
+				{
+					"name" : "RST",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
