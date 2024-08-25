@@ -1,5 +1,5 @@
 Timing Analyzer report for lab4
-Wed Jul 10 13:15:19 2024
+Wed Jul 10 17:14:46 2024
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -103,16 +103,16 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 12          ;
 ; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.53        ;
+; Average used               ; 2.14        ;
 ; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  10.7%      ;
-;     Processor 3            ;  10.6%      ;
-;     Processor 4            ;  10.6%      ;
-;     Processor 5            ;  10.3%      ;
-;     Processor 6            ;  10.3%      ;
+;     Processor 2            ;  23.1%      ;
+;     Processor 3            ;  23.1%      ;
+;     Processor 4            ;  23.0%      ;
+;     Processor 5            ;  22.6%      ;
+;     Processor 6            ;  22.6%      ;
 +----------------------------+-------------+
 
 
@@ -121,7 +121,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------+--------+--------------------------+
 ; SDC File Path   ; Status ; Read at                  ;
 +-----------------+--------+--------------------------+
-; ../DUT/SDC1.sdc ; OK     ; Wed Jul 10 13:15:04 2024 ;
+; ../DUT/SDC1.sdc ; OK     ; Wed Jul 10 17:14:37 2024 ;
 +-----------------+--------+--------------------------+
 
 
@@ -137,14 +137,14 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------------+-----------+---------+------------+-------+---------+------------+-----------+-------------+-------+--------+-----------+------------+----------+------------------------------------------------------------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Slow 1100mV 85C Model Fmax Summary                                                                             ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                                                               ; Note ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
-; 71.6 MHz   ; 71.6 MHz        ; altera_reserved_tck                                                      ;      ;
-; 459.14 MHz ; 459.14 MHz      ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
++---------------------------------------------------------------------------------------------------------------+
+; Slow 1100mV 85C Model Fmax Summary                                                                            ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name                                                               ; Note ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
+; 77.84 MHz ; 77.84 MHz       ; altera_reserved_tck                                                      ;      ;
+; 345.9 MHz ; 345.9 MHz       ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -159,8 +159,8 @@ HTML report is unavailable in plain text report export.
 +--------------------------------------------------------------------------+---------+---------------+
 ; Clock                                                                    ; Slack   ; End Point TNS ;
 +--------------------------------------------------------------------------+---------+---------------+
-; altera_reserved_tck                                                      ; 9.683   ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.822 ; 0.000         ;
+; altera_reserved_tck                                                      ; 10.243  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.109 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -169,8 +169,8 @@ HTML report is unavailable in plain text report export.
 +--------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                    ; Slack ; End Point TNS ;
 +--------------------------------------------------------------------------+-------+---------------+
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.450 ; 0.000         ;
-; altera_reserved_tck                                                      ; 0.531 ; 0.000         ;
+; altera_reserved_tck                                                      ; 0.375 ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.544 ; 0.000         ;
 +--------------------------------------------------------------------------+-------+---------------+
 
 
@@ -179,7 +179,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 29.937 ; 0.000         ;
+; altera_reserved_tck ; 29.965 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -188,7 +188,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.807 ; 0.000         ;
+; altera_reserved_tck ; 0.348 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -199,8 +199,8 @@ HTML report is unavailable in plain text report export.
 +--------------------------------------------------------------------------+---------+---------------+
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666   ; 0.000         ;
 ; PIN_AF14                                                                 ; 9.900   ; 0.000         ;
-; altera_reserved_tck                                                      ; 15.245  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.297 ; 0.000         ;
+; altera_reserved_tck                                                      ; 15.217  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.306 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -210,14 +210,14 @@ HTML report is unavailable in plain text report export.
 No synchronizer chains to report.
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Slow 1100mV 0C Model Fmax Summary                                                                              ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                                                               ; Note ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
-; 73.18 MHz  ; 73.18 MHz       ; altera_reserved_tck                                                      ;      ;
-; 440.53 MHz ; 440.53 MHz      ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
-+------------+-----------------+--------------------------------------------------------------------------+------+
++---------------------------------------------------------------------------------------------------------------+
+; Slow 1100mV 0C Model Fmax Summary                                                                             ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name                                                               ; Note ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
+; 79.1 MHz  ; 79.1 MHz        ; altera_reserved_tck                                                      ;      ;
+; 339.1 MHz ; 339.1 MHz       ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
++-----------+-----------------+--------------------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -226,8 +226,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +--------------------------------------------------------------------------+---------+---------------+
 ; Clock                                                                    ; Slack   ; End Point TNS ;
 +--------------------------------------------------------------------------+---------+---------------+
-; altera_reserved_tck                                                      ; 9.834   ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.730 ; 0.000         ;
+; altera_reserved_tck                                                      ; 10.345  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.051 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -236,8 +236,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +--------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                    ; Slack ; End Point TNS ;
 +--------------------------------------------------------------------------+-------+---------------+
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.449 ; 0.000         ;
-; altera_reserved_tck                                                      ; 0.543 ; 0.000         ;
+; altera_reserved_tck                                                      ; 0.368 ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.560 ; 0.000         ;
 +--------------------------------------------------------------------------+-------+---------------+
 
 
@@ -246,7 +246,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 30.091 ; 0.000         ;
+; altera_reserved_tck ; 30.092 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -255,7 +255,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.767 ; 0.000         ;
+; altera_reserved_tck ; 0.334 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -266,8 +266,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +--------------------------------------------------------------------------+---------+---------------+
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666   ; 0.000         ;
 ; PIN_AF14                                                                 ; 9.926   ; 0.000         ;
-; altera_reserved_tck                                                      ; 15.216  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.255 ; 0.000         ;
+; altera_reserved_tck                                                      ; 15.178  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.260 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -282,8 +282,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+---------+---------------+
 ; Clock                                                                    ; Slack   ; End Point TNS ;
 +--------------------------------------------------------------------------+---------+---------------+
-; altera_reserved_tck                                                      ; 12.586  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 498.825 ; 0.000         ;
+; altera_reserved_tck                                                      ; 12.913  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 498.443 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -292,8 +292,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                    ; Slack ; End Point TNS ;
 +--------------------------------------------------------------------------+-------+---------------+
-; altera_reserved_tck                                                      ; 0.220 ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.231 ; 0.000         ;
+; altera_reserved_tck                                                      ; 0.182 ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.277 ; 0.000         ;
 +--------------------------------------------------------------------------+-------+---------------+
 
 
@@ -302,7 +302,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 30.949 ; 0.000         ;
+; altera_reserved_tck ; 30.871 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -311,7 +311,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.393 ; 0.000         ;
+; altera_reserved_tck ; 0.130 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -322,8 +322,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+---------+---------------+
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666   ; 0.000         ;
 ; PIN_AF14                                                                 ; 9.643   ; 0.000         ;
-; altera_reserved_tck                                                      ; 14.969  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.551 ; 0.000         ;
+; altera_reserved_tck                                                      ; 14.926  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.555 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -338,8 +338,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+---------+---------------+
 ; Clock                                                                    ; Slack   ; End Point TNS ;
 +--------------------------------------------------------------------------+---------+---------------+
-; altera_reserved_tck                                                      ; 13.045  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 498.865 ; 0.000         ;
+; altera_reserved_tck                                                      ; 13.318  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 498.539 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -348,8 +348,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                    ; Slack ; End Point TNS ;
 +--------------------------------------------------------------------------+-------+---------------+
-; altera_reserved_tck                                                      ; 0.204 ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.223 ; 0.000         ;
+; altera_reserved_tck                                                      ; 0.165 ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.263 ; 0.000         ;
 +--------------------------------------------------------------------------+-------+---------------+
 
 
@@ -358,7 +358,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 31.206 ; 0.000         ;
+; altera_reserved_tck ; 31.127 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -367,7 +367,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.355 ; 0.000         ;
+; altera_reserved_tck ; 0.122 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -378,8 +378,8 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+---------+---------------+
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666   ; 0.000         ;
 ; PIN_AF14                                                                 ; 9.632   ; 0.000         ;
-; altera_reserved_tck                                                      ; 14.970  ; 0.000         ;
-; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.542 ; 0.000         ;
+; altera_reserved_tck                                                      ; 14.933  ; 0.000         ;
+; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 249.546 ; 0.000         ;
 +--------------------------------------------------------------------------+---------+---------------+
 
 
@@ -394,11 +394,11 @@ No synchronizer chains to report.
 +---------------------------------------------------------------------------+---------+-------+----------+---------+---------------------+
 ; Clock                                                                     ; Setup   ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +---------------------------------------------------------------------------+---------+-------+----------+---------+---------------------+
-; Worst-case Slack                                                          ; 9.683   ; 0.204 ; 29.937   ; 0.355   ; 1.666               ;
+; Worst-case Slack                                                          ; 10.243  ; 0.165 ; 29.965   ; 0.122   ; 1.666               ;
 ;  PIN_AF14                                                                 ; N/A     ; N/A   ; N/A      ; N/A     ; 9.632               ;
-;  altera_reserved_tck                                                      ; 9.683   ; 0.204 ; 29.937   ; 0.355   ; 14.969              ;
+;  altera_reserved_tck                                                      ; 10.243  ; 0.165 ; 29.965   ; 0.122   ; 14.926              ;
 ;  pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A     ; N/A   ; N/A      ; N/A     ; 1.666               ;
-;  pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.730 ; 0.223 ; N/A      ; N/A     ; 249.255             ;
+;  pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 497.051 ; 0.263 ; N/A      ; N/A     ; 249.260             ;
 ; Design-wide TNS                                                           ; 0.0     ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
 ;  PIN_AF14                                                                 ; N/A     ; N/A   ; N/A      ; N/A     ; 0.000               ;
 ;  altera_reserved_tck                                                      ; 0.000   ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
@@ -469,30 +469,30 @@ No synchronizer chains to report.
 +---------------------+--------------+-------------------+-------------------------+-------------------------+---------------+---------------------+----------------+------------------+--------+------------------+------------------------+------------------------+--------------+---------------+-----------------+-------+---------------------+--------------------+---------------+-----------------+-------------+
 
 
-+------------------------------------------------------------------------+
-; Input Transition Times                                                 ;
-+---------------------+--------------+-----------------+-----------------+
-; Pin                 ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
-+---------------------+--------------+-----------------+-----------------+
-; SW_i[1]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; KEY3                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW8                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; KEY2                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[0]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[2]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[3]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[5]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[4]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[6]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW_i[7]             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; KEY0                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; KEY1                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; PIN_AF14            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; altera_reserved_tms ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; altera_reserved_tck ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; altera_reserved_tdi ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; PIN_AH5             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-+---------------------+--------------+-----------------+-----------------+
++----------------------------------------------------------------------------------------+
+; Input Transition Times                                                                 ;
++-------------------------------------+--------------+-----------------+-----------------+
+; Pin                                 ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
++-------------------------------------+--------------+-----------------+-----------------+
+; SW_i[1]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; KEY3                                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW8                                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; KEY2                                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[0]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[2]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[3]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[5]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[4]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[6]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW_i[7]                             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; KEY0                                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; KEY1                                ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; PIN_AF14                            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; altera_reserved_tms                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; altera_reserved_tck                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; altera_reserved_tdi                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; auto_stp_external_storage_qualifier ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
++-------------------------------------+--------------+-----------------+-----------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -748,7 +748,7 @@ No synchronizer chains to report.
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                               ; To Clock                                                                 ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
-; altera_reserved_tck                                                      ; altera_reserved_tck                                                      ; 7829     ; 0        ; 55       ; 0        ;
+; altera_reserved_tck                                                      ; altera_reserved_tck                                                      ; 8171     ; 0        ; 55       ; 0        ;
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 28       ; 0        ; 0        ; 0        ;
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
@@ -759,7 +759,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                               ; To Clock                                                                 ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
-; altera_reserved_tck                                                      ; altera_reserved_tck                                                      ; 7829     ; 0        ; 55       ; 0        ;
+; altera_reserved_tck                                                      ; altera_reserved_tck                                                      ; 8171     ; 0        ; 55       ; 0        ;
 ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 28       ; 0        ; 0        ; 0        ;
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
@@ -770,7 +770,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 178      ; 0        ; 0        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 180      ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -780,7 +780,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 178      ; 0        ; 0        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 180      ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -824,28 +824,28 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------+---------------+
 
 
-+------------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                                  ;
-+---------------------+--------------------------------------------------------------------------------------+
-; Input Port          ; Comment                                                                              ;
-+---------------------+--------------------------------------------------------------------------------------+
-; KEY0                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY1                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY2                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY3                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; PIN_AH5             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW8                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[0]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[1]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[2]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[3]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[4]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[5]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[6]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[7]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; altera_reserved_tdi ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; altera_reserved_tms ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+---------------------+--------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                                  ;
++-------------------------------------+--------------------------------------------------------------------------------------+
+; Input Port                          ; Comment                                                                              ;
++-------------------------------------+--------------------------------------------------------------------------------------+
+; KEY0                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY1                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY2                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY3                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW8                                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[0]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[1]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[2]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[3]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[4]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[5]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[6]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[7]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; altera_reserved_tdi                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; altera_reserved_tms                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; auto_stp_external_storage_qualifier ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------------------------+--------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------+
@@ -909,28 +909,28 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------+---------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                                  ;
-+---------------------+--------------------------------------------------------------------------------------+
-; Input Port          ; Comment                                                                              ;
-+---------------------+--------------------------------------------------------------------------------------+
-; KEY0                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY1                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY2                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; KEY3                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; PIN_AH5             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW8                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[0]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[1]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[2]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[3]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[4]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[5]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[6]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW_i[7]             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; altera_reserved_tdi ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; altera_reserved_tms ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+---------------------+--------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                                  ;
++-------------------------------------+--------------------------------------------------------------------------------------+
+; Input Port                          ; Comment                                                                              ;
++-------------------------------------+--------------------------------------------------------------------------------------+
+; KEY0                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY1                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY2                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; KEY3                                ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW8                                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[0]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[1]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[2]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[3]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[4]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[5]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[6]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW_i[7]                             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; altera_reserved_tdi                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; altera_reserved_tms                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; auto_stp_external_storage_qualifier ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------------------------+--------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------+
@@ -1000,7 +1000,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Wed Jul 10 13:15:01 2024
+    Info: Processing started: Wed Jul 10 17:14:35 2024
 Info: Command: quartus_sta lab4 -c lab4
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -1017,7 +1017,7 @@ Info (332110): Deriving PLL clocks
     Info (332110): create_generated_clock -source {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|refclkin} -divide_by 2 -multiply_by 12 -duty_cycle 50.00 -name {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]} {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]}
     Info (332110): create_generated_clock -source {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|vco0ph[0]} -divide_by 150 -duty_cycle 50.00 -name {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk} {pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}
 Warning (332060): Node: CounterEnvelope:pll_wrap|counter:m0|q_int[6] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[7] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
+    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[5] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER  from: vco0ph[0]  to: divclk
@@ -1026,140 +1026,140 @@ Info (332143): No user constrained clock uncertainty found in the design. Callin
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
-Info (332146): Worst-case setup slack is 9.683
+Info (332146): Worst-case setup slack is 10.243
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.683               0.000 altera_reserved_tck 
-    Info (332119):   497.822               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.450
+    Info (332119):    10.243               0.000 altera_reserved_tck 
+    Info (332119):   497.109               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.375
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.450               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     0.531               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 29.937
+    Info (332119):     0.375               0.000 altera_reserved_tck 
+    Info (332119):     0.544               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case recovery slack is 29.965
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    29.937               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.807
+    Info (332119):    29.965               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.348
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.807               0.000 altera_reserved_tck 
+    Info (332119):     0.348               0.000 altera_reserved_tck 
 Info (332146): Worst-case minimum pulse width slack is 1.666
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     1.666               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.900               0.000 PIN_AF14 
-    Info (332119):    15.245               0.000 altera_reserved_tck 
-    Info (332119):   249.297               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    15.217               0.000 altera_reserved_tck 
+    Info (332119):   249.306               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Warning (332060): Node: CounterEnvelope:pll_wrap|counter:m0|q_int[6] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[7] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
+    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[5] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER  from: vco0ph[0]  to: divclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_REFCLK_SELECT  from: clkin[0]  to: clkout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 9.834
+Info (332146): Worst-case setup slack is 10.345
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.834               0.000 altera_reserved_tck 
-    Info (332119):   497.730               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.449
+    Info (332119):    10.345               0.000 altera_reserved_tck 
+    Info (332119):   497.051               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.368
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.449               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     0.543               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 30.091
+    Info (332119):     0.368               0.000 altera_reserved_tck 
+    Info (332119):     0.560               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case recovery slack is 30.092
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    30.091               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.767
+    Info (332119):    30.092               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.334
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.767               0.000 altera_reserved_tck 
+    Info (332119):     0.334               0.000 altera_reserved_tck 
 Info (332146): Worst-case minimum pulse width slack is 1.666
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     1.666               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.926               0.000 PIN_AF14 
-    Info (332119):    15.216               0.000 altera_reserved_tck 
-    Info (332119):   249.255               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    15.178               0.000 altera_reserved_tck 
+    Info (332119):   249.260               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Warning (332060): Node: CounterEnvelope:pll_wrap|counter:m0|q_int[6] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[7] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
+    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[5] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER  from: vco0ph[0]  to: divclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_REFCLK_SELECT  from: clkin[0]  to: clkout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 12.586
+Info (332146): Worst-case setup slack is 12.913
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    12.586               0.000 altera_reserved_tck 
-    Info (332119):   498.825               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.220
+    Info (332119):    12.913               0.000 altera_reserved_tck 
+    Info (332119):   498.443               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.182
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.220               0.000 altera_reserved_tck 
-    Info (332119):     0.231               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case recovery slack is 30.949
+    Info (332119):     0.182               0.000 altera_reserved_tck 
+    Info (332119):     0.277               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case recovery slack is 30.871
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    30.949               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.393
+    Info (332119):    30.871               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.130
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.393               0.000 altera_reserved_tck 
+    Info (332119):     0.130               0.000 altera_reserved_tck 
 Info (332146): Worst-case minimum pulse width slack is 1.666
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     1.666               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.643               0.000 PIN_AF14 
-    Info (332119):    14.969               0.000 altera_reserved_tck 
-    Info (332119):   249.551               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    14.926               0.000 altera_reserved_tck 
+    Info (332119):   249.555               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info: Analyzing Fast 1100mV 0C Model
 Warning (332060): Node: CounterEnvelope:pll_wrap|counter:m0|q_int[6] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[7] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
+    Info (13166): Register top:TOPModule|PWM:PWM_inst|COUNTER_PWM[5] is being clocked by CounterEnvelope:pll_wrap|counter:m0|q_int[6]
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER  from: vco0ph[0]  to: divclk
     Info (332098): Cell: pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_REFCLK_SELECT  from: clkin[0]  to: clkout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 13.045
+Info (332146): Worst-case setup slack is 13.318
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    13.045               0.000 altera_reserved_tck 
-    Info (332119):   498.865               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.204
+    Info (332119):    13.318               0.000 altera_reserved_tck 
+    Info (332119):   498.539               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.165
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.204               0.000 altera_reserved_tck 
-    Info (332119):     0.223               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case recovery slack is 31.206
+    Info (332119):     0.165               0.000 altera_reserved_tck 
+    Info (332119):     0.263               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case recovery slack is 31.127
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    31.206               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.355
+    Info (332119):    31.127               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.122
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.355               0.000 altera_reserved_tck 
+    Info (332119):     0.122               0.000 altera_reserved_tck 
 Info (332146): Worst-case minimum pulse width slack is 1.666
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     1.666               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.632               0.000 PIN_AF14 
-    Info (332119):    14.970               0.000 altera_reserved_tck 
-    Info (332119):   249.542               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    14.933               0.000 altera_reserved_tck 
+    Info (332119):   249.546               0.000 pll_wrap|u0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 5269 megabytes
-    Info: Processing ended: Wed Jul 10 13:15:19 2024
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:24
+    Info: Peak virtual memory: 5266 megabytes
+    Info: Processing ended: Wed Jul 10 17:14:46 2024
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:19
 
 
