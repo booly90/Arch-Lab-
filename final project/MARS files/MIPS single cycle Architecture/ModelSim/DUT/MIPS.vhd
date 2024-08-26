@@ -17,13 +17,15 @@ END 	MIPS;
 ARCHITECTURE structure OF MIPS IS
 
 	COMPONENT Ifetch
-   	     PORT(	Instruction			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		PC_plus_4_out 		: OUT  	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-        		Add_result 			: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-        		Branch 				: IN 	STD_LOGIC;
-        		Zero 				: IN 	STD_LOGIC;
-        		PC_out 				: OUT 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-        		clock,reset 		: IN 	STD_LOGIC );
+   	     PORT(	 Instruction 		: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+				 PC_plus_4_out 		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+				 Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+				 Branch 			: IN 	STD_LOGIC;
+				 Zero 				: IN 	STD_LOGIC;
+				 PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+				 Jr		   	 		: IN 	STD_LOGIC;
+				 Jump		   	 	: IN 	STD_LOGIC;
+				 clock, reset 		: IN 	STD_LOGIC );
 	END COMPONENT; 
 
 	COMPONENT Idecode
@@ -97,6 +99,11 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL MemRead 			: STD_LOGIC;
 	SIGNAL ALUop 			: STD_LOGIC_VECTOR(  1 DOWNTO 0 );
 	SIGNAL Instruction		: STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+	SIGNAL BranchNe			: STD_LOGIC;
+	SIGNAL BranchEq			: STD_LOGIC;
+	SIGNAL jump 			: STD_LOGIC;
+	SIGNAL Jr   			: STD_LOGIC;
+	SIGNAL Jal  			: STD_LOGIC;
 
 BEGIN
 					-- copy important signals to output pins for easy 
@@ -117,7 +124,9 @@ BEGIN
 				Add_result 		=> Add_result,
 				Branch 			=> Branch,
 				Zero 			=> Zero,
-				PC_out 			=> PC,        		
+				PC_out 			=> PC,
+				Jr				=> Jr,
+				Jump			=> Jump,
 				clock 			=> clock,  
 				reset 			=> reset );
 
@@ -143,8 +152,12 @@ BEGIN
 				RegWrite 		=> RegWrite,
 				MemRead 		=> MemRead,
 				MemWrite 		=> MemWrite,
-				Branch 			=> Branch,
-				ALUop 			=> ALUop,
+				BranchNe		=> BranchNe,
+				BranchEq		=> BranchEq,
+				Jal				=> Jal,
+				Jr				=> Jr,
+				Jump			=> Jump,
+				--ALUop 			=> ALUop,
                 clock 			=> clock,
 				reset 			=> reset );
 
