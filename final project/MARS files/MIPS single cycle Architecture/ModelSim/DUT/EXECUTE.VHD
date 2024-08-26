@@ -36,13 +36,16 @@ BEGIN
         IF opcode = "000000" THEN -- R-type instructions
             CASE Function_opcode IS
                 WHEN "100000" => ALU_ctl <= "0000"; -- ADD
-                WHEN "100010" => ALU_ctl <= "0001"; -- SUB
-                WHEN "100100" => ALU_ctl <= "0010"; -- AND
+                WHEN "100010" => ALU_ctl <= "0001"; -- SUB, slt (needs to sub between 2 registers
+                when "101010" => ALU_ctl <= "0001"; --sub for slt
+				WHEN "100100" => ALU_ctl <= "0010"; -- AND
                 WHEN "100101" => ALU_ctl <= "0011"; -- OR
                 WHEN "100110" => ALU_ctl <= "0100"; -- XOR
                 WHEN "000000" => ALU_ctl <= "0101"; -- SLL
                 WHEN "000010" => ALU_ctl <= "0110"; -- SRL
                 WHEN "001000" => ALU_ctl <= "0111"; -- JR
+
+				
                 WHEN OTHERS   => ALU_ctl <= "0000"; -- Default
             END CASE;
         ELSIF opcode = "001000" THEN -- ADDI
@@ -56,7 +59,7 @@ BEGIN
         ELSIF opcode = "100011" OR opcode = "101011" THEN -- LW or SW
             ALU_ctl <= "0000"; -- ADD
         ELSIF opcode = "001111" THEN -- LUI
-            ALU_ctl <= "1000";
+            ALU_ctl <= "1001";
         ELSIF opcode = "000100" THEN -- BEQ
             ALU_ctl <= "0001"; -- SUB
         ELSIF opcode = "000101" THEN -- BNE
@@ -72,31 +75,37 @@ BEGIN
 
     -- Generate Zero Flag
     Zero <= '1' WHEN (ALU_output_mux = X"00000000") ELSE '0';
+		-- Select ALU output        
+	ALU_result <= X"0000000" & B"000"  & ALU_output_mux( 31 ) 
+		WHEN  opcode = "001010" or  Function_opcode = "101010" --those are for slt and SLTI
+		ELSE  	ALU_output_mux( 31 DOWNTO 0 );
+						-- Adder to compute Branch Address
+		Branch_Add <= std_logic_vector(unsigned(PC_plus_4(9 DOWNTO 2)) + unsigned(Sign_extend(7 DOWNTO 0)));
+		Add_result 	<= Branch_Add( 7 DOWNTO 0 );
 
     -- ALU operations
     PROCESS(ALU_ctl, Ainput, Binput)
         VARIABLE product : signed(63 DOWNTO 0);
     BEGIN
         CASE ALU_ctl IS
-            WHEN "0000" => ALU_output_mux <= std_logic_vector(signed(Ainput) + signed(Binput)); -- ADD
-            WHEN "0001" => ALU_output_mux <= std_logic_vector(signed(Ainput) - signed(Binput)); -- SUB
-            WHEN "0010" => ALU_output_mux <= Ainput AND Binput; -- AND
-            WHEN "0011" => ALU_output_mux <= Ainput OR Binput; -- OR
-            WHEN "0100" => ALU_output_mux <= Ainput XOR Binput; -- XOR
+            WHEN "0000" => ALU_output_mux <= std_logic_vector(signed(Ainput) + signed(Binput)); -- ADD, ADDI,lw,SW
+            WHEN "0001" => ALU_output_mux <= std_logic_vector(signed(Ainput) - signed(Binput)); -- SUB,beq,bnq,slt,SLTI
+            WHEN "0010" => ALU_output_mux <= Ainput AND Binput; -- AND,ANDI
+            WHEN "0011" => ALU_output_mux <= Ainput OR Binput; -- OR,ORI
+            WHEN "0100" => ALU_output_mux <= Ainput XOR Binput; -- XOR,XORI
             WHEN "0101" => ALU_output_mux <= std_logic_vector(shift_left(unsigned(Ainput), to_integer(unsigned(Binput(10 DOWNTO 6))))); -- SLL
             WHEN "0110" => ALU_output_mux <= std_logic_vector(shift_right(unsigned(Ainput), to_integer(unsigned(Binput(10 DOWNTO 6))))); -- SRL
-            WHEN "0111" => ALU_output_mux <= X"00000001"; -- JR
+            WHEN "0111" => ALU_output_mux <= X"00000000"; -- JR it does not do anything
             WHEN "1000" => 
                 product := signed(Ainput) * signed(Binput); -- MULT
                 ALU_output_mux <= std_logic_vector(product(31 DOWNTO 0)); -- Lower 32 bits of product
-            WHEN OTHERS => ALU_output_mux <= X"00000000"; -- Default
+            when "1001" => ALU_output_mux <= Binput (15 downto 0) & X"0000"; --LUI
+			
+			WHEN OTHERS => ALU_output_mux <= X"00000000"; -- Default
+			
         END CASE;
     END PROCESS;
 
-    -- Branch Address Calculation
-    Branch_Add <= std_logic_vector(unsigned(PC_plus_4(9 DOWNTO 2)) + unsigned(Sign_extend(7 DOWNTO 0)));
-    Add_Result <= Branch_Add;
-    ALU_Result <= ALU_output_mux;
 
 END behavior;
 
