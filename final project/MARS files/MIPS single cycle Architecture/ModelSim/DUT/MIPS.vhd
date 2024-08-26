@@ -20,24 +20,30 @@ ARCHITECTURE structure OF MIPS IS
    	     PORT(	 Instruction 		: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 				 PC_plus_4_out 		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-				 Branch 			: IN 	STD_LOGIC;
+				 BranchNe 			: IN 	STD_LOGIC;
+				 BranchEq 			: IN 	STD_LOGIC;
 				 Zero 				: IN 	STD_LOGIC;
 				 PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 Jr		   	 		: IN 	STD_LOGIC;
 				 Jump		   	 	: IN 	STD_LOGIC;
+				 R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+				 muxed_next_pc		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 clock, reset 		: IN 	STD_LOGIC );
 	END COMPONENT; 
 
 	COMPONENT Idecode
- 	     PORT(	read_data_1 		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		read_data_2 		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		Instruction 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		read_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		ALU_result 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		RegWrite, MemtoReg 	: IN 	STD_LOGIC;
-        		RegDst 				: IN 	STD_LOGIC;
-        		Sign_extend 		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		clock, reset		: IN 	STD_LOGIC );
+ 	     PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data_2	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Instruction : IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			ALU_result	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			RegWrite 	: IN 	STD_LOGIC;
+			MemtoReg 	: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			RegDst 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			Sign_extend : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			muxed_next_pc:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
+			clock,reset	: IN 	STD_LOGIC  );
 	END COMPONENT;
 
 	COMPONENT control
@@ -91,19 +97,21 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL read_data 		: STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 	SIGNAL ALUSrc 			: STD_LOGIC;
 	SIGNAL Branch 			: STD_LOGIC;
-	SIGNAL RegDst 			: STD_LOGIC;
+	SIGNAL RegDst 			: STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 	SIGNAL Regwrite 		: STD_LOGIC;
 	SIGNAL Zero 			: STD_LOGIC;
 	SIGNAL MemWrite 		: STD_LOGIC;
-	SIGNAL MemtoReg 		: STD_LOGIC;
+	SIGNAL MemtoReg 		: STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 	SIGNAL MemRead 			: STD_LOGIC;
-	SIGNAL ALUop 			: STD_LOGIC_VECTOR(  1 DOWNTO 0 );
-	SIGNAL Instruction		: STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+	SIGNAL ALUop 			: STD_LOGIC_VECTOR( 1 DOWNTO 0 );
+	SIGNAL Instruction		: STD_LOGIC_VECTOR(31 DOWNTO 0 );
 	SIGNAL BranchNe			: STD_LOGIC;
 	SIGNAL BranchEq			: STD_LOGIC;
 	SIGNAL jump 			: STD_LOGIC;
 	SIGNAL Jr   			: STD_LOGIC;
 	SIGNAL Jal  			: STD_LOGIC;
+	SIGNAL Funct			: STD_LOGIC_VECTOR( 5 DOWNTO 0 );
+	SIGNAL muxed_next_pc	: STD_LOGIC_VECTOR( 9 DOWNTO 0);
 
 BEGIN
 					-- copy important signals to output pins for easy 
@@ -112,7 +120,7 @@ BEGIN
    ALU_result_out 	<= ALU_result;
    read_data_1_out 	<= read_data_1;
    read_data_2_out 	<= read_data_2;
-   write_data_out  	<= read_data WHEN MemtoReg = '1' ELSE ALU_result;
+   
    Branch_out 		<= Branch;
    Zero_out 		<= Zero;
    RegWrite_out 	<= RegWrite;
@@ -122,11 +130,14 @@ BEGIN
 	PORT MAP (	Instruction 	=> Instruction,
     	    	PC_plus_4_out 	=> PC_plus_4,
 				Add_result 		=> Add_result,
-				Branch 			=> Branch,
+				BranchNe 		=> BranchNe,
+				BranchEq 		=> BranchEq,
 				Zero 			=> Zero,
 				PC_out 			=> PC,
 				Jr				=> Jr,
 				Jump			=> Jump,
+				R_data1			=> read_data_1,
+				muxed_next_pc   =>  muxed_next_pc ,
 				clock 			=> clock,  
 				reset 			=> reset );
 
@@ -140,12 +151,15 @@ BEGIN
 				MemtoReg 		=> MemtoReg,
 				RegDst 			=> RegDst,
 				Sign_extend 	=> Sign_extend,
+				muxed_next_pc   =>  muxed_next_pc,
+				write_data_out	=> write_data_out,
         		clock 			=> clock,  
 				reset 			=> reset );
 
 
    CTL:   control
 	PORT MAP ( 	Opcode 			=> Instruction( 31 DOWNTO 26 ),
+				Funct			=> Instruction( 5 DOWNTO 0 ),
 				RegDst 			=> RegDst,
 				ALUSrc 			=> ALUSrc,
 				MemtoReg 		=> MemtoReg,
