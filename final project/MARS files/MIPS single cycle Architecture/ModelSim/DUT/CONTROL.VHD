@@ -14,7 +14,6 @@ ENTITY control IS
 	RegWrite 	: OUT 	STD_LOGIC;
 	MemRead 	: OUT 	STD_LOGIC;
 	MemWrite 	: OUT 	STD_LOGIC;
-	Shift 		: OUT	STD_LOGIC;
 	BranchEq 	: OUT 	STD_LOGIC;
 	BranchNe 	: OUT 	STD_LOGIC;
 	Jump 		: OUT 	STD_LOGIC;
@@ -28,8 +27,8 @@ END control;
 
 ARCHITECTURE behavior OF control IS
 
-	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jal,Jr, jump 	: STD_LOGIC;
-	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui  			: STD_LOGIC;
+	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire	: STD_LOGIC;
+	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui	: STD_LOGIC;
 
 BEGIN           
 				-- Code to generate control signals using opcode bits
