@@ -160,7 +160,7 @@ BEGIN
 				Add_Result 		=> Add_Result,
 				PC_plus_4		=> PC_plus_4,
                 Clock			=> clock,
-				Reset			=> reset ,
+				Reset			=> reset 
 				Opcode 			=> Instruction( 31 DOWNTO 26 ));
 
    MEM:  dmemory

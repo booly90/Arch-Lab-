@@ -60,7 +60,7 @@ BEGIN
    	MemWrite 	<=  Sw; 
  	BranchEq    <=  Beq;
 	BranchNe    <=  Bne;
-	Jr 			<=  Jr_wire;
+	Jr 			<=  Jr_wire
 	--ALUOp( 1 ) 	<=  R_format;
 	--ALUOp( 0 ) 	<=  Beq OR Bne OR Shift; 
 
