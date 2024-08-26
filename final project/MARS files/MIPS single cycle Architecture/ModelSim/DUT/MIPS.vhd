@@ -47,7 +47,6 @@ ARCHITECTURE structure OF MIPS IS
 					RegWrite 	: OUT 	STD_LOGIC;
 					MemRead 	: OUT 	STD_LOGIC;
 					MemWrite 	: OUT 	STD_LOGIC;
-					Shift 		: OUT	STD_LOGIC;
 					BranchEq 	: OUT 	STD_LOGIC;
 					BranchNe 	: OUT 	STD_LOGIC;
 					Jump 		: OUT 	STD_LOGIC;
