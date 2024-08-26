@@ -48,7 +48,7 @@ inst_memory: altsyncram
       	PC_plus_4( 9 DOWNTO 2 )  <= PC( 9 DOWNTO 2 ) + 1;
        	PC_plus_4( 1 DOWNTO 0 )  <= "00";
 						-- Mux to select Branch Address or PC + 4        
-		Next_PC  <= X"00" WHEN Reset = '1' ELSE
+		Next_PC  <= X"00" WHEN Reset = '1' ELSE                        --- [YL 25/8] add else for j-type instructions
 			Add_result  WHEN ( ( Branch = '1' ) AND ( Zero = '1' ) ) 
 			ELSE   PC_plus_4( 9 DOWNTO 2 );
 	PROCESS
