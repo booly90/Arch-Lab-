@@ -26,7 +26,7 @@ BEGIN
 		widthad_a => 8,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		init_file => "C:\TestPrograms\ModelSim\L1_Cache\asm_ver1\dmemory.hex",
+		init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\dmemory.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (
