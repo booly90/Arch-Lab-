@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Wed Jul 10 13:11:22 2024
+Analysis & Synthesis Status : Successful - Wed Jul 10 17:12:02 2024
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : lab4
 Top-level Entity Name : TopIO_Interface
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 706
+Total registers : 710
 Total pins : 68
 Total virtual pins : 0
-Total block memory bits : 1,179,648
+Total block memory bits : 1,310,720
 Total DSP Blocks : 0
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
