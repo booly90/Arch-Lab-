@@ -50,7 +50,7 @@ BEGIN
 			"11111" WHEN RegDst = "10" 	ELSE 
 			write_register_address_0;
 					-- Mux to bypass data memory for Rformat instructions
-	write_data <=   X"00000" & PC_plus_4 & "00" WHEN MemtoReg = "10" ELSE                             --[YL 25/8] change to add mux from ipad diagram
+	write_data <=   X"00000" & "00" & PC_plus_4  WHEN MemtoReg = "10" ELSE                             --[YL 25/8] change to add mux from ipad diagram
 					read_data     WHEN ( MemtoReg = "01" ) 	ELSE 
 					ALU_result( 31 DOWNTO 0 );
 					-- Sign Extend 16-bits to 32-bits

@@ -77,7 +77,7 @@ BEGIN
     Zero <= '1' WHEN (ALU_output_mux = X"00000000") ELSE '0';
 		-- Select ALU output        
 	ALU_result <= X"0000000" & B"000"  & ALU_output_mux( 31 ) 
-		WHEN  opcode = "001010" or  Function_opcode = "101010" --those are for slt and SLTI
+		WHEN  opcode = "001010" or  (Function_opcode = "101010" and opcode = "000000") --those are for slt and SLTI
 		ELSE  	ALU_output_mux( 31 DOWNTO 0 );
 						-- Adder to compute Branch Address
 		Branch_Add <= std_logic_vector(unsigned(PC_plus_4(9 DOWNTO 2)) + unsigned(Sign_extend(7 DOWNTO 0)));

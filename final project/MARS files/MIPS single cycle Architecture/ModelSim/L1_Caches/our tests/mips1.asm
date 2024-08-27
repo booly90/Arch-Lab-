@@ -37,8 +37,8 @@ main:
   sw   $t4, t4_result    # Store $t4 into memory
 
   # Test MUL, AND, OR, XOR
-  mul  $t5, $t0, $t1     # $t5 = $t0 * $t1
-  sw   $t5, t5_result    # Store $t5 into memory
+#  mul  $t5, $t0, $t1     # $t5 = $t0 * $t1
+#  sw   $t5, t5_result    # Store $t5 into memory
   and  $t6, $t0, $t1     # $t6 = $t0 & $t1
   sw   $t6, t6_result    # Store $t6 into memory
   or   $t7, $t0, $t1     # $t7 = $t0 | $t1

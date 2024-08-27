@@ -62,7 +62,7 @@ BEGIN
       END LOOP;
       WAIT;
    END PROCESS u_0clk_proc;
-   mw_U_0disable_clk <= TRUE AFTER 1000 ns;
+   --mw_U_0disable_clk <= TRUE AFTER 1000 ns;
    clock <= mw_U_0clk;
 
    -- ModuleWare code(v1.9) for instance 'U_1' of 'pulse'

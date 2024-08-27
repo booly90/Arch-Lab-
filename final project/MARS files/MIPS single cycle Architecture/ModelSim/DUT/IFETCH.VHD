@@ -36,7 +36,7 @@ inst_memory: altsyncram
 		widthad_a => 8,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\asm_ver1\program.hex",
+		init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
 		--init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\asm_ver1\program.hex",
 		intended_device_family => "Cyclone"
 	)
