@@ -27,7 +27,7 @@ ARCHITECTURE behavior OF Execute IS
     SIGNAL ALU_ctl              : STD_LOGIC_VECTOR( 3 DOWNTO 0 );
 BEGIN
     -- ALU input mux
-    Ainput <= Read_data_2 when (ALU_ctl = "0101" or ALU_ctl = "0110") else Read_data_1;
+    Ainput <=  Read_data_2 when (ALU_ctl = "0101" or ALU_ctl = "0110") else Read_data_1; 
     Binput <= Read_data_2 WHEN (ALUSrc = '0') ELSE Sign_extend;
 
     -- Generate ALU control bits
