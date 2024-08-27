@@ -21,12 +21,12 @@ ENTITY control IS
 		ALUop 			: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 		INTR			: IN 	STD_LOGIC;
 		-- INTA			: INOUT STD_LOGIC;
-		IF_FLUSH		: OUT 	STD_LOGIC;
-		ID_FLUSH		: OUT 	STD_LOGIC;
-		EX_FLUSH		: OUT 	STD_LOGIC;
-		HOLD_PC			: IN 	STD_LOGIC;
-		Read_ISR_PC		: IN 	STD_LOGIC;		
-		clock, reset	: IN 	STD_LOGIC );
+		--IF_FLUSH		: OUT 	STD_LOGIC;
+		--ID_FLUSH		: OUT 	STD_LOGIC;
+		--EX_FLUSH		: OUT 	STD_LOGIC;
+		--HOLD_PC			: IN 	STD_LOGIC;
+		--Read_ISR_PC		: IN 	STD_LOGIC;		
+		--clock, reset	: IN 	STD_LOGIC );
 END control;
 ------------ Architecture -----------------
 ARCHITECTURE behavior OF control IS

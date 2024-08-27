@@ -1,5 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
+
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_SIGNED.ALL;
 
@@ -44,23 +46,23 @@ BEGIN
         reset       => reset
     );
 
-    -- Clock generation
-    gen_clk: process
-    begin
-        clock <= '0';
-        wait for 50 ns;
-        clock <= '1';
-        wait for 50 ns;
-    end process;
-
-    -- Reset generation
-    gen_reset: process
-    begin
-        reset <= '1';
-        wait for 100 ns;
-        reset <= '0';
-        wait;
-    end process;
+   ---- Clock generation
+   --gen_clk: process
+   --begin
+   --    clock <= '0';
+   --    wait for 50 ns;
+   --    clock <= '1';
+   --    wait for 50 ns;
+   --end process;
+   --
+   ---- Reset generation
+   --gen_reset: process
+   --begin
+   --    reset <= '1';
+   --    wait for 100 ns;
+   --    reset <= '0';
+   --    wait;
+   --end process;
 
     -- Stimulus process
     stimulus: process
@@ -91,6 +93,7 @@ BEGIN
         wait for 100 ns;
         assert (RegDst = "00" and ALUSrc = '0' and RegWrite = '0' and Jump = '1' and Jr = '1')
             report "Test Case JR Failed" severity error;
+
 
         -- SLL (function = 000000)
         Funct <= "000000";
