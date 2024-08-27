@@ -121,7 +121,7 @@ BEGIN
    read_data_1_out 	<= read_data_1;
    read_data_2_out 	<= read_data_2;
    
-   Branch_out 		<= Branch;
+   Branch_out 		<= BranchNe OR BranchEq;
    Zero_out 		<= Zero;
    RegWrite_out 	<= RegWrite;
    MemWrite_out 	<= MemWrite;	
