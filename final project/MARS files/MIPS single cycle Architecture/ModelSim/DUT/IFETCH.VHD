@@ -8,7 +8,7 @@ LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
 
 ENTITY Ifetch IS
-	PORT(	SIGNAL Instruction 		: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+	PORT(	SIGNAL Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         	SIGNAL PC_plus_4_out 	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	SIGNAL Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
         	SIGNAL BranchNe			: IN 	STD_LOGIC;
@@ -18,7 +18,6 @@ ENTITY Ifetch IS
 			SIGNAL Jr		   	 	: IN 	STD_LOGIC;
 			SIGNAL Jump		   	 	: IN 	STD_LOGIC;
 			SIGNAL R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			SIGNAL muxed_next_pc	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0);
         	SIGNAL clock, reset 	: IN 	STD_LOGIC);
 			
 END Ifetch;
@@ -58,16 +57,13 @@ inst_memory: altsyncram
 		jump_address <= Instruction(7 DOWNTO 0) & "00" ;
 						-- Mux to select Branch Address or PC + 4        
 		Next_PC  <= X"00"   		WHEN Reset = '1' ELSE                        
-					R_data1 		WHEN Jr = '1' 	 ELSE
+					R_data1(9 DOWNTO 2)			WHEN Jr = '1' 	 ELSE
 					jump_address( 9 DOWNTO 2)	WHEN jump='1'    ELSE
 					Add_result  	WHEN ( (( BranchNe = '1' ) AND ( Zero = '0' )) 
 									OR	   (( BranchEq = '1' ) AND ( Zero = '1' ))) ELSE
 					PC_plus_4( 9 DOWNTO 2 );
 		
-		muxed_next_pc <= jump_address( 9 DOWNTO 2) &"00"	WHEN jump='1'    ELSE
-					Add_result & "00"  	WHEN ( (( BranchNe = '1' ) AND ( Zero = '0' )) 
-									OR	   (( BranchEq = '1' ) AND ( Zero = '1' ))) ELSE
-					PC_plus_4( 9 DOWNTO 2 ) & "00";
+		
 					
 	PROCESS
 		BEGIN

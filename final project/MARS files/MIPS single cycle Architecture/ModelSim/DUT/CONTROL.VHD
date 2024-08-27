@@ -1,8 +1,10 @@
 		-- control module (implements MIPS control unit)
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.STD_LOGIC_ARITH.ALL;
-USE IEEE.STD_LOGIC_SIGNED.ALL;
+use ieee.numeric_std.all;
+
+--USE IEEE.STD_LOGIC_ARITH.ALL;
+--USE IEEE.STD_LOGIC_SIGNED.ALL;
 
 ENTITY control IS
    PORT( 	

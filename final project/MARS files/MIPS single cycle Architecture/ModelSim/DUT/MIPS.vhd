@@ -17,7 +17,7 @@ END 	MIPS;
 ARCHITECTURE structure OF MIPS IS
 
 	COMPONENT Ifetch
-   	     PORT(	 Instruction 		: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+   	     PORT(	 Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 				 PC_plus_4_out 		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
 				 BranchNe 			: IN 	STD_LOGIC;
@@ -27,23 +27,22 @@ ARCHITECTURE structure OF MIPS IS
 				 Jr		   	 		: IN 	STD_LOGIC;
 				 Jump		   	 	: IN 	STD_LOGIC;
 				 R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-				 muxed_next_pc		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 clock, reset 		: IN 	STD_LOGIC );
 	END COMPONENT; 
 
 	COMPONENT Idecode
  	     PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			read_data_2	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			Instruction : IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			read_data 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			ALU_result	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			RegWrite 	: IN 	STD_LOGIC;
-			MemtoReg 	: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
-			RegDst 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
-			Sign_extend : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			muxed_next_pc:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			read_data_2		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Instruction 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			ALU_result		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			RegWrite 		: IN 	STD_LOGIC;
+			MemtoReg 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			RegDst 			: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			Sign_extend 	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			PC_plus_4		: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
-			clock,reset	: IN 	STD_LOGIC  );
+			clock,reset		: IN 	STD_LOGIC  );
 	END COMPONENT;
 
 	COMPONENT control
@@ -137,7 +136,6 @@ BEGIN
 				Jr				=> Jr,
 				Jump			=> Jump,
 				R_data1			=> read_data_1,
-				muxed_next_pc   =>  muxed_next_pc ,
 				clock 			=> clock,  
 				reset 			=> reset );
 
@@ -151,7 +149,7 @@ BEGIN
 				MemtoReg 		=> MemtoReg,
 				RegDst 			=> RegDst,
 				Sign_extend 	=> Sign_extend,
-				muxed_next_pc   =>  muxed_next_pc,
+				PC_plus_4   =>  PC_plus_4,
 				write_data_out	=> write_data_out,
         		clock 			=> clock,  
 				reset 			=> reset );

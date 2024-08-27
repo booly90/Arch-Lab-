@@ -14,7 +14,7 @@ ENTITY Idecode IS
 			MemtoReg 	: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
 			RegDst 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
 			Sign_extend : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			muxed_next_pc:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			PC_plus_4:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
 			clock,reset	: IN 	STD_LOGIC );
 END Idecode;
@@ -47,10 +47,10 @@ BEGIN
 					-- Mux for Register Write Address
    write_register_address <= write_register_address_1 
 						WHEN RegDst = "01" 	ELSE 
-			X"0000001F" WHEN RegDst = "10" 	ELSE 
+			"11111" WHEN RegDst = "10" 	ELSE 
 			write_register_address_0;
 					-- Mux to bypass data memory for Rformat instructions
-	write_data <=   muxed_next_pc WHEN MemtoReg = "10" ELSE                             --[YL 25/8] change to add mux from ipad diagram
+	write_data <=   X"00000" & PC_plus_4 & "00" WHEN MemtoReg = "10" ELSE                             --[YL 25/8] change to add mux from ipad diagram
 					read_data     WHEN ( MemtoReg = "01" ) 	ELSE 
 					ALU_result( 31 DOWNTO 0 );
 					-- Sign Extend 16-bits to 32-bits
