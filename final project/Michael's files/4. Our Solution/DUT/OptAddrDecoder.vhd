@@ -1,19 +1,24 @@
---------------- Optimized Address Decoder Module 
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE work.aux_package.ALL;
--------------- ENTITY --------------------
+--------------------------------------------------------------------
 ENTITY OptAddrDecoder IS
 	PORT( 
-		reset 						: IN	STD_LOGIC;
-		AddressBus					: IN	STD_LOGIC_VECTOR(11 DOWNTO 0);
-		CS_LEDR, CS_SW, CS_KEY		: OUT 	STD_LOGIC;
-		CS_HEX0, CS_HEX1, CS_HEX2	: OUT 	STD_LOGIC;
-		CS_HEX3, CS_HEX4, CS_HEX5	: OUT 	STD_LOGIC
+		reset 		: IN	STD_LOGIC;
+		AddressBus	: IN	STD_LOGIC_VECTOR(11 DOWNTO 0);
+		CS_LEDR		: OUT 	STD_LOGIC;
+		CS_SW  		: OUT 	STD_LOGIC;
+		CS_KEY		: OUT 	STD_LOGIC;
+		CS_HEX0		: OUT 	STD_LOGIC;
+		CS_HEX1		: OUT 	STD_LOGIC;
+		CS_HEX2		: OUT 	STD_LOGIC;
+		CS_HEX3		: OUT 	STD_LOGIC;
+		CS_HEX4		: OUT 	STD_LOGIC;
+		CS_HEX5		: OUT 	STD_LOGIC
 		);
 END OptAddrDecoder;
------------- ARCHITECTURE ----------------
+--------------------------------------------------------------
 ARCHITECTURE structure OF OptAddrDecoder IS
 
 BEGIN

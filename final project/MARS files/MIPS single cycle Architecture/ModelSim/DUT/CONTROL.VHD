@@ -2,6 +2,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
+USE work.aux_package.ALL;
 
 --USE IEEE.STD_LOGIC_ARITH.ALL;
 --USE IEEE.STD_LOGIC_SIGNED.ALL;
@@ -19,17 +20,15 @@ ENTITY control IS
 	BranchEq 	: OUT 	STD_LOGIC;
 	BranchNe 	: OUT 	STD_LOGIC;
 	Jump 		: OUT 	STD_LOGIC;
-	Jal			: OUT 	STD_LOGIC;
 	Jr 			: OUT 	STD_LOGIC;
 	
-	--ALUop 		: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
-	clock, reset	: IN 	STD_LOGIC );
+		clock, reset	: IN 	STD_LOGIC );
 
 END control;
 
 ARCHITECTURE behavior OF control IS
 
-	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire	: STD_LOGIC;
+	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire,Jal	: STD_LOGIC;
 	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui,shift	: STD_LOGIC;
 
 BEGIN           
@@ -52,7 +51,7 @@ BEGIN
 	
 	
 	
-  	RegDst(0)    	<=  R_format;
+  	RegDst(0)    	<=  R_format ;
 	RegDst(1)    	<=  Jal;
  	ALUSrc  	<=  Lw OR Sw OR Addi OR Andi OR Ori OR Xori OR Shift OR Lui OR Slti;  -- when Imm needed
 	MemtoReg(0)	<=  Lw;

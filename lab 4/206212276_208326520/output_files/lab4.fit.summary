@@ -1,0 +1,11 @@
+I/O Assignment Analysis Status : Successful - Wed Aug 28 11:53:08 2024
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : lab4
+Top-level Entity Name : lab4
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Total pins : 0 / 499 ( 0 % )
+Total virtual pins : 0
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )

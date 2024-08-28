@@ -3,13 +3,13 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE work.aux_package.ALL;
 
 ENTITY Execute IS
     PORT(   Read_data_1     : IN    STD_LOGIC_VECTOR( 31 DOWNTO 0 );
             Read_data_2     : IN    STD_LOGIC_VECTOR( 31 DOWNTO 0 );
             Sign_extend     : IN    STD_LOGIC_VECTOR( 31 DOWNTO 0 );
             Function_opcode : IN    STD_LOGIC_VECTOR( 5 DOWNTO 0 );
-            ALUOp           : IN    STD_LOGIC_VECTOR( 1 DOWNTO 0 );
             ALUSrc          : IN    STD_LOGIC;
             Zero            : OUT   STD_LOGIC;
             ALU_Result      : OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0 );

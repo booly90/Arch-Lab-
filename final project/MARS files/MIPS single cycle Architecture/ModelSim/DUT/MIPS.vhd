@@ -2,6 +2,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
+USE work.aux_package.ALL;
 
 ENTITY MIPS IS
 
@@ -57,7 +58,6 @@ ARCHITECTURE structure OF MIPS IS
 					BranchEq 	: OUT 	STD_LOGIC;
 					BranchNe 	: OUT 	STD_LOGIC;
 					Jump 		: OUT 	STD_LOGIC;
-					Jal			: OUT 	STD_LOGIC;
 					Jr 			: OUT 	STD_LOGIC;
 					clock, reset	: IN 	STD_LOGIC );
 	END COMPONENT;
@@ -67,7 +67,6 @@ ARCHITECTURE structure OF MIPS IS
                 Read_data_2 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
                	Sign_Extend 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
                	Function_opcode		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
-               	ALUOp 				: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
                	ALUSrc 				: IN 	STD_LOGIC;
                	Zero 				: OUT	STD_LOGIC;
                	ALU_Result 			: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
@@ -80,7 +79,7 @@ ARCHITECTURE structure OF MIPS IS
 
 	COMPONENT dmemory
 	     PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        		address 			: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+        		address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         		write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         		MemRead, Memwrite 	: IN 	STD_LOGIC;
         		Clock,reset			: IN 	STD_LOGIC );
@@ -102,13 +101,11 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL MemWrite 		: STD_LOGIC;
 	SIGNAL MemtoReg 		: STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 	SIGNAL MemRead 			: STD_LOGIC;
-	SIGNAL ALUop 			: STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 	SIGNAL Instruction		: STD_LOGIC_VECTOR(31 DOWNTO 0 );
 	SIGNAL BranchNe			: STD_LOGIC;
 	SIGNAL BranchEq			: STD_LOGIC;
 	SIGNAL jump 			: STD_LOGIC;
 	SIGNAL Jr   			: STD_LOGIC;
-	SIGNAL Jal  			: STD_LOGIC;
 	SIGNAL Funct			: STD_LOGIC_VECTOR( 5 DOWNTO 0 );
 	SIGNAL muxed_next_pc	: STD_LOGIC_VECTOR( 9 DOWNTO 0);
 
@@ -166,10 +163,8 @@ BEGIN
 				MemWrite 		=> MemWrite,
 				BranchNe		=> BranchNe,
 				BranchEq		=> BranchEq,
-				Jal				=> Jal,
 				Jr				=> Jr,
 				Jump			=> Jump,
-				--ALUop 			=> ALUop,
                 clock 			=> clock,
 				reset 			=> reset );
 
@@ -178,7 +173,6 @@ BEGIN
              	Read_data_2 	=> read_data_2,
 				Sign_extend 	=> Sign_extend,
                 Function_opcode	=> Instruction( 5 DOWNTO 0 ),
-				ALUOp 			=> ALUop,
 				ALUSrc 			=> ALUSrc,
 				Zero 			=> Zero,
                 ALU_Result		=> ALU_Result,
@@ -190,7 +184,7 @@ BEGIN
 
    MEM:  dmemory
 	PORT MAP (	read_data 		=> read_data,
-				address 		=> ALU_Result (9 DOWNTO 2),--jump memory address by 4
+				address 		=> ALU_Result (9 DOWNTO 2) & "00",--jump memory address by 4
 				write_data 		=> read_data_2,
 				MemRead 		=> MemRead, 
 				Memwrite 		=> MemWrite, 

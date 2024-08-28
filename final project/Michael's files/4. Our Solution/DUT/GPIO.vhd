@@ -10,22 +10,29 @@ ENTITY GPIO IS
 			DataBusSize	: integer := 32
 			);
 	PORT( 
-		-- ControlBus	: IN	STD_LOGIC_VECTOR(CtrlBusSize-1 DOWNTO 0);
-		INTA						: IN	STD_LOGIC;
-		MemReadBus					: IN 	STD_LOGIC;
-		clock						: IN 	STD_LOGIC;
-		reset						: IN 	STD_LOGIC;
-		MemWriteBus					: IN 	STD_LOGIC;
-		AddressBus					: IN	STD_LOGIC_VECTOR(AddrBusSize-1 DOWNTO 0);
-		DataBus						: INOUT	STD_LOGIC_VECTOR(DataBusSize-1 DOWNTO 0);
-		HEX0, HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-		HEX2, HEX3					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-		HEX4, HEX5					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-		LEDR						: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
-		Switches					: IN	STD_LOGIC_VECTOR(7 DOWNTO 0);
-		CS_LEDR, CS_SW				: IN 	STD_LOGIC;
-		CS_HEX0, CS_HEX1, CS_HEX2	: IN 	STD_LOGIC;
-		CS_HEX3, CS_HEX4, CS_HEX5	: IN 	STD_LOGIC
+		INTA					: IN	STD_LOGIC;
+		MemRead_Signal			: IN 	STD_LOGIC;
+		clock					: IN 	STD_LOGIC;
+		reset					: IN 	STD_LOGIC;
+		MemWrite_Signal			: IN 	STD_LOGIC;
+		AddressBus				: IN	STD_LOGIC_VECTOR(AddrBusSize-1 DOWNTO 0);
+		DataBus					: INOUT	STD_LOGIC_VECTOR(DataBusSize-1 DOWNTO 0);
+		HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX2					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX3					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX4					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		HEX5					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+		LEDR					: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
+		Switches				: IN	STD_LOGIC_VECTOR(7 DOWNTO 0);
+		CS_LEDR					: IN 	STD_LOGIC
+		CS_SW					: IN 	STD_LOGIC;
+		CS_HEX0					: IN 	STD_LOGIC
+		CS_HEX1					: IN 	STD_LOGIC
+		CS_HEX2					: IN 	STD_LOGIC;
+		CS_HEX3					: IN 	STD_LOGIC
+		CS_HEX4					: IN 	STD_LOGIC
+		CS_HEX5					: IN 	STD_LOGIC
 		);
 END GPIO;
 ------------ ARCHITECTURE ----------------
@@ -52,10 +59,10 @@ BEGIN
 	LED:	OutputPeripheral
 	GENERIC MAP(SevenSeg => FALSE,
 				IOSize	 => 8)
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_LEDR,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> LEDR
@@ -69,69 +76,68 @@ BEGIN
 	-- HEX5_CS	<=	ChipSelect(3) AND AddressBus(0);
 	
 	HEX0_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,	
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX0,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX0
 			);
 			
 	HEX1_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX1,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX1
 			);
 	
 	HEX2_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX2,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX2
 			);
 	
 	HEX3_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX3,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX3
 			);
 			
 	HEX4_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX4,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX4
 			);
 			
 	HEX5_7SEG:	OutputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				clock 		=> clock,
 				reset		=> reset,
-				MemWrite	=> MemWriteBus,
+				MemWrite	=> MemWrite_Signal,
 				ChipSelect	=> CS_HEX5,
 				Data		=> DataBus(7 DOWNTO 0),
 				GPOutput	=> HEX5
 			);
 	
 	SW:			InputPeripheral
-	PORT MAP(	MemRead		=> MemReadBus,
+	PORT MAP(	MemRead		=> MemRead_Signal,
 				ChipSelect	=> CS_SW,
-				INTA		=> INTA,
 				Data		=> DataBus,
 				GPInput		=> Switches
 			);

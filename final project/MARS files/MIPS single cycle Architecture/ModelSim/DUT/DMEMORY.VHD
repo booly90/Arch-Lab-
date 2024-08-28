@@ -4,13 +4,14 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_SIGNED.ALL;
+USE work.aux_package.ALL;
 
 LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
 
 ENTITY dmemory IS
 	PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        	address 			: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+        	address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 	   		MemRead, Memwrite 	: IN 	STD_LOGIC;
             clock,reset			: IN 	STD_LOGIC );
@@ -23,11 +24,11 @@ BEGIN
 	GENERIC MAP  (
 		operation_mode => "SINGLE_PORT",
 		width_a => 32,
-		widthad_a => 8,
+		widthad_a => 10,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		init_file =>"C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\dmemory.hex",
-		--init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\asm_ver1\dmemory.hex",
+		--init_file =>"C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\dmemory.hex",
+		init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\dmemory.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (

@@ -1,7 +1,4 @@
 
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
 USE work.aux_package.all;
 -------------------------------------
 ENTITY segDecoder IS
@@ -11,8 +8,8 @@ END segDecoder;
 --------------------------------------------------------------
 ARCHITECTURE dfl OF segDecoder IS
 BEGIN
-			
-				
+
+
 	seg <= 	"1000000" 	when data = "0000"       else
 			"1111001" 	when data = "0001"       else
 			"0100100" 	when data = "0010"       else
@@ -28,7 +25,7 @@ BEGIN
 			"1000110" 	when data = "1100"       else
 			"0100001" 	when data = "1101"       else
 			"0000110" 	when data = "1110"       else
-			"0001110" 	when data = "1111"       else	
+			"0001110" 	when data = "1111"       else
 			"1111111"	;
 
 END dfl;

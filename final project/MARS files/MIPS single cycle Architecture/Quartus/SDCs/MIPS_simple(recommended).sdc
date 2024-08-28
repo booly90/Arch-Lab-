@@ -38,7 +38,7 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {clock} -period 56.000 -waveform { 0.000 30.000 } [get_ports { clock }]
+create_clock -name {clock} -period 40.000 -waveform { 0.000 30.000 } [get_ports { clock }]
 
 
 #**************************************************************

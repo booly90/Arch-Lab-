@@ -4,6 +4,8 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE work.aux_package.ALL;
+
 LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
 
@@ -23,9 +25,9 @@ ENTITY Ifetch IS
 END Ifetch;
 
 ARCHITECTURE behavior OF Ifetch IS
-	SIGNAL PC, PC_plus_4 	 	: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-	SIGNAL next_PC, Mem_Addr 	: STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-	SIGNAL jump_address			: STD_LOGIC_VECTOR(9 DOWNTO 0 );
+	SIGNAL PC, PC_plus_4, Mem_Addr 	 	: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+	SIGNAL next_PC 						: STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+	SIGNAL jump_address					: STD_LOGIC_VECTOR(9 DOWNTO 0 );
 BEGIN
 						--ROM for Instruction Memory
 inst_memory: altsyncram
@@ -33,11 +35,11 @@ inst_memory: altsyncram
 	GENERIC MAP (
 		operation_mode => "ROM",
 		width_a => 32,
-		widthad_a => 8,
+		widthad_a => 10,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
-		--init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\asm_ver1\program.hex",
+		--init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
+		init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\program.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (
@@ -50,7 +52,7 @@ inst_memory: altsyncram
 		PC_out 			<= PC;
 		PC_plus_4_out 	<= PC_plus_4;
 						-- send address to inst. memory address register
-		Mem_Addr <= Next_PC;
+		Mem_Addr <= Next_PC & "00";
 						-- Adder to increment PC by 4        
       	PC_plus_4( 9 DOWNTO 2 )  <= PC( 9 DOWNTO 2 ) + 1;
        	PC_plus_4( 1 DOWNTO 0 )  <= "00";
