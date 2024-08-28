@@ -4,10 +4,10 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_SIGNED.ALL;
-USE work.aux_package.ALL;
 
 LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
+USE work.aux_package.ALL;
 
 ENTITY dmemory IS
 	PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );

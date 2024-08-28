@@ -1,7 +1,8 @@
-
 library IEEE;
 USE IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_1164.all;
 USE work.aux_package.ALL;
+
 -------------------------------------
 ENTITY segDecoder IS
   PORT (data		: in STD_LOGIC_VECTOR (3 DOWNTO 0);

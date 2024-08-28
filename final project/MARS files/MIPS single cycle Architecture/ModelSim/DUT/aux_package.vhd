@@ -1,7 +1,7 @@
 library IEEE;
-use ieee.std_logic_1164.all;
-USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_1164.all;
+
 package aux_package is
 ------------------------------------------------------
 	component GPIO_handler IS
@@ -57,9 +57,8 @@ END COMPONENT;
 		------------------------------------------------------
 	COMPONENT segDecoder IS
 		PORT (data		: in STD_LOGIC_VECTOR (3 DOWNTO 0);
-			  seg   	: out STD_LOGIC_VECTOR (6 downto 0));
-	END COMPONENT;
-		
+		seg   		: out STD_LOGIC_VECTOR (6 DOWNTO 0));
+	END COMPONENT segDecoder;
 		
 		
 		------------------------------------------------------
@@ -83,11 +82,96 @@ END COMPONENT;
 		
 		------------------------------------------------------
 		
-		
+		COMPONENT Ifetch
+   	     PORT(	 Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+				 PC_plus_4_out 		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+				 Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+				 BranchNe 			: IN 	STD_LOGIC;
+				 BranchEq 			: IN 	STD_LOGIC;
+				 Zero 				: IN 	STD_LOGIC;
+				 PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+				 Jr		   	 		: IN 	STD_LOGIC;
+				 Jump		   	 	: IN 	STD_LOGIC;
+				 R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+				 clock, reset 		: IN 	STD_LOGIC );
+	END COMPONENT; 
+
+------------------------------------------------------
+	COMPONENT Idecode
+ 	     PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data_2		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Instruction 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			ALU_result		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			RegWrite 		: IN 	STD_LOGIC;
+			MemtoReg 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			RegDst 			: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
+			Sign_extend 	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			PC_plus_4		: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
+			clock,reset		: IN 	STD_LOGIC  );
+	END COMPONENT;
+
+------------------------------------------------------
+	COMPONENT control
+	     PORT( 		Opcode 		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
+					Funct 		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
+					RegDst 		: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
+					ALUSrc 		: OUT 	STD_LOGIC;
+					MemtoReg 	: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
+					RegWrite 	: OUT 	STD_LOGIC;
+					MemRead 	: OUT 	STD_LOGIC;
+					MemWrite 	: OUT 	STD_LOGIC;
+					BranchEq 	: OUT 	STD_LOGIC;
+					BranchNe 	: OUT 	STD_LOGIC;
+					Jump 		: OUT 	STD_LOGIC;
+					Jr 			: OUT 	STD_LOGIC;
+					clock, reset	: IN 	STD_LOGIC );
+	END COMPONENT;
+
+------------------------------------------------------
+	COMPONENT  Execute
+   	     PORT(	Read_data_1 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+                Read_data_2 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+               	Sign_Extend 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+               	Function_opcode		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
+               	ALUSrc 				: IN 	STD_LOGIC;
+               	Zero 				: OUT	STD_LOGIC;
+               	ALU_Result 			: OUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+               	Add_Result 			: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+               	PC_plus_4 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+               	clock, reset		: IN 	STD_LOGIC ;
+				Opcode              : IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 ) );
+	END COMPONENT;
+
+------------------------------------------------------
+	COMPONENT dmemory
+	     PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+        		address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+        		write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+        		MemRead, Memwrite 	: IN 	STD_LOGIC;
+				Peripheral 			: IN 	STD_LOGIC;
+        		Clock,reset			: IN 	STD_LOGIC );
+	END COMPONENT;
 		
 		
 		------------------------------------------------------
-		
+COMPONENT MIPS IS
+	GENERIC(ControlBusSize: integer := 8;
+			AddrBusSize	: integer := 32;
+			DataBusSize	: integer := 32
+			) ;
+	PORT(	reset, clock				 : IN  STD_LOGIC; 
+			ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
+			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
+			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
+			-- Output important signals to pins for easy display in Simulator
+			PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
+			Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Branch_out, Zero_out, Memwrite_out, 
+			Regwrite_out					 : OUT 	STD_LOGIC );
+END COMPONENT MIPS;
 		
 		
 		
