@@ -10,6 +10,8 @@ USE altera_mf.altera_mf_components.all;
 USE work.aux_package.ALL;
 
 ENTITY dmemory IS
+	GENERIC (MemWidth 	: INTEGER := 10;
+		SIM 	 	 : boolean :=FALSE);
 	PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         	address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
@@ -18,17 +20,31 @@ ENTITY dmemory IS
 END dmemory;
 
 ARCHITECTURE behavior OF dmemory IS
-SIGNAL write_clock : STD_LOGIC;
+
+SIGNAL write_clock  : STD_LOGIC;
+SIGNAL dMemAddr		: STD_LOGIC_VECTOR(MemWidth-1 DOWNTO 0);
+
 BEGIN
+
+Simulation: 
+		IF (SIM = TRUE) GENERATE
+				dMemAddr <= address(9 DOWNTO 2);
+		END GENERATE Simulation;
+		
+FPGA: 
+		IF (SIM = FALSE) GENERATE
+				dMemAddr <= address(9 DOWNTO 2) & "00";
+		END GENERATE FPGA;
+
 	data_memory : altsyncram
 	GENERIC MAP  (
 		operation_mode => "SINGLE_PORT",
 		width_a => 32,
-		widthad_a => 10,
+		widthad_a => MemWidth,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		--init_file =>"C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\dmemory.hex",
-		init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\dmemory.hex",
+		init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\dmemory.hex",
+		--init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\dmemory.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (

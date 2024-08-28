@@ -4,7 +4,9 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 USE work.aux_package.ALL;
 
 ENTITY MCU IS
-	GENERIC(ControlBusSize: integer := 8;
+	GENERIC(MemWidth 	: INTEGER := 10;
+			SIM 	  : boolean :=FALSE;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -39,7 +41,7 @@ ARCHITECTURE arch OF MCU IS
 BEGIN
 
 
-	cpu: MIPS 	GENERIC map(ControlBusSize, AddrBusSize, DataBusSize)
+	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)
 				PORT map   (reset			=> reset,
 							clock			=> clock,
 							ControlBus		=> ControlBus,

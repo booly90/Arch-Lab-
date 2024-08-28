@@ -9,7 +9,7 @@ package aux_package is
 			DataBusSize	: integer := 32
 			);
 	PORT( 
-		MemRead_Signal				: IN 	STD_LOGIC;
+		MemRead_Signal			: IN 	STD_LOGIC;
 		clock					: IN 	STD_LOGIC;
 		reset					: IN 	STD_LOGIC;
 		MemWrite_Signal			: IN 	STD_LOGIC;
@@ -83,6 +83,9 @@ END COMPONENT;
 		------------------------------------------------------
 		
 		COMPONENT Ifetch
+		GENERIC  (MemWidth 	: INTEGER := 10;
+					 SIM 	 	 : boolean :=FALSE);
+
    	     PORT(	 Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 				 PC_plus_4_out 		: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 				 Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
@@ -98,7 +101,7 @@ END COMPONENT;
 
 ------------------------------------------------------
 	COMPONENT Idecode
- 	     PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+		 PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 			read_data_2		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 			Instruction 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 			read_data 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
@@ -146,18 +149,22 @@ END COMPONENT;
 
 ------------------------------------------------------
 	COMPONENT dmemory
-	     PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+	    GENERIC (MemWidth 	: INTEGER := 10;
+			SIM 	 	 : boolean :=FALSE);
+		PORT(	read_data 			: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         		address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         		write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         		MemRead, Memwrite 	: IN 	STD_LOGIC;
-				Peripheral 			: IN 	STD_LOGIC;
+				--Peripheral 			: IN 	STD_LOGIC;
         		Clock,reset			: IN 	STD_LOGIC );
 	END COMPONENT;
 		
 		
 		------------------------------------------------------
 COMPONENT MIPS IS
-	GENERIC(ControlBusSize: integer := 8;
+	GENERIC(MemWidth 	: INTEGER := 10;
+			SIM 	 	: boolean := FALSE;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			) ;
@@ -177,7 +184,29 @@ END COMPONENT MIPS;
 		
 		------------------------------------------------------
 		
-		
+		COMPONENT MCU IS
+	GENERIC(MemWidth 	: INTEGER := 10;
+			SIM 		: boolean :=FALSE;
+			ControlBusSize: integer := 2;
+			AddrBusSize	: integer := 32;
+			DataBusSize	: integer := 32
+			);
+	PORT( 	reset, clock			: IN 	STD_LOGIC; 
+			SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+			HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX2					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX3					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX4					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX5					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			LEDR					: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
+		-- Output important signals to pins for easy display in Simulator
+		PC								: OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
+     	Instruction_out					: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+		Branch_out, Zero_out, Memwrite_out, 
+		Regwrite_out					: OUT 	STD_LOGIC );
+END COMPONENT MCU;
 		
 		
 		------------------------------------------------------

@@ -10,6 +10,8 @@ LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
 
 ENTITY Ifetch IS
+	GENERIC (MemWidth 	: INTEGER := 10;
+			 SIM 	 	: boolean :=FALSE);
 	PORT(	SIGNAL Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         	SIGNAL PC_plus_4_out 	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	SIGNAL Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
@@ -25,21 +27,33 @@ ENTITY Ifetch IS
 END Ifetch;
 
 ARCHITECTURE behavior OF Ifetch IS
-	SIGNAL PC, PC_plus_4, Mem_Addr 	 	: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+	SIGNAL PC, PC_plus_4 	 	: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+	SIGNAL Mem_Addr 						: STD_LOGIC_VECTOR( MemWidth-1 DOWNTO 0 );
 	SIGNAL next_PC 						: STD_LOGIC_VECTOR( 7 DOWNTO 0 );
 	SIGNAL jump_address					: STD_LOGIC_VECTOR(9 DOWNTO 0 );
 BEGIN
-						--ROM for Instruction Memory
+		
+Simulation:	IF (SIM) GENERATE
+				Mem_Addr <= PC( 9 DOWNTO 2 );
+			END GENERATE simulation;
+		
+		 
+FPGA:		IF (not SIM ) GENERATE
+				Mem_Addr <= PC;
+			END GENERATE FPGA;
+
+
+	--ROM for Instruction Memory
 inst_memory: altsyncram
 	
 	GENERIC MAP (
 		operation_mode => "ROM",
 		width_a => 32,
-		widthad_a => 10,
+		widthad_a => MemWidth,
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
-		--init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
-		init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\program.hex",
+		init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
+		--init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\program.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (
@@ -52,7 +66,7 @@ inst_memory: altsyncram
 		PC_out 			<= PC;
 		PC_plus_4_out 	<= PC_plus_4;
 						-- send address to inst. memory address register
-		Mem_Addr <= Next_PC & "00";
+		
 						-- Adder to increment PC by 4        
       	PC_plus_4( 9 DOWNTO 2 )  <= PC( 9 DOWNTO 2 ) + 1;
        	PC_plus_4( 1 DOWNTO 0 )  <= "00";

@@ -5,7 +5,9 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 USE work.aux_package.ALL;
 
 ENTITY MIPS IS
-	GENERIC(ControlBusSize: integer := 8;
+	GENERIC(MemWidth 	: INTEGER := 10;
+			SIM 	 	 : boolean :=FALSE;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -56,7 +58,7 @@ BEGIN
 
 	read_data <= read_data_temp WHEN ALU_result(11) ='0' ELSE DataBus;
 	
-	DataBus <= read_data_2 when MemWrite = '1' ELSE read_data;  --read_data_2 is the write_data signal for data-memory
+	DataBus <= read_data_2 when (MemWrite = '1'  AND ALU_result(11) = '1') ELSE (others => 'Z');  --read_data_2 is the write_data signal for data-memory
 	AddressBus <= X"00000" & ALU_result (11 DOWNTO 0);
 	ControlBus(0) <= MemRead;
 	ControlBus(1) <= MemWrite;
@@ -73,7 +75,7 @@ BEGIN
    RegWrite_out 	<= RegWrite;
    MemWrite_out 	<= MemWrite;	
 					-- connect the 5 MIPS components   
-  IFE : Ifetch
+  IFE : Ifetch GENERIC map (MemWidth, SIM)
 	PORT MAP (	Instruction 	=> Instruction,
     	    	PC_plus_4_out 	=> PC_plus_4,
 				Add_result 		=> Add_result,
@@ -139,7 +141,7 @@ BEGIN
 				write_data 		=> read_data_2,
 				MemRead 		=> MemReadInt, 
 				Memwrite 		=> MemWriteInt,
-				Peripheral 		=> ALU_result(11),
+				--Peripheral 		=> ALU_result(11),
                 clock 			=> clock,  
 				reset 			=> reset );
 				
