@@ -1,95 +1,86 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
-entity Unsigned_Binary_Divider is
+entity Divider is
     Port (
-        CLK : in STD_LOGIC;
-        RST : in STD_LOGIC;
-        ENA : in STD_LOGIC;
-        DIVCLK : in STD_LOGIC;
-        DIVIDEND : in STD_LOGIC_VECTOR(31 downto 0);
-        DIVISOR : in STD_LOGIC_VECTOR(31 downto 0);
-        QUOTIENT : out STD_LOGIC_VECTOR(31 downto 0);
-        RESIDUE : out STD_LOGIC_VECTOR(31 downto 0);
-        DIVIFG : out STD_LOGIC
+        dividend : in std_logic_vector(31 downto 0);
+        divisor  : in std_logic_vector(31 downto 0);
+        divclk   : in std_logic;
+        rst      : in std_logic;
+        ena      : in std_logic;
+        div_ifg    : out std_logic;
+        result   : out std_logic_vector(31 downto 0);
+        remainder : out std_logic_vector(31 downto 0)
     );
-end Unsigned_Binary_Divider;
+end Divider;
 
-architecture Behavioral of Unsigned_Binary_Divider is
-    signal Dividend_Reg : STD_LOGIC_VECTOR(63 downto 0); -- 64-bit register to hold shifted Dividend
-    signal Divisor_Reg : STD_LOGIC_VECTOR(31 downto 0);
-    signal Quotient_Reg : STD_LOGIC_VECTOR(31 downto 0);
-    signal Residue_Reg : STD_LOGIC_VECTOR(31 downto 0);
-    signal Sub_Result : STD_LOGIC_VECTOR(31 downto 0);
-    signal Counter : integer range 0 to 32 := 0;
-    signal Done : STD_LOGIC := '0';
-
-    type state_type is (Idle, Load, Subtract, Shift, Done_State);
-    signal State : state_type := Idle;
-    
+architecture Behavioral of Divider is
+    signal temp_dividend : std_logic_vector(31 downto 0);
+    signal temp_result   : std_logic_vector(31 downto 0);
+    signal temp_remainder: std_logic_vector(31 downto 0);
+    signal temp_divisor  : std_logic_vector(31 downto 0);
+    signal count         : integer := 0;
+    signal busy          : std_logic := '0';
+	signal monkey_place_holder        : std_logic_vector(31 downto 0);
+	signal toggle		 : std_logic := '0';
 begin
 
-    process(CLK, RST)
-    begin
-        if RST = '1' then
-            State <= Idle;
-            Dividend_Reg <= (others => '0');
-            Divisor_Reg <= (others => '0');
-            Quotient_Reg <= (others => '0');
-            Residue_Reg <= (others => '0');
-            Counter <= 0;
-            Done <= '0';
-        elsif rising_edge(CLK) then
-            case State is
-                when Idle =>
-                    if ENA = '1' then
-                        State <= Load;
-                    end if;
+process(divclk, rst)
+begin
+    if rst = '1' then
+        temp_dividend <= (others => '0');
+        temp_result   <= (others => '0');
+        temp_remainder<= (others => '0');
+        count         <= 0;
+        busy          <= '0';
+		monkey_place_holder <= (others => '0');
+		div_ifg  <= '0';
+    elsif rising_edge(divclk) then
+        if ena = '1' and busy = '0' then
+			-- Initialize for division
+			temp_dividend <= (others => '0');  -- Start with zero
+			temp_divisor  <= divisor;
+			temp_result   <= (others => '0');
+			count         <= 31;  -- Start from the most significant bit
+			busy          <= '1';
+			monkey_place_holder <= (others => '0');
+			toggle <= '1';
+			div_ifg  <= '0';
+        elsif busy = '1' then
+            if count >= 0 then
+                if toggle = '1' then
+					-- Shift temp_dividend left by 1 and bring in the next bit from the dividend
+					monkey_place_holder<= temp_dividend(30 downto 0) & dividend(count);
+					toggle <= '0';
+				else	
+					-- Compare and subtract if temp_dividend >= temp_divisor
+					if unsigned(monkey_place_holder) >= unsigned(temp_divisor) then
+						temp_dividend <= std_logic_vector(unsigned(monkey_place_holder) - unsigned(temp_divisor));
+						temp_result <= temp_result(30 downto 0) & '1';  -- Set the corresponding bit in the result to '1'
+					else
+						temp_result <= temp_result(30 downto 0) & '0';  -- Set the corresponding bit in the result to '0'
+						temp_dividend <= monkey_place_holder;
+					end if;
 
-                when Load =>
-                    Dividend_Reg(63 downto 32) <= DIVIDEND;  -- Load Dividend
-                    Divisor_Reg <= DIVISOR;                  -- Load Divisor
-                    Quotient_Reg <= (others => '0');         -- Reset Quotient
-                    Residue_Reg <= (others => '0');          -- Reset Residue
-                    Counter <= 32;                           -- Set Counter for 32 bits
-                    State <= Subtract;
+					count <= count - 1;
+					toggle <= '1';
+				end if;
+            else
+                busy <= '0';  -- Division completed
+				result <= temp_result;
+				remainder <= temp_dividend;
+				toggle <= '0';
+				div_ifg <= '1';
+			end if;
 
-                when Subtract =>
-                    -- Perform subtraction
-                    if Dividend_Reg(63 downto 32) >= Divisor_Reg then
-                        Sub_Result <= Dividend_Reg(63 downto 32) - Divisor_Reg;
-                        Dividend_Reg(63 downto 32) <= Sub_Result;
-                        Quotient_Reg(Counter-1) <= '1';
-                    else
-                        Quotient_Reg(Counter-1) <= '0';
-                    end if;
-                    State <= Shift;
+		end if;
 
-                when Shift =>
-                    -- Shift the Dividend Register left by 1
-                    Dividend_Reg <= Dividend_Reg(62 downto 0) & '0';
-                    Counter <= Counter - 1;
-                    if Counter = 0 then
-                        State <= Done_State;
-                    else
-                        State <= Subtract;
-                    end if;
+	end if;
 
-                when Done_State =>
-                    Residue_Reg <= Dividend_Reg(63 downto 32);  -- The Residue is the remaining Dividend
-                    Done <= '1';
-                    State <= Idle;
+end process;
 
-                when others =>
-                    State <= Idle;
-            end case;
-        end if;
-    end process;
+-- Output assignments
 
-    -- Output assignments
-    QUOTIENT <= Quotient_Reg;
-    RESIDUE <= Residue_Reg;
-    DIVIFG <= Done;  -- Set DIVIFG when done
+
 end Behavioral;

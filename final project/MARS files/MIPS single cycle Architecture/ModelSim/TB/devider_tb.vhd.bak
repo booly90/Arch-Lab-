@@ -1,0 +1,74 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Divider is
+    Port (
+        clk      : in  std_logic;
+        rst      : in  std_logic;
+        ena      : in  std_logic;
+        divif    : in  std_logic;
+        dividend : in  std_logic_vector(31 downto 0);
+        divisor  : in  std_logic_vector(31 downto 0);
+        quotient : out std_logic_vector(31 downto 0);
+        residue  : out std_logic_vector(31 downto 0)
+    );
+end Divider;
+
+architecture Behavioral of Divider is
+    signal quotient_reg   : std_logic_vector(31 downto 0) := (others => '0');
+    signal residue_reg    : std_logic_vector(31 downto 0) := (others => '0');
+    signal dividend_reg   : std_logic_vector(31 downto 0) := (others => '0');
+    signal divisor_reg    : std_logic_vector(31 downto 0) := (others => '0');
+    signal count          : integer range 0 to 32 := 0;
+    signal busy           : std_logic := '0';
+
+begin
+
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            quotient_reg <= (others => '0');
+            residue_reg  <= (others => '0');
+            dividend_reg <= (others => '0');
+            divisor_reg  <= (others => '0');
+            count        <= 0;
+            busy         <= '0';
+        elsif rising_edge(clk) then
+            if ena = '1' then
+                if divif = '1' and busy = '0' then
+                    -- Load inputs and start division
+                    dividend_reg <= dividend;
+                    divisor_reg  <= divisor;
+                    quotient_reg <= (others => '0');
+                    residue_reg  <= (others => '0');
+                    count        <= 32;
+                    busy         <= '1';
+                elsif busy = '1' then
+                    if count > 0 then
+                        -- Perform division steps
+                        residue_reg <= residue_reg(30 downto 0) & dividend_reg(31);
+                        dividend_reg <= dividend_reg(30 downto 0) & '0';
+
+                        if residue_reg >= divisor_reg then
+                            residue_reg <= residue_reg - divisor_reg;
+                            quotient_reg <= quotient_reg(30 downto 0) & '1';
+                        else
+                            quotient_reg <= quotient_reg(30 downto 0) & '0';
+                        end if;
+
+                        count <= count - 1;
+                    else
+                        busy <= '0';  -- Division completed
+                    end if;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    quotient <= quotient_reg;
+    residue  <= residue_reg;
+
+end Behavioral;
+
