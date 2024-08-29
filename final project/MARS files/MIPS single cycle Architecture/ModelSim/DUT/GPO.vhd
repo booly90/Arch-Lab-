@@ -12,24 +12,26 @@ ENTITY GPO IS
 		reset			: IN 	STD_LOGIC;
 		MemWrite		: IN	STD_LOGIC;
 		ChipSelect		: IN 	STD_LOGIC;
-		Data			: INOUT	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		Data			: INOUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
 		GPOutput		: OUT	STD_LOGIC_VECTOR(IOWidth-1 DOWNTO 0)
 		);
 END GPO;
 ----------------------------
 ARCHITECTURE structure OF GPO IS
 
-
+	SIGNAL Latch_en : STD_LOGIC;
 	SIGNAL Latch_IO	: STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
 	
-	PROCESS(ChipSelect,MemWrite)
+	Latch_en <= MemWrite AND ChipSelect ;
+	
+	PROCESS(ChipSelect,MemWrite,reset)
 	BEGIN
 	IF (reset = '1') THEN
 		Latch_IO	<= X"00";
 	ELSE
-		IF (MemWrite = '1' AND ChipSelect = '1') THEN
-			Latch_IO <= Data(7 DOWNTO 0);
+		IF (Latch_en = '1')	 THEN
+			Latch_IO <= Data;
 		END IF;
 	END IF;
 	END PROCESS;
@@ -37,7 +39,7 @@ BEGIN
 	---
 
 	-- read bus Tri-State controller
-	Data	<=	X"000000" & Latch_IO WHEN (MemRead = '1' AND ChipSelect = '1') 	ELSE (others => 'Z'); 
+	Data	<=	Latch_IO WHEN (MemRead = '1' AND ChipSelect = '1') 	ELSE (others => 'Z'); 
 
 	
 	-- for HEX Outputs

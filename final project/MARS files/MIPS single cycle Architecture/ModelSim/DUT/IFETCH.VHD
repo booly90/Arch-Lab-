@@ -40,7 +40,7 @@ Simulation:	IF (SIM) GENERATE
 		
 		 
 FPGA:		IF (not SIM ) GENERATE
-				Mem_Addr <= Next_PC;
+				Mem_Addr <= Next_PC & "00";
 			END GENERATE FPGA;
 
 

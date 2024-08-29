@@ -70,9 +70,9 @@ BEGIN
 									 IOWidth 	=> 7)
 						port map   (MemRead 	=> MemRead_notgated,
 									reset		=> reset,
-									MemWrite	=> MemWrite_Signal,
+										MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX0,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> HEX0);
 		
 -------------------HEX1--------------------------------------------
@@ -83,7 +83,7 @@ BEGIN
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX1,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> HEX1);
 
 -------------------HEX2--------------------------------------------
@@ -94,7 +94,7 @@ BEGIN
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX2,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> HEX2);
 		
 -------------------HEX3--------------------------------------------
@@ -104,9 +104,9 @@ BEGIN
 						port map   (MemRead 	=> MemWrite_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
-									ChipSelect	=> CS_HEX1,
-									Data		=> DataBus,
-									GPOutput	=> HEX1);
+									ChipSelect	=> CS_HEX3,
+									Data		=> DataBus(7 downto 0),
+									GPOutput	=> HEX3);
 
 -------------------HEX4--------------------------------------------
 		
@@ -116,7 +116,7 @@ BEGIN
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX4,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> HEX4);
 		
 -------------------HEX5--------------------------------------------
@@ -127,7 +127,7 @@ BEGIN
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX5,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> HEX5);
 
 -------------------LEDR--------------------------------------------
@@ -138,7 +138,7 @@ BEGIN
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_LEDR,
-									Data		=> DataBus,
+									Data		=> DataBus(7 downto 0),
 									GPOutput	=> LEDR);
 									
 -------------------SW--------------------------------------------
@@ -146,7 +146,7 @@ BEGIN
 		SW_inst:  GPI   generic map(DataBusSize => DataBusSize)
 						port map   (MemRead  	=> MemRead_Signal,
 									ChipSelect 	=> CS_SW,
-									Data 		=> DataBus,
+									Data		=> DataBus,
 									GPInput		=> SW);
 END dfl;
 
