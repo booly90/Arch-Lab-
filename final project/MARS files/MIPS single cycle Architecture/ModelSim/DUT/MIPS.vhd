@@ -136,6 +136,7 @@ BEGIN
 				Opcode 			=> Instruction( 31 DOWNTO 26 ));
 
    MEM:  dmemory
+	GENERIC MAP(MemWidth => MemWidth, SIM => SIM) 
 	PORT MAP (	read_data 		=> read_data_temp,
 				address 		=> address,--jump memory address by 4
 				write_data 		=> read_data_2,

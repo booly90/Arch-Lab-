@@ -28,7 +28,7 @@ BEGIN
 
 Simulation: 
 		IF (SIM = TRUE) GENERATE
-				dMemAddr <= address(9 DOWNTO 2);
+				dMemAddr <= address(9 DOWNTO 2);-- + 1;
 		END GENERATE Simulation;
 		
 FPGA: 
@@ -50,7 +50,7 @@ FPGA:
 	PORT MAP (
 		wren_a => memwrite,
 		clock0 => write_clock,
-		address_a => address,
+		address_a => dMemAddr,
 		data_a => write_data,
 		q_a => read_data	);
 -- Load memory address register with write clock
