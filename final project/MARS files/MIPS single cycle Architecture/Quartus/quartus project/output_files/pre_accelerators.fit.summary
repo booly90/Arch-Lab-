@@ -1,13 +1,13 @@
-Fitter Status : Successful - Wed Aug 28 11:39:25 2024
+Fitter Status : Successful - Thu Aug 29 18:44:49 2024
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : pre_accelerators
-Top-level Entity Name : MIPS
+Top-level Entity Name : MCU
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 1,177 / 41,910 ( 3 % )
+Logic utilization (in ALMs) : 1,264 / 41,910 ( 3 % )
 Total registers : 1000
-Total pins : 176 / 499 ( 35 % )
+Total pins : 234 / 499 ( 47 % )
 Total virtual pins : 0
 Total block memory bits : 65,536 / 5,662,720 ( 1 % )
 Total RAM Blocks : 8 / 553 ( 1 % )

@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Wed Aug 28 11:38:16 2024
+Analysis & Synthesis Status : Successful - Thu Aug 29 18:33:20 2024
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : pre_accelerators
-Top-level Entity Name : MIPS
+Top-level Entity Name : MCU
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
 Total registers : 1000
-Total pins : 176
+Total pins : 234
 Total virtual pins : 0
 Total block memory bits : 65,536
 Total DSP Blocks : 2
