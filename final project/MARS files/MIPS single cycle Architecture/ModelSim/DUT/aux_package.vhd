@@ -191,7 +191,7 @@ END COMPONENT MIPS;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT( 	reset, clock			: IN 	STD_LOGIC; 
+	PORT( 	reset, clock_outer			: IN 	STD_LOGIC; 
 			SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
 			HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -210,7 +210,14 @@ END COMPONENT MCU;
 		
 		
 		------------------------------------------------------
-		
+		component pll is
+	port (
+		locked   : out std_logic;        --  locked.export
+		outclk_0 : out std_logic;        -- outclk0.clk
+		refclk   : in  std_logic := '0'; --  refclk.clk
+		rst      : in  std_logic := '0'  --   reset.reset
+	);
+	end COMPONENT;
 		
 		
 		

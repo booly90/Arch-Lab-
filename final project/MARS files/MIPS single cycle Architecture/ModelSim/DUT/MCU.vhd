@@ -10,7 +10,7 @@ ENTITY MCU IS
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT( 	reset, clock			: IN 	STD_LOGIC; 
+	PORT( 	reset, clock_outer		: IN 	STD_LOGIC; 
 			SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
 			HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -31,7 +31,7 @@ ARCHITECTURE arch OF MCU IS
 		SIGNAL ControlBus	        : STD_LOGIC_VECTOR (ControlBusSize-1 DOWNTO 0);
 		SIGNAL DataBus		        : STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
 		SIGNAL AddressBus           : STD_LOGIC_VECTOR (AddrBusSize-1    DOWNTO 0);
-		--SIGNAL            : STD_LOGIC;
+		SIGNAL clock	            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
@@ -40,7 +40,17 @@ ARCHITECTURE arch OF MCU IS
 		--SIGNAL            : STD_LOGIC;
 BEGIN
 
-
+--Simulation:	IF (SIM) GENERATE
+				clock <= clock_outer;
+--			END GENERATE simulation;
+--		
+--		 
+--FPGA:		IF (not SIM ) GENERATE
+--				clock <= pll_clock;
+--			END GENERATE FPGA;
+			
+			
+			
 	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)
 				PORT map   (reset			=> reset,
 							clock			=> clock,
