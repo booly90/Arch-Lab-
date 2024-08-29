@@ -72,7 +72,7 @@ BEGIN
       mw_U_1pulse <= 
          '0',
          '1' AFTER 20 ns,
-         '0' AFTER 100 ns;
+         '0' AFTER 120 ns;
       WAIT;
     END PROCESS u_1pulse_proc;
 

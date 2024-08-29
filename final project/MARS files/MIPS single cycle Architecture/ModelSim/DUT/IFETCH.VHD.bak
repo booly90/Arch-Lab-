@@ -35,12 +35,12 @@ ARCHITECTURE behavior OF Ifetch IS
 BEGIN
 		
 Simulation:	IF (SIM) GENERATE
-				Mem_Addr <= Next_PC;
+				Mem_Addr <= PC( 9 DOWNTO 2 );
 			END GENERATE simulation;
 		
 		 
 FPGA:		IF (not SIM ) GENERATE
-				Mem_Addr <= Next_PC;
+				Mem_Addr <= PC;
 			END GENERATE FPGA;
 
 
@@ -58,8 +58,8 @@ inst_memory: altsyncram
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (
-		clock0     =>  (clock),
-		address_a 	=> Mem_Addr  , 
+		clock0     => clock,
+		address_a 	=> Mem_Addr, 
 		q_a 			=> Instruction );
 					-- Instructions always start on word address - not byte
 		PC(1 DOWNTO 0) <= "00";
@@ -75,7 +75,7 @@ inst_memory: altsyncram
 						-- Calculate jump adress using pc and Instruction
 		jump_address <= Instruction(7 DOWNTO 0) & "00" ;
 						-- Mux to select Branch Address or PC + 4        
-		Next_PC  <= "00000000"   		WHEN Reset = '1'  ELSE                        
+		Next_PC  <= X"00"   		WHEN Reset = '1' ELSE                        
 					R_data1(9 DOWNTO 2)			WHEN Jr = '1' 	 ELSE
 					jump_address( 9 DOWNTO 2)	WHEN jump='1'    ELSE
 					Add_result  	WHEN ( (( BranchNe = '1' ) AND ( Zero = '0' )) 
@@ -89,10 +89,12 @@ inst_memory: altsyncram
 			WAIT UNTIL ( clock'EVENT ) AND ( clock = '1' );
 			IF reset = '1' THEN
 				   PC( 9 DOWNTO 2) <= "00000000" ; 
-
-				   
-			else
+				   hold <= '1';
+			elsif hold = '0'
 				   PC( 9 DOWNTO 2 ) <= next_PC;
+
+			else
+				hold <= '0';
 			END IF;
 	END PROCESS;
 END behavior;
