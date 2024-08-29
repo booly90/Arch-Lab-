@@ -51,7 +51,6 @@ begin
         -- Reset the system
         rst <= '1';
         ena <= '0';
-        ena <= '0';
         wait for 20 ns;
         rst <= '0';
         wait for 20 ns;
@@ -59,7 +58,6 @@ begin
         -- Test case 1: 100 / 5 = 20, remainder = 0
         dividend <= "00000000000000000000000001100100"; -- 100
         divisor <= "00000000000000000000000000000101";  -- 5
-        ena <= '1';
         ena <= '1';
         wait for 20 ns;
         ena <= '0';
