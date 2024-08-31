@@ -69,7 +69,7 @@ PROCESS
 					-- use loop to automatically generate reset logic 
 					-- for all registers
 			FOR i IN 0 TO 31 LOOP
-				register_array(i) <= CONV_STD_LOGIC_VECTOR( i, 32 );
+				register_array(i) <= CONV_STD_LOGIC_VECTOR( 0, 32 );
  			END LOOP;
 					-- Write back to register - don't write to register 0
   		ELSIF RegWrite = '1' AND write_register_address /= 0 THEN

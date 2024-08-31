@@ -20,7 +20,10 @@ ENTITY MIPS IS
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
      	Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 		Branch_out, Zero_out, Memwrite_out, 
-		Regwrite_out					 : OUT 	STD_LOGIC );
+		Regwrite_out					 : OUT 	STD_LOGIC ;
+		Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+		Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+
 END 	MIPS;
 
 ARCHITECTURE structure OF MIPS IS
@@ -74,6 +77,7 @@ BEGIN
    Zero_out 		<= Zero;
    RegWrite_out 	<= RegWrite;
    MemWrite_out 	<= MemWrite;	
+   
 					-- connect the 5 MIPS components   
   IFE : Ifetch GENERIC map (MemWidth, SIM)
 	PORT MAP (	Instruction 	=> Instruction,
@@ -87,7 +91,8 @@ BEGIN
 				Jump			=> Jump,
 				R_data1			=> read_data_1,
 				clock 			=> clock,  
-				reset 			=> reset );
+				reset 			=> reset,
+				Next_PC_out		=> Next_PC_out);
 
    ID : Idecode
    	PORT MAP (	read_data_1 	=> read_data_1,
@@ -133,7 +138,9 @@ BEGIN
 				PC_plus_4		=> PC_plus_4,
                 Clock			=> clock,
 				Reset			=> reset ,
-				Opcode 			=> Instruction( 31 DOWNTO 26 ));
+				Opcode 			=> Instruction( 31 DOWNTO 26 ),
+				Ainput_out		=> Ainput_out,
+				Binput_out		=> Binput_out);
 
    MEM:  dmemory
 	GENERIC MAP(MemWidth => MemWidth, SIM => SIM) 

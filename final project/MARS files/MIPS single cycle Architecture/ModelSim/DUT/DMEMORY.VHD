@@ -41,6 +41,8 @@ FPGA:
 		operation_mode => "SINGLE_PORT",
 		width_a => 32,
 		widthad_a => MemWidth,
+		numwords_a => 1024,
+		lpm_hint => "ENABLE_RUNTIME_MOD = YES,INSTANCE_NAME = DTCM",
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
 		init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\dmemory.hex",

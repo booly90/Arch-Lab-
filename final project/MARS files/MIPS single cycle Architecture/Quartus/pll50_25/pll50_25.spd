@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="simulation/submodules/pll50_25_pll_0.vho"
+   type="VHDL"
+   library="pll_0" />
+ <file path="simulation/pll50_25.vhd" type="VHDL" />
+ <topLevel name="pll50_25" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

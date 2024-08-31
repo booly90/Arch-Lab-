@@ -10,21 +10,25 @@ ENTITY MCU IS
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT( 	reset, clock_outer		: IN 	STD_LOGIC; 
-			SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-			HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			HEX2					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			HEX3					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			HEX4					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			HEX5					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			LEDR					: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	PORT( 	reset, PIN_AF14				: IN 	STD_LOGIC; --pin af14 is clock input
+			--SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+			--HEX0						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			--HEX1						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			--HEX2						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			--HEX3						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			--HEX4						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX5						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			LEDR						: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
 		-- Output important signals to pins for easy display in Simulator
 		PC								: OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
      	Instruction_out					: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 		Branch_out, Zero_out, Memwrite_out, 
-		Regwrite_out					: OUT 	STD_LOGIC );
+		Regwrite_out					: OUT 	STD_LOGIC;
+		Next_PC_out          			: OUT STD_LOGIC_VECTOR (7			     DOWNTO 0);
+		Ainput_out, Binput_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		pll_clock_out					:OUT STD_LOGIC		);
+		
 END MCU;
 
 ARCHITECTURE arch OF MCU IS
@@ -32,7 +36,9 @@ ARCHITECTURE arch OF MCU IS
 		SIGNAL DataBus		        : STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
 		SIGNAL AddressBus           : STD_LOGIC_VECTOR (AddrBusSize-1    DOWNTO 0);
 		SIGNAL clock	            : STD_LOGIC;
-		--SIGNAL            : STD_LOGIC;
+		signal HEX0,HEX1,HEX2,HEX3,HEX4 : STD_LOGIC_VECTOR (6 DOWNTO 0);
+		signal SW 					: STD_LOGIC_VECTOR (7 DOWNTO 0);
+		SIGNAL pll_clock           : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
@@ -40,15 +46,23 @@ ARCHITECTURE arch OF MCU IS
 		--SIGNAL            : STD_LOGIC;
 BEGIN
 
---Simulation:	IF (SIM) GENERATE
-				clock <= clock_outer;
+--Simulation :	IF (SIM) GENERATE
+				clock <= PIN_AF14;
+				pll_clock_out <= PIN_AF14;
 --			END GENERATE simulation;
 --		
 --		 
---FPGA:		IF (not SIM ) GENERATE
+--FPGA :		IF (not SIM ) GENERATE
 --				clock <= pll_clock;
+--				pll_clock_out <= pll_clock;
 --			END GENERATE FPGA;
-			
+--	pll0:
+--	pll50_25 port map(
+--	
+--		outclk_0 	=> pll_clock   ,
+--		refclk   	=> PIN_AF14   ,
+--		rst      	=> reset   
+--	);		
 			
 			
 	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)
@@ -66,7 +80,10 @@ BEGIN
 							Branch_out		=> Branch_out,
 							Zero_out		=> Zero_out,
 							Memwrite_out	=> Memwrite_out,
-							Regwrite_out	=> Regwrite_out
+							Regwrite_out	=> Regwrite_out,
+							Next_PC_out 	=> Next_PC_out,
+							Ainput_out		=> Ainput_out,
+							Binput_out		=> Binput_out
 							);
 							
 	GPIO: GPIO_handler 	GENERIC map(AddrBusSize, DataBusSize)
@@ -85,7 +102,7 @@ BEGIN
 									LEDR			=> LEDR,
 									SW				=> SW
 								);
-							
+			
 							
 							
 END arch;
