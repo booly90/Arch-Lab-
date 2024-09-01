@@ -66,12 +66,12 @@ inst_memory: altsyncram
 		lpm_type => "altsyncram",
 		outdata_reg_a => "UNREGISTERED",
 		--init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
-		init_file => "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\program.hex",
+		init_file => "C:\Users\user\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\ModelSim\L1_Caches\our tests\ITCM.hex",
 		--init_file =>"C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\asm code\program.hex",
 		intended_device_family => "Cyclone"
 	)
 	PORT MAP (
-		clock0     =>  (clock_if),
+		clock0     =>  (clock),
 		address_a 	=> Mem_Addr  , 
 		q_a 			=> Instruction );
 		

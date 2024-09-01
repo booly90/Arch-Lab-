@@ -197,7 +197,7 @@ END COMPONENT MIPS;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT( 	reset, clock_outer			: IN 	STD_LOGIC; 
+	PORT( 	reset, PIN_AF14			: IN 	STD_LOGIC; 
 			--SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
 			--HEX0					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			--HEX1					: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);

@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sat Aug 31 17:26:43 2024
+Analysis & Synthesis Status : Successful - Sun Sep  1 12:12:10 2024
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : pre_accelerators
 Top-level Entity Name : MCU
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 5816
+Total registers : 6657
 Total pins : 264
 Total virtual pins : 0
-Total block memory bits : 1,490,944
+Total block memory bits : 1,753,088
 Total DSP Blocks : 2
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
