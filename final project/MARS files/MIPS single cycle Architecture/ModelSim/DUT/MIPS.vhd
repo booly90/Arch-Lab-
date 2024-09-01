@@ -11,10 +11,10 @@ ENTITY MIPS IS
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT(	reset, clock				 : IN  STD_LOGIC; 
-			ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
-			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
-			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
+	PORT(	reset_n, PIN_AF14				 : IN  STD_LOGIC; 
+			--****ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
+			--****DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
+			--****AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
 		-- Output important signals to pins for easy display in Simulator
 		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
@@ -57,14 +57,21 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL address     		: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 	SIGNAL MemReadInt  		: STD_LOGIC;
 	SIGNAL MemWriteInt 		: STD_LOGIC;
+	signal reset,clock		: STD_LOGIC;
 BEGIN
 
-	read_data <= read_data_temp WHEN ALU_result(11) ='0' ELSE DataBus;
+
 	
-	DataBus <= read_data_2 when (MemWrite = '1'  AND ALU_result(11) = '1') ELSE (others => 'Z');  --read_data_2 is the write_data signal for data-memory
-	AddressBus <= X"00000" & ALU_result (11 DOWNTO 0);
-	ControlBus(0) <= MemRead;
-	ControlBus(1) <= MemWrite;
+---  every comment containing **** should be removed once design works on FPGA with MIPS as top [YL 31.8]
+
+	read_data <= read_data_temp; --**** WHEN ALU_result(11) ='0' ELSE DataBus;
+	
+	clock <= PIN_AF14;
+	reset <= not reset_n;
+	--****DataBus <= read_data_2 when (MemWrite = '1'  AND ALU_result(11) = '1') ELSE (others => 'Z');  --read_data_2 is the write_data signal for data-memory
+	--****AddressBus <= X"00000" & ALU_result (11 DOWNTO 0);
+	--****ControlBus(0) <= MemRead;
+	--****ControlBus(1) <= MemWrite;
 	
 					-- copy important signals to output pins for easy 
 					-- display in Simulator
@@ -77,6 +84,12 @@ BEGIN
    Zero_out 		<= Zero;
    RegWrite_out 	<= RegWrite;
    MemWrite_out 	<= MemWrite;	
+   ------------------------------------------------------------------------------------
+   
+    
+	address     <=  ALU_Result (9 DOWNTO 2) & "00"	;
+	MemReadInt  <= (MemRead AND (NOT ALU_result(11)));
+	MemWriteInt  <= (MemWrite AND (NOT ALU_result(11)));
    
 					-- connect the 5 MIPS components   
   IFE : Ifetch GENERIC map (MemWidth, SIM)
@@ -153,8 +166,6 @@ BEGIN
                 clock 			=> clock,  
 				reset 			=> reset );
 				
-	address     <=  ALU_Result (9 DOWNTO 2) & "00"	;
-	MemReadInt  <= (MemRead AND (NOT ALU_result(11)));
-	MemWriteInt  <= (MemWrite AND (NOT ALU_result(11)));
+	
 END structure;
 

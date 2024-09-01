@@ -16,7 +16,8 @@ ENTITY Execute IS
             Add_Result      : OUT   STD_LOGIC_VECTOR( 7 DOWNTO 0 );
             PC_plus_4       : IN    STD_LOGIC_VECTOR( 9 DOWNTO 0 );
             clock, reset    : IN    STD_LOGIC ;
-            opcode          : IN    STD_LOGIC_VECTOR( 5 DOWNTO 0 )
+            opcode          : IN    STD_LOGIC_VECTOR( 5 DOWNTO 0 );
+			Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
             );
 END Execute;
 
@@ -30,6 +31,9 @@ BEGIN
     Ainput <=  Read_data_2 when (ALU_ctl = "0101" or ALU_ctl = "0110") else Read_data_1; 
     Binput <= Read_data_2 WHEN (ALUSrc = '0') ELSE Sign_extend;
 
+	Ainput_out <= Ainput;
+	Binput_out <= Binput;
+	
     -- Generate ALU control bits
     PROCESS(opcode, Function_opcode)
     BEGIN
