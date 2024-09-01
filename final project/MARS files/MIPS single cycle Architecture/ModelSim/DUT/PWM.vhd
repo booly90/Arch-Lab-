@@ -43,28 +43,6 @@ BEGIN
 
     process(CLK, RST, btssel)
     begin
-	--creating mclk/2, mclk/4, mclk/8
---		if rising_edge(clk) or falling_edge(clk) then
---			if old_btssel /= btssel then
---				btssel_changed <= '1';
---				if clk ='1' then
---					select_counter <= '1';
---				ELSE
---					select_counter <= '0';
---				end if;
---			ELSE
---				btssel_changed <= '0';
---			end if;
---			old_btssel <= btssel;
---		end if;
-		
---		if rising_edge(BTSSEL(0)) or rising_edge(BTSSEL(1)) then
---			if clk = '1' then
---				select_counter <= '1';
---			ELSE
---				select_counter <= '0';
---			end if;
---		end if;
 		
 		if unsigned (BTSSEL) = 0 then
 			CHOSEN_CLK <= clk;
