@@ -1040,15 +1040,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "pll_clock_out",
-					"strict" : false
-				},
-				{
-					"name" : "reset",
-					"strict" : false
-				},
-				{
-					"name" : "PIN_AF14",
+					"name" : "reset_n",
 					"strict" : false
 				}
 			]

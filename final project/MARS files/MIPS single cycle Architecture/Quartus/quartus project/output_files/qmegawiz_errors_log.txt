@@ -1,0 +1,31 @@
+
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 03PM:01:19>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 03PM:01:20>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 03PM:01:21>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 03PM:01:28>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 04PM:27:19>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/user/Documents/GitHub/Arch-Lab-/final project/MARS files/MIPS single cycle Architecture/Quartus/new pll/pll.vhd
+
+Sep 01 04PM:29:51>: Megafunction PLL Intel FPGA IP v21.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted

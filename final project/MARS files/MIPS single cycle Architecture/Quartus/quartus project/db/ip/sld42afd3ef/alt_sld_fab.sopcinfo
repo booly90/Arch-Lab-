@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="alt_sld_fab" kind="alt_sld_fab" version="1.0" fabric="QSYS">
  <!-- Format version 21.1 842 (Future versions may contain additional information.) -->
- <!-- 2024.08.31.18:02:22 -->
+ <!-- 2024.09.01.16:33:21 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_DEVICE_FAMILY">
   <type>java.lang.String</type>
@@ -50,13 +50,13 @@
  <module
    name="alt_sld_fab"
    kind="alt_sld_fab"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>bdf5243258fdd8d97486</value>
+   <value>ea998861a9dc432b1cb5</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -104,7 +104,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="EP_INFOS">
    <type>java.lang.String</type>
-   <value>{hpath {MIPS:cpu|Ifetch:IFE|altsyncram:inst_memory|altsyncram_jqe4:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {MIPS:cpu|dmemory:MEM|altsyncram:data_memory|altsyncram_1ug4:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {sld_signaltap:auto_signaltap_0} } </value>
+   <value>{hpath {MIPS:cpu|Ifetch:IFE|altsyncram:inst_memory|altsyncram_gde4:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {MIPS:cpu|dmemory:MEM|altsyncram:data_memory|altsyncram_9rg4:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {sld_signaltap:auto_signaltap_0} } </value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -303,7 +303,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_presplit"
    kind="altera_super_splitter"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab.presplit">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -481,7 +481,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_splitter"
    kind="altera_sld_splitter"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab.splitter">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -1352,7 +1352,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_jtagpins"
    kind="altera_jtag_pins_bridge"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab.jtagpins">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -1583,7 +1583,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_sldfabric"
    kind="altera_sld_jtag_hub"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab.sldfabric">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -2729,13 +2729,13 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_ident"
    kind="altera_connection_identification_hub"
-   version="22.1"
+   version="21.1"
    path="alt_sld_fab.ident">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>bdf5243258fdd8d97486</value>
+   <value>ea998861a9dc432b1cb5</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3347,7 +3347,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Top level generated instrumentation fabric</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>16</instanceCount>
@@ -3363,7 +3363,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Splitter for debug fabric</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -3371,7 +3371,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Splitter for debug fabric</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>4</instanceCount>
@@ -3387,7 +3387,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>altera_jtag_pins_bridge</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>4</instanceCount>
@@ -3403,7 +3403,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Altera SLD JTAG Hub</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -3411,7 +3411,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Connection identification hub</displayName>
-  <version>22.1</version>
+  <version>21.1</version>
  </plugin>
  <plugin>
   <instanceCount>6</instanceCount>

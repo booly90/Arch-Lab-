@@ -10,7 +10,7 @@ ENTITY MCU IS
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
-	PORT( 	reset, PIN_AF14				: IN 	STD_LOGIC; --pin af14 is clock input
+	PORT( 	reset_n, PIN_AF14				: IN 	STD_LOGIC; --pin af14 is clock input
 			--SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
 			--HEX0						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			--HEX1						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -39,7 +39,7 @@ ARCHITECTURE arch OF MCU IS
 		signal HEX0,HEX1,HEX2,HEX3,HEX4 : STD_LOGIC_VECTOR (6 DOWNTO 0);
 		signal SW 					: STD_LOGIC_VECTOR (7 DOWNTO 0);
 		SIGNAL pll_clock           : STD_LOGIC;
-		signal reset_n             :  STD_LOGIC;
+		signal reset             :  STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
@@ -50,24 +50,24 @@ BEGIN
 --Simulation :	IF (SIM) GENERATE
 				clock <= PIN_AF14;
 				pll_clock_out <= PIN_AF14;
---			END GENERATE simulation;
---		
---		 
---FPGA :		IF (not SIM ) GENERATE
---				clock <= pll_clock;
---				pll_clock_out <= pll_clock;
---			END GENERATE FPGA;
---	pll0:
---	pll50_25 port map(
---	
---		outclk_0 	=> pll_clock   ,
---		refclk   	=> PIN_AF14   ,
---		rst      	=> reset   
---	);		
-			reset_n <= not(reset);
+			END GENERATE simulation;
+		
+		 
+FPGA :		IF (not SIM ) GENERATE
+				clock <= pll_clock;
+				pll_clock_out <= pll_clock;
+			END GENERATE FPGA;
+	pll0:
+	pll50_25 port map(
+	
+		outclk_0 	=> pll_clock   ,
+		refclk   	=> PIN_AF14   ,
+		rst      	=> reset   
+	);		
+			reset <= not(reset_n);
 			
 	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)
-				PORT map   (reset			=> reset_n,
+				PORT map   (reset			=> reset,
 							clock			=> clock,
 							ControlBus		=> ControlBus,
 							DataBus			=> DataBus,
@@ -90,7 +90,7 @@ BEGIN
 	GPIO: GPIO_handler 	GENERIC map(AddrBusSize, DataBusSize)
 						PORT    map(MemRead_Signal 	=> ControlBus(0),
 									clock			=> clock,
-									reset			=> reset_n,
+									reset			=> reset,
 									MemWrite_Signal => ControlBus(1),
 									AddressBus		=> AddressBus,
 									DataBus			=> DataBus,

@@ -164,26 +164,27 @@ END COMPONENT;
 		
 		------------------------------------------------------
 COMPONENT MIPS IS
-		GENERIC(MemWidth 	: INTEGER := 10;
-			SIM 	 	 : boolean :=FALSE;
+	GENERIC(MemWidth 	: INTEGER := 10;
+			SIM 	 	: boolean := FALSE;
 			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
-			);
-	PORT(	reset_n, clock				 : IN  STD_LOGIC; 
-			--****ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
-			--****DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
-			--****AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
-		-- Output important signals to pins for easy display in Simulator
-		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
-     	Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-		Branch_out, Zero_out, Memwrite_out, 
-		Regwrite_out					 : OUT 	STD_LOGIC ;
-		Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-		Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+			) ;
+	PORT(	reset, clock				 : IN  STD_LOGIC; 
+			ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
+			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
+			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
+			-- Output important signals to pins for easy display in Simulator
+			PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
+			Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Branch_out, Zero_out, Memwrite_out, 
+			Regwrite_out					 : OUT 	STD_LOGIC;
+			Next_PC_out			: OUT 	STD_LOGIC_VECTOR( 7 DOWNTO 0);
+			Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0)				
 
-END COMPONENT 	MIPS;
+			);
+END COMPONENT MIPS;
 		
 		
 		
@@ -218,7 +219,7 @@ END COMPONENT MCU;
 		
 		
 		------------------------------------------------------
-	COMPONENT pll50_25 is
+	COMPONENT pll2 is
 	port (
 		locked   : out std_logic;        --  locked.export
 		outclk_0 : out std_logic;        -- outclk0.clk

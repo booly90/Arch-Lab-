@@ -37,16 +37,19 @@ ARCHITECTURE behavior OF Ifetch IS
 	SIGNAL next_PC 						: STD_LOGIC_VECTOR( 7 DOWNTO 0 );
 	SIGNAL jump_address					: STD_LOGIC_VECTOR(9 DOWNTO 0 );
 	signal reset_sample : STD_LOGIC;
+	signal clock_if		: STD_LOGIC;
 	
 BEGIN
 		
 Simulation:	IF (SIM) GENERATE
 				Mem_Addr <= Next_PC;
+				--Mem_Addr <= PC (9 DOWNTO 2);
 			END GENERATE simulation;
 		
 		 
 FPGA:		IF (not SIM ) GENERATE
 				Mem_Addr <= Next_PC & "00";
+				--Mem_Addr <= PC;
 			END GENERATE FPGA;
 
 	Next_PC_out <= Next_PC;
@@ -72,12 +75,13 @@ inst_memory: altsyncram
 		address_a 	=> Mem_Addr  , 
 		q_a 			=> Instruction );
 		
+		clock_if <= not clock;
 					-- Instructions always start on word address - not byte
 		PC(1 DOWNTO 0) <= "00";
 					-- copy output signals - allows read inside module
 		
-		PC_out 			<= PC ;
-		PC_plus_4_out 	<= PC_plus_4 ;
+			PC_out 			<= PC ;
+			PC_plus_4_out 	<= PC_plus_4 ;
 						-- send address to inst. memory address register
 		
 						-- Adder to increment PC by 4        
