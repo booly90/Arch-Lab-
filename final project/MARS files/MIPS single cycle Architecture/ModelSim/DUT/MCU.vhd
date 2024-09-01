@@ -40,6 +40,7 @@ ARCHITECTURE arch OF MCU IS
 		signal SW 					: STD_LOGIC_VECTOR (7 DOWNTO 0);
 		SIGNAL pll_clock           : STD_LOGIC;
 		signal reset             :  STD_LOGIC;
+		signal locked            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
@@ -47,23 +48,22 @@ ARCHITECTURE arch OF MCU IS
 		--SIGNAL            : STD_LOGIC;
 BEGIN
 
---Simulation :	IF (SIM) GENERATE
+Simulation :	IF (SIM) GENERATE
 				clock <= PIN_AF14;
 				pll_clock_out <= PIN_AF14;
---			END GENERATE simulation;
---		
---		 
---FPGA :		IF (not SIM ) GENERATE
---				clock <= pll_clock;
---				pll_clock_out <= pll_clock;
---			END GENERATE FPGA;
---	pll0:
---	pll50_25 port map(
---	
---		outclk_0 	=> pll_clock   ,
---		refclk   	=> PIN_AF14   ,
---		rst      	=> reset   
---	);		
+			END GENERATE simulation;
+		
+		 
+FPGA :		IF (not SIM ) GENERATE
+				clock <= pll_clock;
+				pll_clock_out <= pll_clock;
+			END GENERATE FPGA;
+	pll0:
+	pll2 port map(
+		refclk   	=> PIN_AF14   ,
+		outclk_0 	=> pll_clock   
+
+	);		
 			reset <= not(reset_n);
 			
 	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)

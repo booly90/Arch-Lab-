@@ -37,7 +37,7 @@ set_time_format -unit ns -decimal_places 3
 #**************************************************************
 # Create Clock
 #**************************************************************
-create_clock -name {MAIN_clock} -period 40.000 [get_ports PIN_AF14] 
+create_clock -name {MAIN_clock} -period 20.000 [get_ports PIN_AF14] 
 
 derive_pll_clocks
 

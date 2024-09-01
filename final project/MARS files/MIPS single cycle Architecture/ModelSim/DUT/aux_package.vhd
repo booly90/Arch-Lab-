@@ -219,7 +219,7 @@ END COMPONENT MCU;
 		
 		
 		------------------------------------------------------
-	COMPONENT pll50_25 is
+	COMPONENT pll2 is
 	port (
 		locked   : out std_logic;        --  locked.export
 		outclk_0 : out std_logic;        -- outclk0.clk
