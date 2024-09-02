@@ -48,11 +48,13 @@ BEGIN
                 WHEN "000000" => ALU_ctl <= "0101"; -- SLL
                 WHEN "000010" => ALU_ctl <= "0110"; -- SRL
                 WHEN "001000" => ALU_ctl <= "0111"; -- JR
-				when "100001" => ALU_ctl <= "1011"; --MOVE
 
 				
                 WHEN OTHERS   => ALU_ctl <= "0000"; -- Default
             END CASE;
+		ELSIF opcode = "000000" AND Function_opcode = "100001" THEN
+			ALU_ctl <= "0000";
+			Binput <= X"0000";
         ELSIF opcode = "001000" THEN -- ADDI
             ALU_ctl <= "0000";
         ELSIF opcode = "001100" THEN -- ANDI
@@ -106,7 +108,7 @@ BEGIN
                 product := signed(Ainput) * signed(Binput); -- MULT
                 ALU_output_mux <= std_logic_vector(product(31 DOWNTO 0)); -- Lower 32 bits of product
             when "1001" => ALU_output_mux <= Binput (15 downto 0) & X"0000"; --LUI
-			when "1011" => ALU_output_mux <= std_logic_vector(unsigned(Ainput) + unsigned(Binput));
+			
 			WHEN OTHERS => ALU_output_mux <= X"00000000"; -- Default
 			
         END CASE;

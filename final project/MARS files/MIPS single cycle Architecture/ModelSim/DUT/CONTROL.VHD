@@ -27,8 +27,8 @@ ENTITY control IS
 END control;
 
 ARCHITECTURE behavior OF control IS
-
-	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire,Jal	: STD_LOGIC;
+	
+	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire,Jal,jal_27	: STD_LOGIC;
 	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui,shift	: STD_LOGIC;
 
 BEGIN           
@@ -45,18 +45,19 @@ BEGIN
 	Xori		<=  '1' WHEN Opcode = "001110" ELSE '0';
 	Lui			<=	'1' WHEN Opcode = "001111" ELSE '0';
 	Jal      	<=	'1' WHEN Opcode = "000011" ELSE '0';
-	Jump		<=	'1' WHEN Opcode = "000010" OR Opcode = "000011" OR (Opcode = "000000" AND Funct = "001000") ELSE '0';
+	Jump		<=	'1' WHEN Opcode = "000010" OR Opcode = "000011" 
+					OR (Opcode = "000000" AND Funct = "001000") ELSE '0';
 	Shift		<=  '1' WHEN Opcode = "000000" AND (Funct = "000000" OR Funct = "000010") ELSE '0';
 	Jr_wire     <=  '1' WHEN Opcode = "000000" AND Funct = "001000"  ELSE '0';
+	Jal_27     	<=	'1' WHEN Opcode = "111111" ELSE '0';
 	
 	
-	
-  	RegDst(0)    	<=  R_format ;
-	RegDst(1)    	<=  Jal;
+  	RegDst(0)    	<=  R_format or jal_27 ;
+	RegDst(1)    	<=  Jal or jal_27;
  	ALUSrc  	<=  Lw OR Sw OR Addi OR Andi OR Ori OR Xori OR Shift OR Lui OR Slti;  -- when Imm needed
 	MemtoReg(0)	<=  Lw;
-	MemtoReg(1)	<=  Jal;
-  	RegWrite 	<=  R_format OR Lw OR Jal OR Addi OR Andi OR Ori OR Xori OR Lui OR Slti;
+	MemtoReg(1)	<=  Jal or jal_27;
+  	RegWrite 	<=  R_format OR Lw OR Jal OR Addi OR Andi OR Ori OR Xori OR Lui OR Slti or jal_27;
   	MemRead 	<=  Lw;
    	MemWrite 	<=  Sw; 
  	BranchEq    <=  Beq;
