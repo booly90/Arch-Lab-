@@ -1,0 +1,32 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\div_pll.qsys" --block-symbol-file --output-directory="C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\div_pll" --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading Quartus/div_pll.qsys
+Progress: Reading input file
+Progress: Adding pll_0 [altera_pll 22.1]
+Progress: Parameterizing module pll_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: div_pll.pll_0: The legal reference clock frequency is 5.0 MHz..800.0 MHz
+Info: div_pll.pll_0: Able to implement PLL with user settings
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate "C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\div_pll.qsys" --synthesis=VERILOG --output-directory="C:\Users\barmu\Documents\GitHub\Arch-Lab-\final project\MARS files\MIPS single cycle Architecture\Quartus\div_pll\synthesis" --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading Quartus/div_pll.qsys
+Progress: Reading input file
+Progress: Adding pll_0 [altera_pll 22.1]
+Progress: Parameterizing module pll_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: div_pll.pll_0: The legal reference clock frequency is 5.0 MHz..800.0 MHz
+Info: div_pll.pll_0: Able to implement PLL with user settings
+Info: div_pll: Generating div_pll "div_pll" for QUARTUS_SYNTH
+Info: pll_0: "div_pll" instantiated altera_pll "pll_0"
+Info: div_pll: Done "div_pll" with 2 modules, 3 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

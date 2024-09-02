@@ -32,43 +32,43 @@ END GPIO_handler;
 ARCHITECTURE dfl OF GPIO_handler IS
 
 
-		SIGNAL CS_LEDR				:	STD_LOGIC;
-		SIGNAL CS_SW				:	STD_LOGIC;
-		SIGNAL CS_KEY				:	STD_LOGIC;
-		SIGNAL CS_HEX0				:	STD_LOGIC;
-		SIGNAL CS_HEX1				:	STD_LOGIC;
-		SIGNAL CS_HEX2				:	STD_LOGIC;
-		SIGNAL CS_HEX3				:	STD_LOGIC;
-		SIGNAL CS_HEX4				:	STD_LOGIC;
-		SIGNAL CS_HEX5				:	STD_LOGIC;
-		SIGNAL AddressBusBits		: 	STD_LOGIC_VECTOR(3 DOWNTO 0);								
-		SIGNAL MemRead_gated		:	STD_LOGIC;
-		SIGNAL MemRead_notgated		:	STD_LOGIC;
+		SIGNAL CS_LEDR, CS_LEDR_gated				:	STD_LOGIC;
+		SIGNAL CS_SW, CS_SW_gated					:	STD_LOGIC;
+		SIGNAL CS_KEY								:	STD_LOGIC;
+		SIGNAL CS_HEX0								:	STD_LOGIC;
+		SIGNAL CS_HEX1								:	STD_LOGIC;
+		SIGNAL CS_HEX2								:	STD_LOGIC;
+		SIGNAL CS_HEX3								:	STD_LOGIC;
+		SIGNAL CS_HEX4								:	STD_LOGIC;
+		SIGNAL CS_HEX5								:	STD_LOGIC;
+		SIGNAL AddressBusBits						: 	STD_LOGIC_VECTOR(3 DOWNTO 0);								
+		
 
 BEGIN
 		AddressBusBits <= AddressBus(11) & AddressBus(4 DOWNTO 2);
 		
-		MemRead_gated <= MemRead_Signal AND AddressBus(0);   -- to differentiate between similarliy decoded adresses (like hex0 and hex1)
-		MemRead_notgated <= MemRead_Signal AND (NOT AddressBus(0));   -- to differentiate between similarliy decoded adresses (like hex0 and hex1)
+		
 		
 		ADecoder : OptAddrDecoder
-			port map (	reset 		=> reset,
+			port map (	reset 			=> reset,
 						AddressBusBits	=> AddressBusBits,
-						CS_LEDR		=> CS_LEDR,
-						CS_SW  		=> CS_SW  ,
-						CS_KEY  	=> CS_KEY  ,
-						CS_HEX0		=> CS_HEX0,
-						CS_HEX1		=> CS_HEX1,
-						CS_HEX2		=> CS_HEX2,
-						CS_HEX3		=> CS_HEX3,
-						CS_HEX4		=> CS_HEX4,
-						CS_HEX5		=> CS_HEX5);
+						Address0		=> AddressBus(0),
+						CS_LEDR			=> CS_LEDR,
+						CS_SW  			=> CS_SW  ,
+						CS_KEY  		=> CS_KEY  ,
+						CS_HEX0			=> CS_HEX0,
+						CS_HEX1			=> CS_HEX1,
+						CS_HEX2			=> CS_HEX2,
+						CS_HEX3			=> CS_HEX3,
+						CS_HEX4			=> CS_HEX4,
+						CS_HEX5			=> CS_HEX5
+						);
 	
 -------------------HEX0--------------------------------------------
 		
 		HEX0_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemRead_notgated,
+						port map   (MemRead 	=> MemRead_Signal,
 									reset		=> reset,
 										MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX0,
@@ -79,7 +79,7 @@ BEGIN
 		
 		HEX1_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemRead_gated,
+						port map   (MemRead 	=> MemRead_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX1,
@@ -90,7 +90,7 @@ BEGIN
 		
 		HEX2_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemRead_notgated,
+						port map   (MemRead 	=> MemRead_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX2,
@@ -101,7 +101,7 @@ BEGIN
 		
 		HEX3_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemWrite_Signal,
+						port map   (MemRead 	=> MemRead_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX3,
@@ -112,7 +112,7 @@ BEGIN
 		
 		HEX4_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemRead_gated,
+						port map   (MemRead		=> MemRead_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX4,
@@ -123,7 +123,7 @@ BEGIN
 		
 		HEX5_inst: GPO 	generic map (useSevenSeg => TRUE,
 									 IOWidth 	=> 7)
-						port map   (MemRead 	=> MemRead_notgated,
+						port map   (MemRead 	=> MemRead_Signal,
 									reset		=> reset,
 									MemWrite	=> MemWrite_Signal,
 									ChipSelect	=> CS_HEX5,
