@@ -42,6 +42,8 @@ BEGIN
 	CS_SW			<=	'0' WHEN reset = '1' ELSE '1' WHEN AddressBusBits = "1100" ELSE '0';  --adress = 1000_0001_0000  --> (A11,A4,A3,A2) = (1100) 
 	CS_KEY			<=	'0' WHEN reset = '1' ELSE '1' WHEN AddressBusBits = "1101" ELSE '0';  --adress = 1000_0001_0100  --> (A11,A4,A3,A2) = (1101) 
 	
+	------------------------------------------------
+	
 	CS_HEX0 	<=	CS_HEX0_temp  AND  (not Address0);
 	CS_HEX1 	<=	CS_HEX1_temp  AND  Address0;
 	CS_HEX2 	<=	CS_HEX2_temp  AND  (not Address0);
