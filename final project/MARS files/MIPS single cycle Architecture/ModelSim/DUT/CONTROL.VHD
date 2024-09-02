@@ -21,8 +21,14 @@ ENTITY control IS
 	BranchNe 	: OUT 	STD_LOGIC;
 	Jump 		: OUT 	STD_LOGIC;
 	Jr 			: OUT 	STD_LOGIC;
+	JAL_ISR_out : OUT 	STD_LOGIC;
 	
-		clock, reset	: IN 	STD_LOGIC );
+	clr_IRdiv, clr_IRbt : OUT STD_LOGIC;
+	INTA		: OUT 	STD_LOGIC;
+	INTR		: IN 	STD_LOGIC;
+	INT_FSM		: OUT	STD_LOGIC_VECTOR ( 1 DOWNTO 0 );
+	
+	clock, reset	: IN 	STD_LOGIC );
 
 END control;
 
@@ -53,7 +59,7 @@ BEGIN
 	
 	
   	RegDst(0)    	<=  R_format or jal_ISR ;
-	RegDst(1)    	<=  Jal or jal_ISR;
+	RegDst(1)    	<=  Jal;
  	ALUSrc  	<=  Lw OR Sw OR Addi OR Andi OR Ori OR Xori OR Shift OR Lui OR Slti;  -- when Imm needed
 	MemtoReg(0)	<=  Lw;
 	MemtoReg(1)	<=  Jal or jal_ISR;
@@ -63,9 +69,15 @@ BEGIN
  	BranchEq    <=  Beq;
 	BranchNe    <=  Bne;
 	Jr 			<=  Jr_wire;
-	--ALUOp( 1 ) 	<=  R_format;
-	--ALUOp( 0 ) 	<=  Beq OR Bne OR Shift; 
+	JAL_ISR_out <=  jal_ISR;
 
+
+INT_FSM: INT_FSM port map (
+			INT_FSM 	=> INT_FSM,
+			INTA 		=> INTA,
+			rst 		=> reset,
+			clk			=> clock
+			);
    END behavior;
 
 

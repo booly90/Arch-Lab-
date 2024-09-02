@@ -7,18 +7,20 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 ENTITY Idecode IS
 
 	  
-	  PORT(	read_data_1	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			read_data_2	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			Instruction : IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			read_data 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			ALU_result	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			RegWrite 	: IN 	STD_LOGIC;
-			MemtoReg 	: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
-			RegDst 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
-			Sign_extend : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			PC_plus_4:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
-			clock,reset	: IN 	STD_LOGIC );
+	  PORT(	read_data_1		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data_2		: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Instruction_IF 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			read_data 		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			ALU_result		: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			RegWrite 		: IN 	STD_LOGIC;
+			MemtoReg 		: IN 	STD_LOGIC_VECTOR( 1  DOWNTO 0 );
+			RegDst 			: IN 	STD_LOGIC_VECTOR( 1  DOWNTO 0 );
+			Sign_extend 	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			PC_plus_4		: IN 	STD_LOGIC_VECTOR( 9  DOWNTO 0 );
+			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			INT_FSM			: IN 	STD_LOGIC_VECTOR( 1  DOWNTO 0 ); 
+			clock,reset		: IN 	STD_LOGIC
+			);
 END Idecode;
 
 
@@ -35,6 +37,12 @@ TYPE register_file IS ARRAY ( 0 TO 31 ) OF STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 	SIGNAL Instruction_immediate_value	: STD_LOGIC_VECTOR( 15 DOWNTO 0 );
 
 BEGIN
+
+	Instruction <= 	X"335AFFFE" 	when INT_FSM = '01' ELSE -- GIE=0
+					X"8C19083E" 	when INT_FSM = '10' ELSE -- LW type
+					X"FF20D800"		when INT_FSM = '11' ELSE -- JAL_ISR
+					Instruction_IF;
+					
 	read_register_1_address 	<= Instruction( 25 DOWNTO 21 );
    	read_register_2_address 	<= Instruction( 20 DOWNTO 16 );
    	write_register_address_1	<= Instruction( 15 DOWNTO 11 );

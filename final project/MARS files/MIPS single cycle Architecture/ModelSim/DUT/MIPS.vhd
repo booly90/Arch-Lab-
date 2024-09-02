@@ -90,6 +90,7 @@ BEGIN
 				Jr				=> Jr,
 				Jump			=> Jump,
 				R_data1			=> read_data_1,
+				JAL_ISR			=> JAL_ISR
 				clock 			=> clock,  
 				reset 			=> reset,
 				Next_PC_out		=> Next_PC_out);
@@ -123,6 +124,7 @@ BEGIN
 				BranchEq		=> BranchEq,
 				Jr				=> Jr,
 				Jump			=> Jump,
+				JAL_ISR_out		=> JAL_ISR,
                 clock 			=> clock,
 				reset 			=> reset );
 

@@ -15,13 +15,16 @@ ENTITY Ifetch IS
 	PORT(	Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
         	PC_plus_4_out 	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-        	BranchNe			: IN 	STD_LOGIC;
-			BranchEq			: IN 	STD_LOGIC;
+        	BranchNe		: IN 	STD_LOGIC;
+			BranchEq		: IN 	STD_LOGIC;
         	Zero 			: IN 	STD_LOGIC;
       		PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 			Jr		   	 	: IN 	STD_LOGIC;
-			Jump		   	 	: IN 	STD_LOGIC;
-			R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			Jump		   	: IN 	STD_LOGIC;
+			read_data_1_ID			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+			hold_PC			: IN 	STD_LOGIC;
+			read_data_MEM	: IN 	STD_LOGIC_VECTOR ( 31 DOWNTO 0 );
+			JAL_ISR			: IN 	STD_LOGIC;
         	clock, reset 	: IN 	STD_LOGIC;
 			
 			-- Output important signals to pins for easy display in Simulator
@@ -38,6 +41,7 @@ ARCHITECTURE behavior OF Ifetch IS
 	SIGNAL jump_address					: STD_LOGIC_VECTOR(9 DOWNTO 0 );
 	signal reset_sample : STD_LOGIC;
 	signal clock_if		: STD_LOGIC;
+	signal Branch
 	
 BEGIN
 		
@@ -90,11 +94,13 @@ inst_memory: altsyncram
 						-- Calculate jump adress using pc and Instruction
 		jump_address <= Instruction(7 DOWNTO 0) & "00" ;
 						-- Mux to select Branch Address or PC + 4        
-		Next_PC  <= "00000000"   		WHEN Reset = '1' ELSE --or reset_sample = '1'  ELSE                        
-					R_data1(9 DOWNTO 2)			WHEN Jr = '1' 	 ELSE
-					jump_address( 9 DOWNTO 2)	WHEN jump='1'    ELSE
-					Add_result  	WHEN ( (( BranchNe = '1' ) AND ( Zero = '0' )) 
-									OR	   (( BranchEq = '1' ) AND ( Zero = '1' ))) ELSE
+		Branch <= (( BranchNe = '1' ) AND ( Zero = '0' )) OR (( BranchEq = '1' ) AND ( Zero = '1' ))
+						
+		Next_PC  <= "00000000"   				WHEN Reset = '1' 	ELSE -- reset 
+					read_data_MEM(9 DOWNTO 2)	WHEN JAL_ISR = '1'	ELSE -- ISR call
+					read_data_1_ID(9 DOWNTO 2)	WHEN Jr = '1' 	 	ELSE -- JR
+					jump_address( 9 DOWNTO 2)	WHEN jump='1'    	ELSE -- jal / jump
+					Add_result  				WHEN Branch = '1'	ELSE -- BNE / BEQ
 					PC_plus_4( 9 DOWNTO 2 );
 		
 		
@@ -106,7 +112,7 @@ inst_memory: altsyncram
 				   PC( 9 DOWNTO 2) <= "00000000" ; 
 
 				   
-			else
+			elsif hold_PC = '0' then 
 				   PC( 9 DOWNTO 2 ) <= next_PC;
 			END IF;
 	END PROCESS;
