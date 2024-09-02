@@ -12,17 +12,17 @@ USE altera_mf.altera_mf_components.all;
 ENTITY Ifetch IS
 	GENERIC (MemWidth 	: INTEGER := 10;
 			 SIM 	 	: boolean :=FALSE);
-	PORT(	SIGNAL Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        	SIGNAL PC_plus_4_out 	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-        	SIGNAL Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-        	SIGNAL BranchNe			: IN 	STD_LOGIC;
-			SIGNAL BranchEq			: IN 	STD_LOGIC;
-        	SIGNAL Zero 			: IN 	STD_LOGIC;
-      		SIGNAL PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-			SIGNAL Jr		   	 	: IN 	STD_LOGIC;
-			SIGNAL Jump		   	 	: IN 	STD_LOGIC;
-			SIGNAL R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        	SIGNAL clock, reset 	: IN 	STD_LOGIC;
+	PORT(	Instruction 		: INOUT	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+        	PC_plus_4_out 	: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+        	Add_result 		: IN 	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+        	BranchNe			: IN 	STD_LOGIC;
+			BranchEq			: IN 	STD_LOGIC;
+        	Zero 			: IN 	STD_LOGIC;
+      		PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			Jr		   	 	: IN 	STD_LOGIC;
+			Jump		   	 	: IN 	STD_LOGIC;
+			R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+        	clock, reset 	: IN 	STD_LOGIC;
 			
 			-- Output important signals to pins for easy display in Simulator
 			SIGNAL Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 ));
