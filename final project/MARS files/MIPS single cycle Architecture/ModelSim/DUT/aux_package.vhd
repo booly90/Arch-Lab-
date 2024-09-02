@@ -65,6 +65,7 @@ END COMPONENT;
 		COMPONENT OptAddrDecoder IS
 	PORT( 
 		reset 			: IN	STD_LOGIC;
+		Address0		: IN	STD_LOGIC;  --bit 0 of address bus
 		AddressBusBits	: IN	STD_LOGIC_VECTOR(3 DOWNTO 0);
 		CS_LEDR			: OUT 	STD_LOGIC;
 		CS_SW  			: OUT 	STD_LOGIC;
@@ -231,12 +232,30 @@ END COMPONENT MCU;
 		
 		
 		------------------------------------------------------
-		
+		COMPONENT Divider is
+    Port (
+        dividend : in std_logic_vector(31 downto 0);
+        divisor  : in std_logic_vector(31 downto 0);
+        divclk   : in std_logic;
+        rst      : in std_logic;
+        ena      : in std_logic;
+        div_ifg    : out std_logic;
+        result   : out std_logic_vector(31 downto 0);
+        remainder : out std_logic_vector(31 downto 0)
+    );
+end COMPONENT;
 		
 		
 		
 		------------------------------------------------------
-		
+			component div_pll is
+		port (
+			locked   : out std_logic;        -- export
+			outclk_0 : out std_logic;        -- clk
+			refclk   : in  std_logic := 'X'; -- clk
+			rst      : in  std_logic := 'X'  -- reset
+		);
+	end component div_pll;
 		
 		
 		
