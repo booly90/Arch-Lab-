@@ -17,8 +17,9 @@ ENTITY Idecode IS
 			RegDst 		: IN 	STD_LOGIC_VECTOR( 1 DOWNTO 0);
 			Sign_extend : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 			PC_plus_4:IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
-			clock,reset	: IN 	STD_LOGIC );
+			--***write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0);
+			clock,reset	: IN 	STD_LOGIC 
+			);
 END Idecode;
 
 
@@ -60,7 +61,7 @@ BEGIN
 		WHEN Instruction_immediate_value(15) = '0'
 		ELSE	X"FFFF" & Instruction_immediate_value;
 	
-	write_data_out <= write_data;
+	--***write_data_out <= write_data;
 PROCESS
 	BEGIN
 		WAIT UNTIL clock'EVENT AND clock = '1';

@@ -1024,8 +1024,7 @@ set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/IDECODE.VHD
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/EXECUTE.VHD
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/DMEMORY.VHD
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/CONTROL.VHD
-set_global_assignment -name SIGNALTAP_FILE output_files/stp_pre_accelerator.stp
 set_global_assignment -name QIP_FILE pll2.qip
 set_global_assignment -name SIP_FILE pll2.sip
-set_global_assignment -name SLD_FILE db/stp_pre_accelerator_auto_stripped.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SLD_FILE db/stp_pre_accelerator_auto_stripped.stp

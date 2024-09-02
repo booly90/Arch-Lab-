@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="alt_sld_fab" kind="alt_sld_fab" version="1.0" fabric="QSYS">
  <!-- Format version 21.1 842 (Future versions may contain additional information.) -->
- <!-- 2024.09.01.16:33:21 -->
+ <!-- 2024.09.02.13:46:40 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_DEVICE_FAMILY">
   <type>java.lang.String</type>
@@ -50,7 +50,7 @@
  <module
    name="alt_sld_fab"
    kind="alt_sld_fab"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -303,7 +303,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_presplit"
    kind="altera_super_splitter"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab.presplit">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -481,7 +481,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_splitter"
    kind="altera_sld_splitter"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab.splitter">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -1352,7 +1352,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_jtagpins"
    kind="altera_jtag_pins_bridge"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab.jtagpins">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -1583,7 +1583,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_sldfabric"
    kind="altera_sld_jtag_hub"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab.sldfabric">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -2729,7 +2729,7 @@ parameters are a RESULT of the module parameters. -->
  <module
    name="alt_sld_fab_ident"
    kind="altera_connection_identification_hub"
-   version="21.1"
+   version="22.1"
    path="alt_sld_fab.ident">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
@@ -3347,7 +3347,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Top level generated instrumentation fabric</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>16</instanceCount>
@@ -3363,7 +3363,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Splitter for debug fabric</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -3371,7 +3371,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Splitter for debug fabric</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>4</instanceCount>
@@ -3387,7 +3387,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>altera_jtag_pins_bridge</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>4</instanceCount>
@@ -3403,7 +3403,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Altera SLD JTAG Hub</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -3411,7 +3411,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Connection identification hub</displayName>
-  <version>21.1</version>
+  <version>22.1</version>
  </plugin>
  <plugin>
   <instanceCount>6</instanceCount>

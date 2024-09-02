@@ -18,14 +18,16 @@ ENTITY Ifetch IS
         	SIGNAL BranchNe			: IN 	STD_LOGIC;
 			SIGNAL BranchEq			: IN 	STD_LOGIC;
         	SIGNAL Zero 			: IN 	STD_LOGIC;
-      		SIGNAL PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+      		
 			SIGNAL Jr		   	 	: IN 	STD_LOGIC;
 			SIGNAL Jump		   	 	: IN 	STD_LOGIC;
 			SIGNAL R_data1			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-        	SIGNAL clock, reset 	: IN 	STD_LOGIC;
+        	SIGNAL clock, reset 	: IN 	STD_LOGIC
 			
 			-- Output important signals to pins for easy display in Simulator
-			SIGNAL Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 ));
+			--***SIGNAL PC_out 			: OUT	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+			--***SIGNAL Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 )
+			);
 			
 
 			
@@ -52,7 +54,7 @@ FPGA:		IF (not SIM ) GENERATE
 				--Mem_Addr <= PC;
 			END GENERATE FPGA;
 
-	Next_PC_out <= Next_PC;
+	--***Next_PC_out <= Next_PC;
 
 	--ROM for Instruction Memory
 inst_memory: altsyncram
@@ -80,7 +82,7 @@ inst_memory: altsyncram
 		PC(1 DOWNTO 0) <= "00";
 					-- copy output signals - allows read inside module
 		
-			PC_out 			<= PC ;
+			--***PC_out 			<= PC ;
 			PC_plus_4_out 	<= PC_plus_4 ;
 						-- send address to inst. memory address register
 		

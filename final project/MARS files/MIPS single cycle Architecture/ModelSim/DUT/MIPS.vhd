@@ -14,15 +14,16 @@ ENTITY MIPS IS
 	PORT(	reset, clock				 : IN  STD_LOGIC; 
 			ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
 			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
-			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
+			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0)
 		-- Output important signals to pins for easy display in Simulator
-		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
-		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
-     	Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-		Branch_out, Zero_out, Memwrite_out, 
-		Regwrite_out					 : OUT 	STD_LOGIC ;
-		Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-		Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+		--***PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
+		--***ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
+     	--***Instruction_out					 : OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+		--***Branch_out, Zero_out, Memwrite_out, 
+		--***Regwrite_out					 : OUT 	STD_LOGIC ;
+		--***Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
+		--***Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
 
 END 	MIPS;
 
@@ -68,15 +69,15 @@ BEGIN
 	
 					-- copy important signals to output pins for easy 
 					-- display in Simulator
-   Instruction_out 	<= Instruction;
-   ALU_result_out 	<= ALU_result;
-   read_data_1_out 	<= read_data_1;
-   read_data_2_out 	<= read_data_2;
-   
-   Branch_out 		<= BranchNe OR BranchEq;
-   Zero_out 		<= Zero;
-   RegWrite_out 	<= RegWrite;
-   MemWrite_out 	<= MemWrite;	
+   --***Instruction_out 	<= Instruction;
+   --***ALU_result_out 	<= ALU_result;
+   --***read_data_1_out 	<= read_data_1;
+   --***read_data_2_out 	<= read_data_2;
+   --***
+   --***Branch_out 		<= BranchNe OR BranchEq;
+   --***Zero_out 		<= Zero;
+   --***RegWrite_out 	<= RegWrite;
+   --***MemWrite_out 	<= MemWrite;	
    
 					-- connect the 5 MIPS components   
   IFE : Ifetch GENERIC map (MemWidth, SIM)
@@ -86,13 +87,14 @@ BEGIN
 				BranchNe 		=> BranchNe,
 				BranchEq 		=> BranchEq,
 				Zero 			=> Zero,
-				PC_out 			=> PC,
+				--***PC_out 			=> PC,
 				Jr				=> Jr,
 				Jump			=> Jump,
 				R_data1			=> read_data_1,
 				clock 			=> clock,  
-				reset 			=> reset,
-				Next_PC_out		=> Next_PC_out);
+				reset 			=> reset
+				--Next_PC_out		=> Next_PC_out
+				);
 
    ID : Idecode
    	PORT MAP (	read_data_1 	=> read_data_1,
@@ -105,7 +107,7 @@ BEGIN
 				RegDst 			=> RegDst,
 				Sign_extend 	=> Sign_extend,
 				PC_plus_4   =>  PC_plus_4,
-				write_data_out	=> write_data_out,
+				--***write_data_out	=> write_data_out,
         		clock 			=> clock,  
 				reset 			=> reset );
 
@@ -138,9 +140,10 @@ BEGIN
 				PC_plus_4		=> PC_plus_4,
                 Clock			=> clock,
 				Reset			=> reset ,
-				Opcode 			=> Instruction( 31 DOWNTO 26 ),
-				Ainput_out		=> Ainput_out,
-				Binput_out		=> Binput_out);
+				Opcode 			=> Instruction( 31 DOWNTO 26 )
+				--***Ainput_out		=> Ainput_out,
+				--***Binput_out		=> Binput_out
+				);
 
    MEM:  dmemory
 	GENERIC MAP(MemWidth => MemWidth, SIM => SIM) 

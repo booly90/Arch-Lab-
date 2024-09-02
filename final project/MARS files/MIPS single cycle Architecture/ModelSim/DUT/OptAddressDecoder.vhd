@@ -3,6 +3,24 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE work.aux_package.ALL;
 --------------------------------------------------------------------
+
+
+--#--------------------------------------------------------------
+--#		    MEMORY Mapped I/O
+--#--------------------------------------------------------------
+--#define PORT_LEDR[7-0] 0x800 - LSB byte (Output Mode)
+--#------------------- PORT_HEX0_HEX1 ---------------------------
+--#define PORT_HEX0[7-0] 0x804 - LSB byte (Output Mode)
+--#define PORT_HEX1[7-0] 0x805 - LSB byte (Output Mode)
+--#------------------- PORT_HEX2_HEX3 ---------------------------
+--#define PORT_HEX2[7-0] 0x808 - LSB byte (Output Mode)
+--#define PORT_HEX3[7-0] 0x809 - LSB byte (Output Mode)
+--#------------------- PORT_HEX4_HEX5 ---------------------------
+--#define PORT_HEX4[7-0] 0x80C - LSB byte (Output Mode)
+--#define PORT_HEX5[7-0] 0x80D - LSB byte (Output Mode)
+--#--------------------------------------------------------------
+--#define PORT_SW[7-0]   0x810 - LSB byte (Input Mode)
+--#--------------------------------------------------------------
 ENTITY OptAddrDecoder IS
 	PORT( 
 		reset 			: IN	STD_LOGIC;
