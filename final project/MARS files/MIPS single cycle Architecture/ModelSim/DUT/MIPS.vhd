@@ -1,3 +1,4 @@
+
 				-- Top Level Structural Model for MIPS Processor Core
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -7,7 +8,7 @@ USE work.aux_package.ALL;
 ENTITY MIPS IS
 	GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	 	 : boolean :=FALSE;
-			ControlBusSize: integer := 4;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -16,7 +17,8 @@ ENTITY MIPS IS
 			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
 			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
 			GIE							 : OUT 	STD_LOGIC;
-
+			INTA						 : OUT	STD_LOGIC;
+			INTR						 : IN	STD_LOGIC;
 		-- Output important signals to pins for easy display in Simulator
 		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
@@ -63,8 +65,7 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL read_data_MEM	: STD_LOGIC_VECTOR(31 DOWNTO 0 );
 	SIGNAL clr_IRbt			: STD_LOGIC;
 	SIGNAL clr_IRdiv   		: STD_LOGIC;
-	SIGNAL INTA				: STD_LOGIC;
-	SIGNAL INTR				: STD_LOGIC;
+	
 	SIGNAL INT_FSM			: STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
 	SIGNAL DIV_en	 		: STD_LOGIC;
 	SIGNAL JAL_ISR			: STD_LOGIC;
@@ -77,9 +78,7 @@ BEGIN
 	AddressBus <= X"00000" & ALU_result (11 DOWNTO 0);
 	ControlBus(0) <= MemRead;
 	ControlBus(1) <= MemWrite;
-	ControlBus(2) <= clr_IRbt;
-	ControlBus(3) <= clr_IRdiv;
-	
+
 					-- copy important signals to output pins for easy 
 					-- display in Simulator
    Instruction_out 	<= Instruction;
@@ -144,8 +143,6 @@ BEGIN
 				Jr				=> Jr,
 				Jump			=> Jump,
 				JAL_ISR_out		=> JAL_ISR,
-				clr_IRbt 		=> clr_IRbt,
-				clr_IRdiv		=> clr_IRdiv,
 				INTA	 		=> INTA,		
 				INTR	 		=> INTR,	
 				INT_FSM	 		=> INT_FSM,	

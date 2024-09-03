@@ -8,10 +8,10 @@ USE work.aux_package.ALL;
 ENTITY interupt_handler IS
 GENERIC(	AddrBusSize	: integer := 12;
 			DataBusSize	: integer := 32;
-			IrqSize	    : integer := 6
+			IrqSize	    : integer := 7
 			);
 	PORT( 
-		set_btifg,key_1,key_2,key_3,DIV,clk,rst	:	in std_logic;
+		set_btifg,key_1,key_2,key_3,DIV_ifg,clk,rst	:	in std_logic;
 		INTR							:	out std_logic;
 		IRQ_OUT							:	out STD_LOGIC_VECTOR(6 DOWNTO 0);		
 		MemReadBus	: IN	STD_LOGIC;
@@ -36,9 +36,9 @@ ARCHITECTURE dfl OF interupt_handler IS
 
 BEGIN
 
-DataBus <=	X"000000" & '0'		& typereg 	WHEN (AddressBus = X"83E" AND MemReadBus = '1') OR (INTA = '0' AND MemReadBus = '0') ELSE
-			X"000000"&"00" 	& IntrEn 	WHEN (AddressBus = X"83C" AND MemReadBus = '1') ELSE
-			X"000000"&"00" 	& IFG		WHEN (AddressBus = X"83D" AND MemReadBus = '1') ELSE
+DataBus <=	X"000000" & typereg 	WHEN (AddressBus = X"83E" AND MemReadBus = '1') else --**OR (INTA = '0' AND MemReadBus = '0') ELSE
+			X"000000" & '0' 	& IntrEn 	WHEN (AddressBus = X"83C" AND MemReadBus = '1') ELSE
+			X"000000" & '0' 	& IFG		WHEN (AddressBus = X"83D" AND MemReadBus = '1') ELSE
 			(OTHERS => 'Z');
 
 
@@ -48,13 +48,13 @@ PROCESS(clk)
 BEGIN
 	IF (falling_edge(clk)) THEN
 		IF (AddressBus = X"83C" AND MemWriteBus = '1') THEN
-			IntrEn 	<=	DataBus(IrqSize-1 DOWNTO 0);
+			IntrEn 	<=	DataBus(6 DOWNTO 0);
 		END IF;		
 	END IF;
 END PROCESS;
 
-IFG		<=	DataBus(6 DOWNTO 0)	WHEN (AddressBus = X"83D" AND MemWriteBus = '1') ELSE
-			IRQ AND IntrEn;		
+IFG		<=	DataBus(6 DOWNTO 0)	WHEN (AddressBus = X"83D" AND MemWriteBus = '1') 
+			ELSE (IRQ AND IntrEn);		
 
 PROCESS (clk, IFG) BEGIN 
 	IF (rising_edge(clk)) THEN
@@ -69,7 +69,9 @@ PROCESS (clk, IFG) BEGIN
 END PROCESS;
 			
 ------------ KEY1 ---------------
-IntrSrc <= '0' & '0' & set_btifg & key_1 & key_2 & key_3 & DIV;
+-- two zeroes are for USART IFG's
+IntrSrc <= DIV_ifg & key_3 & key_2 & key_1 & set_btifg & '0' & '0';
+			
 
 PROCESS (clk, rst, CLR_IRQ(3), IntrSrc(3))
 BEGIN

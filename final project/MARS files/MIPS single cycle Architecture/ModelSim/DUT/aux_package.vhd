@@ -142,8 +142,6 @@ END COMPONENT;
 	Jump 			: OUT 	STD_LOGIC;
 	Jr 				: OUT 	STD_LOGIC;
 	JAL_ISR_out 	: OUT 	STD_LOGIC;
-	clr_IRbt		: OUT 	STD_LOGIC;
-	clr_IRdiv   	: OUT 	STD_LOGIC;
 	INTA			: OUT 	STD_LOGIC;
 	INTR			: IN 	STD_LOGIC;
 	INT_FSM			: INOUT	STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
@@ -184,9 +182,9 @@ END COMPONENT;
 		
 		------------------------------------------------------
 COMPONENT MIPS IS
-		GENERIC(MemWidth 	: INTEGER := 10;
+			GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	 	 : boolean :=FALSE;
-			ControlBusSize: integer := 4;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -195,7 +193,8 @@ COMPONENT MIPS IS
 			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
 			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
 			GIE							 : OUT 	STD_LOGIC;
-
+			INTA						 : OUT	STD_LOGIC;
+			INTR						 : IN	STD_LOGIC;
 		-- Output important signals to pins for easy display in Simulator
 		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
@@ -214,7 +213,7 @@ END COMPONENT MIPS;
 		COMPONENT MCU IS
 	GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	  : boolean :=FALSE;
-			ControlBusSize: integer := 4;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -278,7 +277,24 @@ END COMPONENT priotity_encoder;
 		
 		
 		------------------------------------------------------
-		
+		COMPONENT interupt_handler IS
+GENERIC(	AddrBusSize	: integer := 12;
+			DataBusSize	: integer := 32;
+			IrqSize	    : integer := 6
+			);
+	PORT( 
+		set_btifg,key_1,key_2,key_3,DIV_ifg,clk,rst	:	in std_logic;
+		INTR							:	out std_logic;
+		IRQ_OUT							:	out STD_LOGIC_VECTOR(6 DOWNTO 0);		
+		MemReadBus	: IN	STD_LOGIC;
+		MemWriteBus	: IN	STD_LOGIC;
+		AddressBus	: IN	STD_LOGIC_VECTOR(11 DOWNTO 0);
+		DataBus		: INOUT	STD_LOGIC_VECTOR(DataBusSize-1 DOWNTO 0);
+		INTA		: IN	STD_LOGIC;
+		GIE			: IN	STD_LOGIC
+		);
+  
+END COMPONENT interupt_handler;
 		
 		
 		------------------------------------------------------

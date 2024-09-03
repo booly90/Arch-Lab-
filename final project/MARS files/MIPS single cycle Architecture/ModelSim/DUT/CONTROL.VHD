@@ -23,8 +23,6 @@ ENTITY control IS
 	Jump 			: OUT 	STD_LOGIC;
 	Jr 				: OUT 	STD_LOGIC;
 	JAL_ISR_out 	: OUT 	STD_LOGIC;
-	clr_IRbt		: OUT 	STD_LOGIC;
-	clr_IRdiv   	: OUT 	STD_LOGIC;
 	INTA			: OUT 	STD_LOGIC;
 	INTR			: IN 	STD_LOGIC;
 	INT_FSM			: INOUT	STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
@@ -76,8 +74,6 @@ BEGIN
 	Jr 			<=  Jr_wire;
 	JAL_ISR_out <=  jal_ISR;
 	INTA 		<= 	INTA_reg;
-	clr_IRbt	<= 	'1' when INT_FSM = "11" else '0';
-	clr_IRdiv	<= 	'1' when INT_FSM = "11" else '0';
 	DIV_en		<=  '1' WHEN Instruction(31 downto 26) = "100011" --if instruction is lw to divisor
 					AND Instruction(15 downto 0) = X"0830"        -- then EN = 1
 					ELSE '0'; 
