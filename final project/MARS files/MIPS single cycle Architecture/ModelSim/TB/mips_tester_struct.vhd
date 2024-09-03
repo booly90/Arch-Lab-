@@ -23,7 +23,8 @@ ENTITY MIPS_tester IS
       read_data_2_out : IN     STD_LOGIC_VECTOR ( 31 DOWNTO 0 );
       write_data_out  : IN     STD_LOGIC_VECTOR ( 31 DOWNTO 0 );
       clock           : OUT    STD_LOGIC;
-      reset           : OUT    STD_LOGIC
+      reset           : OUT    STD_LOGIC;
+	  key_1_n,key_2_n,key_3_n: OUT    STD_LOGIC
    );
 
 -- Declarations
@@ -52,7 +53,7 @@ ARCHITECTURE struct OF MIPS_tester IS
 
 
 BEGIN
-
+	
    -- ModuleWare code(v1.9) for instance 'U_0' of 'clk'
    u_0clk_proc: PROCESS
    BEGIN
@@ -64,7 +65,11 @@ BEGIN
    END PROCESS u_0clk_proc;
    --mw_U_0disable_clk <= TRUE AFTER 1000 ns;
    clock <= mw_U_0clk;
-
+   
+   key_1 <= '0';
+	wait 200 ns;
+   key_1 <= '1';
+	wait 800 ns
    -- ModuleWare code(v1.9) for instance 'U_1' of 'pulse'
    reset <= mw_U_1pulse;
    u_1pulse_proc: PROCESS
