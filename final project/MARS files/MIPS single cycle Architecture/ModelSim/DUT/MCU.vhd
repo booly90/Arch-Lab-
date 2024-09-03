@@ -6,7 +6,7 @@ USE work.aux_package.ALL;
 ENTITY MCU IS
 	GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	  : boolean :=FALSE;
-			ControlBusSize: integer := 4;
+			ControlBusSize: integer := 2;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -19,6 +19,7 @@ ENTITY MCU IS
 			HEX4						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			HEX5						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			LEDR						: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
+			key_1_n,key_2_n,key_3_n			: IN	STD_LOGIC;
 		-- Output important signals to pins for easy display in Simulator
 		PC								: OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		--ALU_result_out, read_data_1_out, read_data_2_out, 	
@@ -43,12 +44,12 @@ ARCHITECTURE arch OF MCU IS
 		--signal SW 					: STD_LOGIC_VECTOR (7 DOWNTO 0);
 		SIGNAL pll_clock           : STD_LOGIC;
 		signal reset             :  STD_LOGIC;
-		signal locked            : STD_LOGIC;
+		signal IRQ_OUT            : STD_LOGIC_VECTOR(6 downto 0);
 		
 		SIGNAL GIE            : STD_LOGIC;
-		--SIGNAL            : STD_LOGIC;
-		--SIGNAL            : STD_LOGIC;
-		--SIGNAL            : STD_LOGIC;
+		SIGNAL INTA           : STD_LOGIC;
+		SIGNAL INTR           : STD_LOGIC;
+		SIGNAL key_1,key_2,key_3           : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 BEGIN
 
@@ -83,6 +84,8 @@ FPGA :		IF (not SIM ) GENERATE
 							AddressBus		=> AddressBus,
 							PC				=> PC,
 							GIE				=> GIE,
+							INTR			=> INTR,
+							INTA			=> INTA,	
 							--ALU_result_out  => ALU_result_out,
 							--read_data_1_out => read_data_1_out,
 							--read_data_2_out => read_data_2_out,
@@ -113,7 +116,27 @@ FPGA :		IF (not SIM ) GENERATE
 									LEDR			=> LEDR,
 									SW				=> SW
 								);
-			
-							
+	
+key_1 <= not key_1_n;
+key_2 <= not key_2_n;
+key_3 <= not key_3_n;
+	
+INT_handler: interupt_handler port map (
+		set_btifg		=> '0',   --** set_btifg is not connected yet
+		key_1			=> key_1,
+		key_2	        => key_2,
+		key_3	        => key_3,
+		DIV_ifg         => '0',   --** DIV_ifg is not connected yet
+		clk	            => clock,
+		rst	            => reset,
+		INTR			=> INTR	,	
+		IRQ_OUT			=> IRQ_OUT,		
+		MemReadBus		=> ControlBus(0),	
+		MemWriteBus		=> ControlBus(1)	,
+		AddressBus		=> AddressBus(11 DOWNTO 0)	,
+		DataBus			=> DataBus		,
+		INTA			=> INTA		,
+		GIE				=> GIE			
+);							
 							
 END arch;

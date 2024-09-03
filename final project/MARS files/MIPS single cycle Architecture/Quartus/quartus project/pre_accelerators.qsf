@@ -1009,6 +1009,9 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[26] -
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[30] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_pre_accelerators_auto_signaltap_0_1_3bbd," -section_id auto_signaltap_0
+set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/prio_encoder_6.vhd
+set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/interupt_handler.vhd
+set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/interupt_FSM.vhd
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/segDecoder.vhd
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/GPI.vhd
 set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/OptAddressDecoder.vhd
@@ -1027,5 +1030,8 @@ set_global_assignment -name VHDL_FILE ../../ModelSim/DUT/CONTROL.VHD
 set_global_assignment -name SIGNALTAP_FILE output_files/stp_pre_accelerator.stp
 set_global_assignment -name QIP_FILE pll2.qip
 set_global_assignment -name SIP_FILE pll2.sip
-set_global_assignment -name SLD_FILE db/stp_pre_accelerator_auto_stripped.stp
+set_location_assignment PIN_AK4 -to key_1_n
+set_location_assignment PIN_AA14 -to key_2_n
+set_location_assignment PIN_AA15 -to key_3_n
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SLD_FILE db/stp_pre_accelerator_auto_stripped.stp

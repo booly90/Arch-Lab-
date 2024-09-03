@@ -16,10 +16,10 @@ ARCHITECTURE structure OF priotity_encoder IS
 BEGIN
 
 	type_signal  <= 	
-				'010000' 	WHEN INT_reqs(1) = '1' ELSE 		-- type = X"10"
-				'010100' 	WHEN INT_reqs(2) = '1' ELSE 		-- type = X"14"
-				'011000' 	WHEN INT_reqs(3) = '1' ELSE 		-- type = X"18"
-				'011100' 	WHEN INT_reqs(4) = '1' ELSE 		-- type = X"1c"
-				'100000' 	WHEN INT_reqs(5) = '1' ELSE 		-- type = X"20" 
-				'000000'   			
+				"010000" 	WHEN INT_reqs(1) = '1' ELSE 		-- type = X"10"
+				"010100" 	WHEN INT_reqs(2) = '1' ELSE 		-- type = X"14"
+				"011000" 	WHEN INT_reqs(3) = '1' ELSE 		-- type = X"18"
+				"011100" 	WHEN INT_reqs(4) = '1' ELSE 		-- type = X"1c"
+				"100000" 	WHEN INT_reqs(5) = '1' ELSE 		-- type = X"20" 
+				"000000" ;  			
 END ARCHITECTURE;                                   

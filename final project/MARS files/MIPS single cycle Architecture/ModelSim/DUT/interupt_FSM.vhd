@@ -17,15 +17,15 @@ ARCHITECTURE structure OF interupt_FSM IS
 signal	state, next_state : STD_LOGIC_VECTOR( 1 DOWNTO 0 ) ;
 BEGIN
 
-	next_state <= "00" when rst = '1' else 
+	next_state <=   "00" when rst = '1' else 
 					"01" when state = "00" and INTA = '0' else
 					"10" when state = "00" and INTA = '0' else
 					"11" when state = "00" and INTA = '0' else
-					else "00";
+					"00";
 process(clk, rst)
 begin
 	if rst = '1' then
-		state = "00";
+		state <= "00";
 	elsif rising_edge(clk) then
 		state <= next_state;
 	end if;
