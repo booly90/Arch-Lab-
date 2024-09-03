@@ -54,6 +54,7 @@ ARCHITECTURE struct OF MIPS_tb IS
 	SIGNAL HEX4					:	STD_LOGIC_VECTOR(6 DOWNTO 0);
 	SIGNAL HEX5					:	STD_LOGIC_VECTOR(6 DOWNTO 0);
 	SIGNAL LEDR					:	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	
 
    -- Component Declaration
    	COMPONENT MCU IS
@@ -64,12 +65,12 @@ ARCHITECTURE struct OF MIPS_tb IS
 			DataBusSize	: integer := 32
 			);
 	PORT( 	reset, PIN_AF14				: IN 	STD_LOGIC; --pin af14 is clock input
-			--SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
-			--HEX0						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			--HEX1						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			--HEX2						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			--HEX3						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
-			--HEX4						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			SW						: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+			HEX0						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX1						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX2						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX3						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
+			HEX4						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			HEX5						: OUT	STD_LOGIC_VECTOR(6 DOWNTO 0);
 			LEDR						: OUT	STD_LOGIC_VECTOR(7 DOWNTO 0);
 		-- Output important signals to pins for easy display in Simulator
@@ -135,7 +136,10 @@ BEGIN
         Branch_out      => Branch_out,
         Zero_out        => Zero_out,
         Memwrite_out    => Memwrite_out,
-        Regwrite_out    => Regwrite_out
+        Regwrite_out    => Regwrite_out;
+		key_1_n			=> key_1_n;
+		key_2_n			=> key_2_n;
+		key_3_n			=> key_3_n;
       );
    U_1 : MIPS_tester
       PORT MAP (
