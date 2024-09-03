@@ -73,6 +73,8 @@ BEGIN
             ALU_ctl <= "0001"; -- SUB
         ELSIF opcode = "011100" THEN -- MULT
             ALU_ctl <= "1000";
+		ELSIF opcode = "011100" THEN -- JAL_ISR
+			ALU_ctl <= "0000";
         ELSE
             ALU_ctl <= "0001"; -- Default
         END IF;
