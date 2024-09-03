@@ -13,7 +13,6 @@ ENTITY priotity_encoder IS
 END priotity_encoder;
 ----------------------------
 ARCHITECTURE structure OF priotity_encoder IS
-signal	counter : STD_LOGIC_VECTOR( 1 DOWNTO 0 );
 BEGIN
 
 	type_signal  <= 	'000000' 	WHEN INT_reqs(0) = '1' ELSE -- type = X"00" 

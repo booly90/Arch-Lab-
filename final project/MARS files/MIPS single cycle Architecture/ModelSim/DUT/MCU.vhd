@@ -6,7 +6,7 @@ USE work.aux_package.ALL;
 ENTITY MCU IS
 	GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	  : boolean :=FALSE;
-			ControlBusSize: integer := 2;
+			ControlBusSize: integer := 4;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -26,10 +26,11 @@ ENTITY MCU IS
 		Branch_out, Zero_out, Memwrite_out, 
 		Regwrite_out					: OUT 	STD_LOGIC;
 		Next_PC_out          			: OUT STD_LOGIC_VECTOR (7			     DOWNTO 0);
-		Ainput_out, Binput_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		DataBus_out, AddressBus_our			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		ControlBus_out					: out std_logic_vector (1 downto 0);
-		pll_clock_out					:OUT STD_LOGIC		);
+		Ainput_out, Binput_out			: OUT STD_LOGIC_VECTOR(DataBusSize-1 DOWNTO 0);
+		DataBus_out, AddressBus_our			: OUT STD_LOGIC_VECTOR(DataBusSize-1 DOWNTO 0);
+		ControlBus_out					: out std_logic_vector (ControlBusSize-1 downto 0);
+		pll_clock_out					:OUT STD_LOGIC		
+		);
 		
 END MCU;
 
@@ -43,7 +44,8 @@ ARCHITECTURE arch OF MCU IS
 		SIGNAL pll_clock           : STD_LOGIC;
 		signal reset             :  STD_LOGIC;
 		signal locked            : STD_LOGIC;
-		--SIGNAL            : STD_LOGIC;
+		
+		SIGNAL GIE            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
 		--SIGNAL            : STD_LOGIC;
@@ -67,10 +69,10 @@ FPGA :		IF (not SIM ) GENERATE
 
 	);		
 			reset <= not(reset_n);
- DataBus_out <= DataBus;
- ControlBus_out <= ControlBus_out;
- AddressBus_our <= AddressBus;
 
+ DataBus_out <= DataBus;
+ ControlBus_out <= ControlBus;
+ AddressBus_our <= AddressBus;
 
 			
 	cpu: MIPS 	GENERIC map(MemWidth,SIM,ControlBusSize, AddrBusSize, DataBusSize)
@@ -80,6 +82,7 @@ FPGA :		IF (not SIM ) GENERATE
 							DataBus			=> DataBus,
 							AddressBus		=> AddressBus,
 							PC				=> PC,
+							GIE				=> GIE,
 							--ALU_result_out  => ALU_result_out,
 							--read_data_1_out => read_data_1_out,
 							--read_data_2_out => read_data_2_out,

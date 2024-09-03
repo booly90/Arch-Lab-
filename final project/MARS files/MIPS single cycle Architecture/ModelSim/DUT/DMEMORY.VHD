@@ -16,7 +16,8 @@ ENTITY dmemory IS
         	address 			: IN 	STD_LOGIC_VECTOR( 9 DOWNTO 0 );
         	write_data 			: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 	   		MemRead, Memwrite 	: IN 	STD_LOGIC;
-            clock,reset			: IN 	STD_LOGIC );
+            clock,reset			: IN 	STD_LOGIC
+			);
 END dmemory;
 
 ARCHITECTURE behavior OF dmemory IS

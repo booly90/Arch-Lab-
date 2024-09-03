@@ -18,7 +18,8 @@ ENTITY Idecode IS
 			Sign_extend 	: OUT 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 			PC_plus_4		: IN 	STD_LOGIC_VECTOR( 9  DOWNTO 0 );
 			write_data_out	: OUT   STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			INT_FSM			: IN 	STD_LOGIC_VECTOR( 1  DOWNTO 0 ); 
+			INT_FSM			: IN 	STD_LOGIC_VECTOR( 1  DOWNTO 0 );
+			GIE				: OUT 	STD_LOGIC;
 			clock,reset		: IN 	STD_LOGIC
 			);
 END Idecode;
@@ -35,12 +36,15 @@ TYPE register_file IS ARRAY ( 0 TO 31 ) OF STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 	SIGNAL write_register_address_1		: STD_LOGIC_VECTOR( 4 DOWNTO 0 );
 	SIGNAL write_register_address_0		: STD_LOGIC_VECTOR( 4 DOWNTO 0 );
 	SIGNAL Instruction_immediate_value	: STD_LOGIC_VECTOR( 15 DOWNTO 0 );
+	SIGNAL Instruction					: STD_LOGIC_VECTOR( 31 DOWNTO 0 );
 
 BEGIN
 
-	Instruction <= 	X"335AFFFE" 	when INT_FSM = '01' ELSE -- GIE=0
-					X"8C19083E" 	when INT_FSM = '10' ELSE -- LW type
-					X"FF20D800"		when INT_FSM = '11' ELSE -- JAL_ISR
+	GIE <= register_array(26)(0);
+
+	Instruction <= 	X"335AFFFE" 	when INT_FSM = "01" ELSE -- GIE=0
+					X"8C19083E" 	when INT_FSM = "10" ELSE -- LW type
+					X"FF20D800"		when INT_FSM = "11" ELSE -- JAL_ISR
 					Instruction_IF;
 					
 	read_register_1_address 	<= Instruction( 25 DOWNTO 21 );

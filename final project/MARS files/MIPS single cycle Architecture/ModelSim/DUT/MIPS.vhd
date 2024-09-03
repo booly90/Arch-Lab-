@@ -7,7 +7,7 @@ USE work.aux_package.ALL;
 ENTITY MIPS IS
 	GENERIC(MemWidth 	: INTEGER := 10;
 			SIM 	 	 : boolean :=FALSE;
-			ControlBusSize: integer := 2;
+			ControlBusSize: integer := 4;
 			AddrBusSize	: integer := 32;
 			DataBusSize	: integer := 32
 			);
@@ -15,6 +15,8 @@ ENTITY MIPS IS
 			ControlBus	        		 : OUT STD_LOGIC_VECTOR   (ControlBusSize-1 DOWNTO 0);
 			DataBus		        		 : INOUT STD_LOGIC_VECTOR (DataBusSize-1    DOWNTO 0);
 			AddressBus          		 : OUT STD_LOGIC_VECTOR   (AddrBusSize-1    DOWNTO 0);
+			GIE							 : OUT 	STD_LOGIC;
+
 		-- Output important signals to pins for easy display in Simulator
 		PC								 : OUT  STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 		ALU_result_out, read_data_1_out, read_data_2_out, write_data_out,	
@@ -22,7 +24,8 @@ ENTITY MIPS IS
 		Branch_out, Zero_out, Memwrite_out, 
 		Regwrite_out					 : OUT 	STD_LOGIC ;
 		Next_PC_out  	: OUT	STD_LOGIC_VECTOR( 7 DOWNTO 0 );
-		Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+		Ainput_out, Binput_out		: OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
 
 END 	MIPS;
 
@@ -57,6 +60,15 @@ ARCHITECTURE structure OF MIPS IS
 	SIGNAL address     		: STD_LOGIC_VECTOR( 9 DOWNTO 0 );
 	SIGNAL MemReadInt  		: STD_LOGIC;
 	SIGNAL MemWriteInt 		: STD_LOGIC;
+	SIGNAL read_data_MEM	: STD_LOGIC_VECTOR(31 DOWNTO 0 );
+	SIGNAL clr_IRbt			: STD_LOGIC;
+	SIGNAL clr_IRdiv   		: STD_LOGIC;
+	SIGNAL INTA				: STD_LOGIC;
+	SIGNAL INTR				: STD_LOGIC;
+	SIGNAL INT_FSM			: STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
+	SIGNAL DIV_en	 		: STD_LOGIC;
+	SIGNAL JAL_ISR			: STD_LOGIC;
+
 BEGIN
 
 	read_data <= read_data_temp WHEN ALU_result(11) ='0' ELSE DataBus;
@@ -65,6 +77,8 @@ BEGIN
 	AddressBus <= X"00000" & ALU_result (11 DOWNTO 0);
 	ControlBus(0) <= MemRead;
 	ControlBus(1) <= MemWrite;
+	ControlBus(2) <= clr_IRbt;
+	ControlBus(3) <= clr_IRdiv;
 	
 					-- copy important signals to output pins for easy 
 					-- display in Simulator
@@ -89,16 +103,18 @@ BEGIN
 				PC_out 			=> PC,
 				Jr				=> Jr,
 				Jump			=> Jump,
-				R_data1			=> read_data_1,
-				JAL_ISR			=> JAL_ISR
-				clock 			=> clock,  
+				read_data_1_ID	=> read_data_1,
+				read_data_MEM	=> read_data_MEM,
+				JAL_ISR			=> JAL_ISR,
+				INT_FSM			=> INT_FSM,
+				clock 			=> clock,
 				reset 			=> reset,
 				Next_PC_out		=> Next_PC_out);
 
    ID : Idecode
    	PORT MAP (	read_data_1 	=> read_data_1,
         		read_data_2 	=> read_data_2,
-        		Instruction 	=> Instruction,
+        		Instruction_IF 	=> Instruction,
         		read_data 		=> read_data,
 				ALU_result 		=> ALU_result,
 				RegWrite 		=> RegWrite,
@@ -107,6 +123,8 @@ BEGIN
 				Sign_extend 	=> Sign_extend,
 				PC_plus_4   =>  PC_plus_4,
 				write_data_out	=> write_data_out,
+				INT_FSM			=> INT_FSM,
+				GIE				=> GIE,
         		clock 			=> clock,  
 				reset 			=> reset );
 
@@ -114,6 +132,7 @@ BEGIN
    CTL:   control
 	PORT MAP ( 	Opcode 			=> Instruction( 31 DOWNTO 26 ),
 				Funct			=> Instruction( 5 DOWNTO 0 ),
+				Instruction		=> Instruction,
 				RegDst 			=> RegDst,
 				ALUSrc 			=> ALUSrc,
 				MemtoReg 		=> MemtoReg,
@@ -125,8 +144,14 @@ BEGIN
 				Jr				=> Jr,
 				Jump			=> Jump,
 				JAL_ISR_out		=> JAL_ISR,
-                clock 			=> clock,
-				reset 			=> reset );
+				clr_IRbt 		=> clr_IRbt,
+				clr_IRdiv		=> clr_IRdiv,
+				INTA	 		=> INTA,		
+				INTR	 		=> INTR,	
+				INT_FSM	 		=> INT_FSM,	
+				DIV_en	 		=> DIV_en,	 
+                clock 	 		=> clock,
+				reset 	 		=> reset );
 
    EXE:  Execute
    	PORT MAP (	Read_data_1 	=> read_data_1,
@@ -151,7 +176,6 @@ BEGIN
 				write_data 		=> read_data_2,
 				MemRead 		=> MemReadInt, 
 				Memwrite 		=> MemWriteInt,
-				--Peripheral 		=> ALU_result(11),
                 clock 			=> clock,  
 				reset 			=> reset );
 				

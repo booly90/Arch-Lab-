@@ -22,9 +22,9 @@ ENTITY Ifetch IS
 			Jr		   	 	: IN 	STD_LOGIC;
 			Jump		   	: IN 	STD_LOGIC;
 			read_data_1_ID			: IN	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
-			hold_PC			: IN 	STD_LOGIC;
 			read_data_MEM	: IN 	STD_LOGIC_VECTOR ( 31 DOWNTO 0 );
 			JAL_ISR			: IN 	STD_LOGIC;
+			INT_FSM			: IN 	STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
         	clock, reset 	: IN 	STD_LOGIC;
 			
 			-- Output important signals to pins for easy display in Simulator
@@ -39,9 +39,12 @@ ARCHITECTURE behavior OF Ifetch IS
 	SIGNAL Mem_Addr 						: STD_LOGIC_VECTOR( MemWidth-1 DOWNTO 0 );
 	SIGNAL next_PC 						: STD_LOGIC_VECTOR( 7 DOWNTO 0 );
 	SIGNAL jump_address					: STD_LOGIC_VECTOR(9 DOWNTO 0 );
-	signal reset_sample : STD_LOGIC;
-	signal clock_if		: STD_LOGIC;
-	signal Branch
+	SIGNAL reset_sample : STD_LOGIC;
+	SIGNAL clock_if		: STD_LOGIC;
+	SIGNAL Branch		: STD_LOGIC;
+	SIGNAL hold_PC		: STD_LOGIC;
+
+	
 	
 BEGIN
 		
@@ -94,8 +97,8 @@ inst_memory: altsyncram
 						-- Calculate jump adress using pc and Instruction
 		jump_address <= Instruction(7 DOWNTO 0) & "00" ;
 						-- Mux to select Branch Address or PC + 4        
-		Branch <= (( BranchNe = '1' ) AND ( Zero = '0' )) OR (( BranchEq = '1' ) AND ( Zero = '1' ))
-						
+		Branch <= '1' when (( BranchNe = '1' ) AND ( Zero = '0' )) OR (( BranchEq = '1' ) AND ( Zero = '1' ))
+				  ELSE '0';
 		Next_PC  <= "00000000"   				WHEN Reset = '1' 	ELSE -- reset 
 					read_data_MEM(9 DOWNTO 2)	WHEN JAL_ISR = '1'	ELSE -- ISR call
 					read_data_1_ID(9 DOWNTO 2)	WHEN Jr = '1' 	 	ELSE -- JR
@@ -103,7 +106,7 @@ inst_memory: altsyncram
 					Add_result  				WHEN Branch = '1'	ELSE -- BNE / BEQ
 					PC_plus_4( 9 DOWNTO 2 );
 		
-		
+		hold_PC <= '1' when INT_FSM = "10" or INT_FSM = "01" else '0';
 					
 	PROCESS
 		BEGIN

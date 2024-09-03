@@ -9,34 +9,39 @@ USE work.aux_package.ALL;
 
 ENTITY control IS
    PORT( 	
-	Opcode 		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
-	Funct 		: IN 	STD_LOGIC_VECTOR( 5 DOWNTO 0 );
-	RegDst 		: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
-	ALUSrc 		: OUT 	STD_LOGIC;
-	MemtoReg 	: OUT 	STD_LOGIC_VECTOR( 1 DOWNTO 0 );
-	RegWrite 	: OUT 	STD_LOGIC;
-	MemRead 	: OUT 	STD_LOGIC;
-	MemWrite 	: OUT 	STD_LOGIC;
-	BranchEq 	: OUT 	STD_LOGIC;
-	BranchNe 	: OUT 	STD_LOGIC;
-	Jump 		: OUT 	STD_LOGIC;
-	Jr 			: OUT 	STD_LOGIC;
-	JAL_ISR_out : OUT 	STD_LOGIC;
-	
-	clr_IRdiv, clr_IRbt : OUT STD_LOGIC;
-	INTA		: OUT 	STD_LOGIC;
-	INTR		: IN 	STD_LOGIC;
-	INT_FSM		: OUT	STD_LOGIC_VECTOR ( 1 DOWNTO 0 );
-	
-	clock, reset	: IN 	STD_LOGIC );
+	Opcode 			: IN 	STD_LOGIC_VECTOR( 5  DOWNTO 0 );
+	Funct 			: IN 	STD_LOGIC_VECTOR( 5  DOWNTO 0 );
+	Instruction 	: IN 	STD_LOGIC_VECTOR( 31 DOWNTO 0 );
+	RegDst 			: OUT 	STD_LOGIC_VECTOR( 1  DOWNTO 0 );
+	ALUSrc 			: OUT 	STD_LOGIC;
+	MemtoReg 		: OUT 	STD_LOGIC_VECTOR( 1  DOWNTO 0 );
+	RegWrite 		: OUT 	STD_LOGIC;
+	MemRead 		: OUT 	STD_LOGIC;
+	MemWrite 		: OUT 	STD_LOGIC;
+	BranchEq 		: OUT 	STD_LOGIC;
+	BranchNe 		: OUT 	STD_LOGIC;
+	Jump 			: OUT 	STD_LOGIC;
+	Jr 				: OUT 	STD_LOGIC;
+	JAL_ISR_out 	: OUT 	STD_LOGIC;
+	clr_IRbt		: OUT 	STD_LOGIC;
+	clr_IRdiv   	: OUT 	STD_LOGIC;
+	INTA			: OUT 	STD_LOGIC;
+	INTR			: IN 	STD_LOGIC;
+	INT_FSM			: INOUT	STD_LOGIC_VECTOR ( 1  DOWNTO 0 );
+	DIV_en	 		: OUT	STD_LOGIC;
+	clock, reset	: IN 	STD_LOGIC 
+	);
 
 END control;
 
 ARCHITECTURE behavior OF control IS
 	
-	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire,Jal,jal_ISR	: STD_LOGIC;
-	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui,shift	: STD_LOGIC;
-
+	SIGNAL  R_format, Lw, Sw, Beq, Bne,Jr_wire,Jal,jal_ISR		: STD_LOGIC;
+	SIGNAL  Addi, Andi, Slti, Ori, Xori, Lui,shift,INTA_reg		: STD_LOGIC;
+	SIGNAL  now_dividend,now_divisor : STD_LOGIC;
+	SIGNAL	divFSM : STD_LOGIC_VECTOR (1 DOWNTO 0);
+	
+	
 BEGIN           
 				-- Code to generate control signals using opcode bits
 	R_format 	<=  '1' WHEN Opcode = "000000" OR Opcode = "011100" ELSE '0';
@@ -51,8 +56,8 @@ BEGIN
 	Xori		<=  '1' WHEN Opcode = "001110" ELSE '0';
 	Lui			<=	'1' WHEN Opcode = "001111" ELSE '0';
 	Jal      	<=	'1' WHEN Opcode = "000011" ELSE '0';
-	Jump		<=	'1' WHEN Opcode = "000010" OR Opcode = "000011" 
-					OR (Opcode = "000000" AND Funct = "001000") ELSE '0';
+	Jump		<=	'1' WHEN Opcode = "000010" OR  Opcode = "000011" 
+						 OR (Opcode = "000000" AND Funct = "001000") ELSE '0';
 	Shift		<=  '1' WHEN Opcode = "000000" AND (Funct = "000000" OR Funct = "000010") ELSE '0';
 	Jr_wire     <=  '1' WHEN Opcode = "000000" AND Funct = "001000"  ELSE '0';
 	jal_ISR     	<=	'1' WHEN Opcode = "111111" ELSE '0';
@@ -70,14 +75,37 @@ BEGIN
 	BranchNe    <=  Bne;
 	Jr 			<=  Jr_wire;
 	JAL_ISR_out <=  jal_ISR;
+	INTA 		<= 	INTA_reg;
+	clr_IRbt	<= 	'1' when INT_FSM = "11" else '0';
+	clr_IRdiv	<= 	'1' when INT_FSM = "11" else '0';
+	DIV_en		<=  '1' WHEN Instruction(31 downto 26) = "100011" --if instruction is lw to divisor
+					AND Instruction(15 downto 0) = X"0830"        -- then EN = 1
+					ELSE '0'; 
 
+	
+	
+INTA_proc: process (clock,reset)
+BEGIN
+	if (reset = '1') then
+		INTA_reg <= '1';
+	elsif rising_edge(clock) then
+		if INTR = '1' OR (not (INT_FSM = "01" OR INT_FSM = "10" ))  then
+			INTA_reg <= '0';
+		else 	
+			INTA_reg <= '1';
+		end if;
+	end if;
+end process;
 
-INT_FSM: INT_FSM port map (
+	
+INT_FSM_proc: interupt_FSM port map (
 			INT_FSM 	=> INT_FSM,
-			INTA 		=> INTA,
+			INTA 		=> INTA_reg,
 			rst 		=> reset,
 			clk			=> clock
 			);
    END behavior;
+
+--check if current instruction is lw to dividend or divisor77
 
 
