@@ -73,7 +73,7 @@ BEGIN
             ALU_ctl <= "0001"; -- SUB
         ELSIF opcode = "011100" THEN -- MULT
             ALU_ctl <= "1000";
-		ELSIF opcode = "011100" THEN -- JAL_ISR
+		ELSIF opcode = "111111" THEN -- JAL_ISR
 			ALU_ctl <= "0000";
         ELSE
             ALU_ctl <= "0001"; -- Default
@@ -96,7 +96,7 @@ BEGIN
         VARIABLE product : signed(63 DOWNTO 0);
     BEGIN
         CASE ALU_ctl IS
-            WHEN "0000" => ALU_output_mux <= std_logic_vector(signed(Ainput) + signed(Binput)); -- ADD, ADDI,lw,SW
+            WHEN "0000" => ALU_output_mux <= std_logic_vector(signed(Ainput) + signed(Binput)); -- ADD, ADDI,lw,SW,JAl_isr
             WHEN "0001" => ALU_output_mux <= std_logic_vector(signed(Ainput) - signed(Binput)); -- SUB,beq,bnq,slt,SLTI
             WHEN "0010" => ALU_output_mux <= Ainput AND Binput; -- AND,ANDI
             WHEN "0011" => ALU_output_mux <= Ainput OR Binput; -- OR,ORI
